@@ -113,115 +113,35 @@ public class GameManager {
      */
     public void drawBoard() {
         this.maze.CreateMaze(root);
-        // 1st line
-        Integer skip[] = {5, 17};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
+
+        // defines cookie positions
+        Integer skip[][] = {
+                {5, 17},
+                {1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21},
+                {1, 21},
+                {1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21},
+                {1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21},
+                {3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19},
+                {1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21},
+                {1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21},
+                {1, 21},
+                {1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21},
+                {5, 17}
+        };
+
+        // iterate through each line, and column of the grid and place cookies.
+        double offset = 2.5;
+        for (int line = 0; line < 11; line++) {
+            for (int i = 0; i < 23; i++) {
+                if (!Arrays.asList(skip[line]).contains(i)) {
+                    Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, offset * BarObstacle.THICKNESS);
+                    this.cookieSet.add(cookie);
+                    root.getChildren().add(cookie);
+                }
             }
+            offset += 2;
         }
 
-        // 2nd line
-        skip = new Integer[]{1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 4.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 3rd line
-        skip = new Integer[]{1, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 6.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 4th line
-        skip = new Integer[]{1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, 8.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 5th line
-        skip = new Integer[]{1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 10.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 6th line
-        skip = new Integer[]{3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 7th line
-        skip = new Integer[]{1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, 14.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 8th line
-        skip = new Integer[]{1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, 16.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 9th line
-        skip = new Integer[]{1, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, 18.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 10th line
-        skip = new Integer[]{1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, 20.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
-
-        // 11th line
-        skip = new Integer[]{5, 17};
-        for (int i = 0; i < 23; i++) {
-            if (!Arrays.asList(skip).contains(i)) {
-                Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, 22.5 * BarObstacle.THICKNESS);
-                this.cookieSet.add(cookie);
-                root.getChildren().add(cookie);
-            }
-        }
         root.getChildren().add(this.pacman);
         this.generateGhosts();
         root.getChildren().addAll(this.ghosts);
@@ -232,10 +152,10 @@ public class GameManager {
      * Generates the ghosts for the pacman!
      */
     public void generateGhosts() {
-        this.ghosts.add(new Ghost(18.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, Color.DEEPPINK, maze, this));
-        this.ghosts.add(new Ghost(22.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, Color.GREENYELLOW, maze, this));
-        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, Color.BLACK, maze, this));
-        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 9.5 * BarObstacle.THICKNESS, Color.SPRINGGREEN, maze, this));
+        this.ghosts.add(new Ghost(18.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 1, maze, this));
+        this.ghosts.add(new Ghost(22.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 2, maze, this));
+        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 3, maze, this));
+        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 9.5 * BarObstacle.THICKNESS, 4, maze, this));
     }
 
     /**
@@ -350,36 +270,20 @@ public class GameManager {
             if (axis.equals("x")) {
                 // pacman goes right
                 if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanRightEdge >= cookieLeftEdge && pacmanRightEdge <= cookieRightEdge)) {
-                    if (cookie.isVisible()) {
-                        this.score += cookie.getValue();
-                        this.cookiesEaten++;
-                    }
-                    cookie.hide();
+                    collectCookie(cookie);
                 }
                 // pacman goes left
                 if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanLeftEdge >= cookieLeftEdge && pacmanLeftEdge <= cookieRightEdge)) {
-                    if (cookie.isVisible()) {
-                        this.score += cookie.getValue();
-                        this.cookiesEaten++;
-                    }
-                    cookie.hide();
+                    collectCookie(cookie);
                 }
             } else {
                 // pacman goes up
                 if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanBottomEdge >= cookieTopEdge && pacmanBottomEdge <= cookieBottomEdge)) {
-                    if (cookie.isVisible()) {
-                        this.score += cookie.getValue();
-                        this.cookiesEaten++;
-                    }
-                    cookie.hide();
+                    collectCookie(cookie);
                 }
                 // pacman goes down
                 if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanTopEdge <= cookieBottomEdge && pacmanTopEdge >= cookieTopEdge)) {
-                    if (cookie.isVisible()) {
-                        this.score += cookie.getValue();
-                        this.cookiesEaten++;
-                    }
-                    cookie.hide();
+                    collectCookie(cookie);
                 }
             }
             this.scoreBoard.score.setText("Score: " + this.score);
@@ -387,6 +291,14 @@ public class GameManager {
                 this.endGame();
             }
         }
+    }
+
+    private void collectCookie(Cookie cookie) {
+        if (cookie.isVisible()) {
+            this.score += cookie.getValue();
+            this.cookiesEaten++;
+        }
+        cookie.hide();
     }
 
     /**

@@ -3,9 +3,13 @@ package pacman;
 
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -17,14 +21,15 @@ public class Ghost extends Rectangle implements Runnable {
     AnimationTimer animation;
     int timesWalked;
 
-    public Ghost(double x, double y, Color color, Maze maze, GameManager gameManager) {
+    public Ghost(double x, double y, int color, Maze maze, GameManager gameManager) {
         this.setX(x);
         this.setY(y);
         this.maze = maze;
         this.gameManager = gameManager;
         this.setHeight(50);
         this.setWidth(50);
-        this.setFill(color);
+        Image img = new Image("/pacman/ghost" + color + ".png");
+        this.setFill(new ImagePattern(img));
         this.timesWalked = 0;
         this.direction = "down";
         this.createAnimation();
@@ -168,36 +173,23 @@ public class Ghost extends Rectangle implements Runnable {
                 double padding = 12;
                 timesWalked++;
                 int walkAtLeast = 4;
-                switch (direction) {
-                    case "left":
-                        moveUntilYouCant("left", "down", leftEdge, topEdge, rightEdge, bottomEdge, padding);
-                        if (timesWalked > walkAtLeast) {
-                            checkIftheresPathToGo(getRandomDirection("left", "right"));
-                            timesWalked = 0;
-                        }
-                        break;
-                    case "right":
-                        moveUntilYouCant("right", "up", leftEdge, topEdge, rightEdge, bottomEdge, padding);
-                        if (timesWalked > walkAtLeast) {
-                            checkIftheresPathToGo(getRandomDirection("left", "right"));
-                             timesWalked = 0;
-                        }
-                        break;
-                    case "up":
-                        moveUntilYouCant("up", "left", leftEdge, topEdge, rightEdge, bottomEdge, padding);
-                        if (timesWalked > walkAtLeast) {
-                            checkIftheresPathToGo(getRandomDirection("up", "down"));
-                            timesWalked = 0;
-                        }
-                        break;
-                    case "down":
-                        moveUntilYouCant("down", "right", leftEdge, topEdge, rightEdge, bottomEdge, padding);
-                        if (timesWalked > walkAtLeast) {
-                            checkIftheresPathToGo(getRandomDirection("up", "down"));
-                            timesWalked = 0;
-                        }
-                        break;
+
+                Map<String, String> directionsMap = Map.of(
+                        "left", "down",
+                        "right", "up",
+                        "up", "left",
+                        "down", "right"
+                );
+
+                moveUntilYouCant(direction, directionsMap.get(direction), leftEdge, topEdge, rightEdge, bottomEdge, padding);
+                if (timesWalked > walkAtLeast) {
+                    if (direction.equals("left") || direction.equals("right"))
+                        checkIftheresPathToGo(getRandomDirection("left", "right"));
+                    else
+                        checkIftheresPathToGo(getRandomDirection("up", "down"));
+                    timesWalked = 0;
                 }
+
             }
         };
     }
