@@ -349,19 +349,21 @@ public class GameManager {
             double cookieBottomEdge = cookieCenterY + cookie.getRadius();
             if (axis.equals("x")) {
                 // pacman goes right
-                collectCookie(pacmanRightEdge, pacmanTopEdge, pacmanBottomEdge, cookie, cookieCenterY, cookieLeftEdge, cookieRightEdge);
+                if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanRightEdge >= cookieLeftEdge && pacmanRightEdge <= cookieRightEdge)) {
+                    collectCookie(cookie);
+                }
                 // pacman goes left
-                collectCookie(pacmanLeftEdge, pacmanTopEdge, pacmanBottomEdge, cookie, cookieCenterY, cookieLeftEdge, cookieRightEdge);
+                if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanLeftEdge >= cookieLeftEdge && pacmanLeftEdge <= cookieRightEdge)) {
+                    collectCookie(cookie);
+                }
             } else {
                 // pacman goes up
-                collectCookie(pacmanBottomEdge, pacmanLeftEdge, pacmanRightEdge, cookie, cookieCenterX, cookieTopEdge, cookieBottomEdge);
+                if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanBottomEdge >= cookieTopEdge && pacmanBottomEdge <= cookieBottomEdge)) {
+                    collectCookie(cookie);
+                }
                 // pacman goes down
                 if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanTopEdge <= cookieBottomEdge && pacmanTopEdge >= cookieTopEdge)) {
-                    if (cookie.isVisible()) {
-                        this.score += cookie.getValue();
-                        this.cookiesEaten++;
-                    }
-                    cookie.hide();
+                    collectCookie(cookie);
                 }
             }
             this.scoreBoard.score.setText("Score: " + this.score);
@@ -371,14 +373,12 @@ public class GameManager {
         }
     }
 
-    private void collectCookie(double pacmanLeftEdge, double pacmanTopEdge, double pacmanBottomEdge, Cookie cookie, double cookieCenterY, double cookieLeftEdge, double cookieRightEdge) {
-        if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanLeftEdge >= cookieLeftEdge && pacmanLeftEdge <= cookieRightEdge)) {
-            if (cookie.isVisible()) {
-                this.score += cookie.getValue();
-                this.cookiesEaten++;
-            }
-            cookie.hide();
+    private void collectCookie(Cookie cookie) {
+        if (cookie.isVisible()) {
+            this.score += cookie.getValue();
+            this.cookiesEaten++;
         }
+        cookie.hide();
     }
 
     /**
