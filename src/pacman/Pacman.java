@@ -15,6 +15,5 @@ public class Pacman extends Circle {
         this.setRadius(25);
         Image img = new Image("pacman/pacman.png");
         this.setFill(new ImagePattern(img));
-        //this.setFill(Color.YELLOW);
     }
 }
