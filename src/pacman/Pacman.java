@@ -25,12 +25,10 @@ public class Pacman extends Circle {
      * Checks if pacman is touching a ghost
      */
     boolean checkGhostCoalition(Set<Ghost> ghosts) {
-        double pacmanCenterY = getCenterY();
-        double pacmanCenterX = getCenterX();
-        double pacmanLeftEdge = pacmanCenterX - getRadius();
-        double pacmanRightEdge = pacmanCenterX + getRadius();
-        double pacmanTopEdge = pacmanCenterY - getRadius();
-        double pacmanBottomEdge = pacmanCenterY + getRadius();
+        double pacmanLeftEdge = getCenterX() - getRadius();
+        double pacmanRightEdge = getCenterX() + getRadius();
+        double pacmanTopEdge = getCenterY() - getRadius();
+        double pacmanBottomEdge = getCenterY() + getRadius();
         for (Ghost ghost : ghosts) {
             double ghostLeftEdge = ghost.getX();
             double ghostRightEdge = ghost.getX() + ghost.getWidth();
@@ -48,16 +46,13 @@ public class Pacman extends Circle {
     /**
      * Checks if the Pacman touches cookies.
      *
-     * @param pacman
      * @param axis
      */
-    void checkCookieCoalition(Pacman pacman, String axis, Set<Cookie> cookieSet) {
-        double pacmanCenterY = pacman.getCenterY();
-        double pacmanCenterX = pacman.getCenterX();
-        double pacmanLeftEdge = pacmanCenterX - pacman.getRadius();
-        double pacmanRightEdge = pacmanCenterX + pacman.getRadius();
-        double pacmanTopEdge = pacmanCenterY - pacman.getRadius();
-        double pacmanBottomEdge = pacmanCenterY + pacman.getRadius();
+    void checkCookieCoalition(String axis, Set<Cookie> cookieSet) {
+        double pacmanLeftEdge = getCenterX() - getRadius();
+        double pacmanRightEdge = getCenterX() + getRadius();
+        double pacmanTopEdge = getCenterY() - getRadius();
+        double pacmanBottomEdge = getCenterY() + getRadius();
         for (Cookie cookie : cookieSet) {
             double cookieCenterX = cookie.getCenterX();
             double cookieCenterY = cookie.getCenterY();
