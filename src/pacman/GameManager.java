@@ -95,7 +95,7 @@ public class GameManager {
      *
      * @param event
      */
-    public void restartGame(KeyEvent event) {
+    void restartGame(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             root.getChildren().clear();
             this.cookieSet.clear();
@@ -113,7 +113,7 @@ public class GameManager {
     /**
      * Draws the board of the game with the cookies and the Pacman
      */
-    public void drawBoard() {
+    void drawBoard() {
         this.maze.CreateMaze(root);
 
         // defines cookie positions
@@ -153,7 +153,7 @@ public class GameManager {
     /**
      * Generates the ghosts for the pacman!
      */
-    public void generateGhosts() {
+    void generateGhosts() {
         this.ghosts.add(new Ghost(18.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 1, maze, this));
         this.ghosts.add(new Ghost(22.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 2, maze, this));
         this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 3, maze, this));
@@ -165,7 +165,7 @@ public class GameManager {
      *
      * @param event
      */
-    public void movePacman(KeyEvent event) {
+    void movePacman(KeyEvent event) {
         for (Ghost ghost : this.ghosts) {
             ghost.run();
         }
@@ -190,7 +190,7 @@ public class GameManager {
      *
      * @param event
      */
-    public void stopPacman(KeyEvent event) {
+     void stopPacman(KeyEvent event) {
         switch (event.getCode()) {
             case RIGHT:
                 this.rightPacmanAnimation.stop();
@@ -271,11 +271,11 @@ public class GameManager {
         }
     }
 
-    public Pacman getPacman() {
+    Pacman getPacman() {
         return pacman;
     }
 
-    public Set<Ghost> getGhosts() {
+    Set<Ghost> getGhosts() {
         return ghosts;
     }
 }
