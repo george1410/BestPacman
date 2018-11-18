@@ -44,11 +44,6 @@ public class Ghost extends Rectangle implements Runnable {
         return directions[rnd];
     }
 
-    private boolean getRandomBoolean() {
-        Random rand = new Random();
-        return rand.nextBoolean();
-    }
-
     /**
      * Gets the animation for the ghost
      * @return
