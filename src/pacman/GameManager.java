@@ -222,6 +222,7 @@ public class GameManager {
                             pacman.checkCookieCoalition("x", cookieSet);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
+                            pacman.checkDoorway();
                         }
                         break;
                     case "right":
@@ -231,6 +232,7 @@ public class GameManager {
                             pacman.checkCookieCoalition("x", cookieSet);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
+                            pacman.checkDoorway();
                         }
                         break;
                     case "up":
@@ -240,6 +242,7 @@ public class GameManager {
                             pacman.checkCookieCoalition( "y", cookieSet);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
+                            pacman.checkDoorway();
                         }
                         break;
                     case "down":
@@ -249,6 +252,7 @@ public class GameManager {
                             pacman.checkCookieCoalition( "y", cookieSet);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
+                            pacman.checkDoorway();
                         }
                         break;
                 }
