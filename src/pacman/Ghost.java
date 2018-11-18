@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
