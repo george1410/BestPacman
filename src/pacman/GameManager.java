@@ -59,9 +59,7 @@ public class GameManager {
         for (Ghost ghost : ghosts) {
             ghost.getAnimation().stop();
         }
-        this.pacman.setRotate(0);
-        this.pacman.setCenterX(2.5 * BarObstacle.THICKNESS);
-        this.pacman.setCenterY(2.5 * BarObstacle.THICKNESS);
+        this.pacman.reset();
         lifes--;
         score -= 10;
         this.scoreBoard.lifes.setText("Lifes: " + this.lifes);
@@ -101,8 +99,7 @@ public class GameManager {
             this.cookieSet.clear();
             this.ghosts.clear();
             this.drawBoard();
-            this.pacman.setCenterX(2.5 * BarObstacle.THICKNESS);
-            this.pacman.setCenterY(2.5 * BarObstacle.THICKNESS);
+            this.pacman.reset();
             this.lifes = 3;
             this.score = 0;
             this.cookiesEaten = 0;

@@ -87,4 +87,10 @@ public class Pacman extends Circle {
             }
         }
     }
+
+    void reset() {
+        setRotate(0);
+        setCenterX(2.5 * BarObstacle.THICKNESS);
+        setCenterY(2.5 * BarObstacle.THICKNESS);
+    }
 }
