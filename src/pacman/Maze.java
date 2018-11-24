@@ -67,9 +67,9 @@ public class Maze {
             String line;
             int y = 0;
             while ((line = br.readLine()) != null) {
-                for (int i = 0; i < line.length(); i++) {
-                    if (line.charAt(i) == '1') {
-                        this.obstacles.add(new BarObstacle(i * BarObstacle.THICKNESS, y * BarObstacle.THICKNESS, "horizontal", 1));
+                for (int x = 0; x < line.length(); x++) {
+                    if (line.charAt(x) == '1') {
+                        this.obstacles.add(new BarObstacle(x, y));
                     }
                 }
                 y++;
