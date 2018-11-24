@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -42,11 +41,6 @@ public class Ghost extends Rectangle implements Runnable {
             rnd = new Random().nextInt(directions.length);
         }
         return directions[rnd];
-    }
-
-    private boolean getRandomBoolean() {
-        Random rand = new Random();
-        return rand.nextBoolean();
     }
 
     /**
@@ -165,7 +159,8 @@ public class Ghost extends Rectangle implements Runnable {
         {
             public void handle(long currentNanoTime)
             {
-                gameManager.checkGhostCoalition();
+                if(gameManager.getPacman().checkGhostCoalition(gameManager.getGhosts()))
+                    gameManager.lifeLost();
                 double leftEdge = getX();
                 double topEdge = getY();
                 double rightEdge = getX() + getWidth();

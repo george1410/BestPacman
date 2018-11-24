@@ -36,7 +36,7 @@ public class GameManager {
     GameManager(Group root) {
         this.root = root;
         this.maze = new Maze();
-        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS);
+        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this);
         this.cookieSet = new HashSet<>();
         this.ghosts = new HashSet<>();
         this.leftPacmanAnimation = this.createAnimation("left");
@@ -51,7 +51,7 @@ public class GameManager {
     /**
      * Set one life less
      */
-    private void lifeLost() {
+    void lifeLost() {
         this.leftPacmanAnimation.stop();
         this.rightPacmanAnimation.stop();
         this.upPacmanAnimation.stop();
@@ -59,9 +59,7 @@ public class GameManager {
         for (Ghost ghost : ghosts) {
             ghost.getAnimation().stop();
         }
-        this.pacman.setRotate(0);
-        this.pacman.setCenterX(2.5 * BarObstacle.THICKNESS);
-        this.pacman.setCenterY(2.5 * BarObstacle.THICKNESS);
+        this.pacman.reset();
         lifes--;
         score -= 10;
         this.scoreBoard.lifes.setText("Lifes: " + this.lifes);
@@ -92,16 +90,16 @@ public class GameManager {
 
     /**
      * Restart the game
+     *
      * @param event
      */
-    public void restartGame(KeyEvent event) {
+    void restartGame(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             root.getChildren().clear();
             this.cookieSet.clear();
             this.ghosts.clear();
             this.drawBoard();
-            this.pacman.setCenterX(2.5 * BarObstacle.THICKNESS);
-            this.pacman.setCenterY(2.5 * BarObstacle.THICKNESS);
+            this.pacman.reset();
             this.lifes = 3;
             this.score = 0;
             this.cookiesEaten = 0;
@@ -112,7 +110,7 @@ public class GameManager {
     /**
      * Draws the board of the game with the cookies and the Pacman
      */
-    public void drawBoard() {
+    void drawBoard() {
         this.maze.CreateMaze(root);
 
         // defines cookie positions
@@ -135,7 +133,7 @@ public class GameManager {
         for (int line = 0; line < 11; line++) {
             for (int i = 0; i < 23; i++) {
                 if (!Arrays.asList(skip[line]).contains(i)) {
-                    Cookie cookie = new Cookie(((2*i) + 2.5) * BarObstacle.THICKNESS, offset * BarObstacle.THICKNESS);
+                    Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, offset * BarObstacle.THICKNESS);
                     this.cookieSet.add(cookie);
                     root.getChildren().add(cookie);
                 }
@@ -152,7 +150,7 @@ public class GameManager {
     /**
      * Generates the ghosts for the pacman!
      */
-    public void generateGhosts() {
+    private void generateGhosts() {
         this.ghosts.add(new Ghost(18.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 1, maze, this));
         this.ghosts.add(new Ghost(22.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 2, maze, this));
         this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 3, maze, this));
@@ -161,13 +159,14 @@ public class GameManager {
 
     /**
      * Moves the pacman
+     *
      * @param event
      */
-    public void movePacman(KeyEvent event) {
+    void movePacman(KeyEvent event) {
         for (Ghost ghost : this.ghosts) {
             ghost.run();
         }
-        switch(event.getCode()) {
+        switch (event.getCode()) {
             case RIGHT:
                 this.rightPacmanAnimation.start();
                 break;
@@ -185,10 +184,11 @@ public class GameManager {
 
     /**
      * Stops the pacman
+     *
      * @param event
      */
-    public void stopPacman(KeyEvent event) {
-        switch(event.getCode()) {
+     void stopPacman(KeyEvent event) {
+        switch (event.getCode()) {
             case RIGHT:
                 this.rightPacmanAnimation.stop();
                 break;
@@ -206,127 +206,74 @@ public class GameManager {
 
     /**
      * Creates an animation of the movement.
+     *
      * @param direction
      * @return
      */
     private AnimationTimer createAnimation(String direction) {
         double step = 5;
-        return new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
-            switch (direction) {
-                case "left":
-                    if (!maze.isTouching(pacman.getCenterX() - pacman.getRadius(), pacman.getCenterY(), 15)) {
-                        pacman.setRotate(180);
-                        pacman.setCenterX(pacman.getCenterX() - step);
-                        checkCookieCoalition(pacman, "x");
-                        checkGhostCoalition();
-                    }
-                    break;
-                case "right":
-                    if (!maze.isTouching(pacman.getCenterX() + pacman.getRadius(), pacman.getCenterY(), 15)) {
-                        pacman.setRotate(0);
-                        pacman.setCenterX(pacman.getCenterX() + step);
-                        checkCookieCoalition(pacman, "x");
-                        checkGhostCoalition();
-                    }
-                    break;
-                case "up":
-                    if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() - pacman.getRadius(), 15)) {
-                        pacman.setRotate(270);
-                        pacman.setCenterY(pacman.getCenterY() - step);
-                        checkCookieCoalition(pacman, "y");
-                        checkGhostCoalition();
-                    }
-                    break;
-                case "down":
-                   if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() + pacman.getRadius(), 15)) {
-                       pacman.setRotate(90);
-                       pacman.setCenterY(pacman.getCenterY() + step);
-                       checkCookieCoalition(pacman, "y");
-                       checkGhostCoalition();
-                   }
-                   break;
-            }
+        return new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                switch (direction) {
+                    case "left":
+                        if (!maze.isTouching(pacman.getCenterX() - pacman.getRadius(), pacman.getCenterY(), 15)) {
+                            pacman.setRotate(180);
+                            pacman.setCenterX(pacman.getCenterX() - step);
+                            pacman.checkCookieCoalition("x", cookieSet);
+                            if (pacman.checkGhostCoalition(ghosts))
+                                lifeLost();
+                        }
+                        break;
+                    case "right":
+                        if (!maze.isTouching(pacman.getCenterX() + pacman.getRadius(), pacman.getCenterY(), 15)) {
+                            pacman.setRotate(0);
+                            pacman.setCenterX(pacman.getCenterX() + step);
+                            pacman.checkCookieCoalition("x", cookieSet);
+                            if (pacman.checkGhostCoalition(ghosts))
+                                lifeLost();
+                        }
+                        break;
+                    case "up":
+                        if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() - pacman.getRadius(), 15)) {
+                            pacman.setRotate(270);
+                            pacman.setCenterY(pacman.getCenterY() - step);
+                            pacman.checkCookieCoalition( "y", cookieSet);
+                            if (pacman.checkGhostCoalition(ghosts))
+                                lifeLost();
+                        }
+                        break;
+                    case "down":
+                        if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() + pacman.getRadius(), 15)) {
+                            pacman.setRotate(90);
+                            pacman.setCenterY(pacman.getCenterY() + step);
+                            pacman.checkCookieCoalition( "y", cookieSet);
+                            if (pacman.checkGhostCoalition(ghosts))
+                                lifeLost();
+                        }
+                        break;
+                }
             }
         };
     }
 
-    /**
-     * Checks if the Pacman touches cookies.
-     * @param pacman
-     * @param axis
-     */
-    private void checkCookieCoalition(Pacman pacman, String axis) {
-        double pacmanCenterY = pacman.getCenterY();
-        double pacmanCenterX = pacman.getCenterX();
-        double pacmanLeftEdge = pacmanCenterX - pacman.getRadius();
-        double pacmanRightEdge = pacmanCenterX + pacman.getRadius();
-        double pacmanTopEdge = pacmanCenterY - pacman.getRadius();
-        double pacmanBottomEdge = pacmanCenterY + pacman.getRadius();
-        for (Cookie cookie:cookieSet) {
-            double cookieCenterX = cookie.getCenterX();
-            double cookieCenterY = cookie.getCenterY();
-            double cookieLeftEdge = cookieCenterX - cookie.getRadius();
-            double cookieRightEdge = cookieCenterX + cookie.getRadius();
-            double cookieTopEdge = cookieCenterY - cookie.getRadius();
-            double cookieBottomEdge = cookieCenterY + cookie.getRadius();
-            if (axis.equals("x")) {
-                // pacman goes right
-                if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanRightEdge >= cookieLeftEdge && pacmanRightEdge <= cookieRightEdge)) {
-                    collectCookie(cookie);
-                }
-                // pacman goes left
-                if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanLeftEdge >= cookieLeftEdge && pacmanLeftEdge <= cookieRightEdge)) {
-                    collectCookie(cookie);
-                }
-            } else {
-                // pacman goes up
-                if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanBottomEdge >= cookieTopEdge && pacmanBottomEdge <= cookieBottomEdge)) {
-                    collectCookie(cookie);
-                }
-                // pacman goes down
-                if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanTopEdge <= cookieBottomEdge && pacmanTopEdge >= cookieTopEdge)) {
-                    collectCookie(cookie);
-                }
-            }
-            this.scoreBoard.score.setText("Score: " + this.score);
-            if (this.cookiesEaten == this.cookieSet.size()) {
-                this.endGame();
-            }
-        }
-    }
-
-    private void collectCookie(Cookie cookie) {
+    void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
             this.score += cookie.getValue();
             this.cookiesEaten++;
         }
         cookie.hide();
-    }
-
-    /**
-     * Checks if pacman is touching a ghost
-     */
-    public void checkGhostCoalition() {
-        double pacmanCenterY = pacman.getCenterY();
-        double pacmanCenterX = pacman.getCenterX();
-        double pacmanLeftEdge = pacmanCenterX - pacman.getRadius();
-        double pacmanRightEdge = pacmanCenterX + pacman.getRadius();
-        double pacmanTopEdge = pacmanCenterY - pacman.getRadius();
-        double pacmanBottomEdge = pacmanCenterY + pacman.getRadius();
-        for (Ghost ghost : ghosts) {
-            double ghostLeftEdge = ghost.getX();
-            double ghostRightEdge = ghost.getX() + ghost.getWidth();
-            double ghostTopEdge = ghost.getY();
-            double ghostBottomEdge = ghost.getY() + ghost.getHeight();
-            if ((pacmanLeftEdge <= ghostRightEdge && pacmanLeftEdge >= ghostLeftEdge) || (pacmanRightEdge >= ghostLeftEdge && pacmanRightEdge <= ghostRightEdge)) {
-                if ((pacmanTopEdge <= ghostBottomEdge && pacmanTopEdge >= ghostTopEdge) || (pacmanBottomEdge >= ghostTopEdge && pacmanBottomEdge <= ghostBottomEdge)) {
-                    lifeLost();
-                }
-            }
+        scoreBoard.score.setText("Score: " + score);
+        if (cookiesEaten == cookieSet.size()) {
+            endGame();
         }
     }
 
+    Pacman getPacman() {
+        return pacman;
+    }
+
+    Set<Ghost> getGhosts() {
+        return ghosts;
+    }
 }
+
