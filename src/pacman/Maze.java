@@ -13,10 +13,12 @@ import java.util.Set;
 
 public class Maze {
 
-    public Set<BarObstacle> obstacles;
+    private Set<BarObstacle> obstacles;
+    Set<Cookie> cookies;
 
     Maze() {
         obstacles = new HashSet<>();
+        cookies = new HashSet<>();
     }
 
     /**
@@ -70,12 +72,14 @@ public class Maze {
                 for (int x = 0; x < line.length(); x++) {
                     if (line.charAt(x) == '1') {
                         this.obstacles.add(new BarObstacle(x, y));
+                    } else if (line.charAt(x) == '2') {
+                        Cookie cookie = new Cookie((x+0.5) * BarObstacle.THICKNESS, (y+0.5) * BarObstacle.THICKNESS);
+                        this.cookies.add(cookie);
+                        root.getChildren().add(cookie);
                     }
                 }
                 y++;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

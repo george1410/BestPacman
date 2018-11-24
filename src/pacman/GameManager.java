@@ -17,7 +17,6 @@ public class GameManager {
 
     private Pacman pacman;
     private Group root;
-    private Set<Cookie> cookieSet;
     private Set<Ghost> ghosts;
     private AnimationTimer leftPacmanAnimation;
     private AnimationTimer rightPacmanAnimation;
@@ -37,7 +36,6 @@ public class GameManager {
         this.root = root;
         this.maze = new Maze();
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this);
-        this.cookieSet = new HashSet<>();
         this.ghosts = new HashSet<>();
         this.leftPacmanAnimation = this.createAnimation("left");
         this.rightPacmanAnimation = this.createAnimation("right");
@@ -96,7 +94,7 @@ public class GameManager {
     void restartGame(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             root.getChildren().clear();
-            this.cookieSet.clear();
+            maze.cookies.clear();
             this.ghosts.clear();
             this.drawBoard();
             this.pacman.reset();
@@ -112,34 +110,6 @@ public class GameManager {
      */
     void drawBoard() {
         this.maze.CreateMaze(root);
-
-        // defines cookie positions
-        Integer skip[][] = {
-                {5, 17},
-                {1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21},
-                {1, 21},
-                {1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21},
-                {1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21},
-                {3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19},
-                {1, 7, 8, 9, 10, 11, 12, 13, 14, 15, 21},
-                {1, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21},
-                {1, 21},
-                {1, 2, 3, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 20, 21},
-                {5, 17}
-        };
-
-        // iterate through each line, and column of the grid and place cookies.
-        double offset = 2.5;
-        for (int line = 0; line < 11; line++) {
-            for (int i = 0; i < 23; i++) {
-                if (!Arrays.asList(skip[line]).contains(i)) {
-                    Cookie cookie = new Cookie(((2 * i) + 2.5) * BarObstacle.THICKNESS, offset * BarObstacle.THICKNESS);
-                    this.cookieSet.add(cookie);
-                    root.getChildren().add(cookie);
-                }
-            }
-            offset += 2;
-        }
 
         root.getChildren().add(this.pacman);
         this.generateGhosts();
@@ -219,7 +189,7 @@ public class GameManager {
                         if (!maze.isTouching(pacman.getCenterX() - pacman.getRadius(), pacman.getCenterY(), 15)) {
                             pacman.setRotate(180);
                             pacman.setCenterX(pacman.getCenterX() - step);
-                            pacman.checkCookieCoalition("x", cookieSet);
+                            pacman.checkCookieCoalition("x", maze.cookies);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
                             pacman.checkDoorway();
@@ -229,7 +199,7 @@ public class GameManager {
                         if (!maze.isTouching(pacman.getCenterX() + pacman.getRadius(), pacman.getCenterY(), 15)) {
                             pacman.setRotate(0);
                             pacman.setCenterX(pacman.getCenterX() + step);
-                            pacman.checkCookieCoalition("x", cookieSet);
+                            pacman.checkCookieCoalition("x", maze.cookies);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
                             pacman.checkDoorway();
@@ -239,7 +209,7 @@ public class GameManager {
                         if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() - pacman.getRadius(), 15)) {
                             pacman.setRotate(270);
                             pacman.setCenterY(pacman.getCenterY() - step);
-                            pacman.checkCookieCoalition( "y", cookieSet);
+                            pacman.checkCookieCoalition( "y", maze.cookies);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
                             pacman.checkDoorway();
@@ -249,7 +219,7 @@ public class GameManager {
                         if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() + pacman.getRadius(), 15)) {
                             pacman.setRotate(90);
                             pacman.setCenterY(pacman.getCenterY() + step);
-                            pacman.checkCookieCoalition( "y", cookieSet);
+                            pacman.checkCookieCoalition( "y", maze.cookies);
                             if (pacman.checkGhostCoalition(ghosts))
                                 lifeLost();
                             pacman.checkDoorway();
@@ -267,7 +237,7 @@ public class GameManager {
         }
         cookie.hide();
         scoreBoard.score.setText("Score: " + score);
-        if (cookiesEaten == cookieSet.size()) {
+        if (cookiesEaten == maze.cookies.size()) {
             endGame();
         }
     }
