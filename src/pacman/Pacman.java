@@ -82,6 +82,16 @@ public class Pacman extends Circle {
         }
     }
 
+    void checkDoorway() {
+        double pacmanLeftEdge = getCenterX() - getRadius();
+        double pacmanRightEdge = getCenterX() + getRadius();
+        if (pacmanRightEdge < 0) {
+            setCenterX(49 * BarObstacle.THICKNESS + getRadius());
+        } else if (pacmanLeftEdge > 49 * BarObstacle.THICKNESS + getRadius()) {
+            setCenterX(0 - getRadius());
+        }
+    }
+
     void reset() {
         setRotate(0);
         setCenterX(2.5 * BarObstacle.THICKNESS);
