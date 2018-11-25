@@ -9,7 +9,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class GameManager {
     private AnimationTimer upPacmanAnimation;
     private AnimationTimer downPacmanAnimation;
     private Maze maze;
-    private int lifes;
+    private int lives;
     private int score;
     private Score scoreBoard;
     private boolean gameEnded;
@@ -41,7 +40,7 @@ public class GameManager {
         this.rightPacmanAnimation = this.createAnimation("right");
         this.upPacmanAnimation = this.createAnimation("up");
         this.downPacmanAnimation = this.createAnimation("down");
-        this.lifes = 3;
+        this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
     }
@@ -58,11 +57,11 @@ public class GameManager {
             ghost.getAnimation().stop();
         }
         this.pacman.reset();
-        lifes--;
+        lives--;
         score -= 10;
-        this.scoreBoard.lifes.setText("Lives: " + this.lifes);
+        this.scoreBoard.lifes.setText("Lives: " + this.lives);
         this.scoreBoard.score.setText("Score: " + this.score);
-        if (lifes == 0) {
+        if (lives == 0) {
             this.endGame();
         }
     }
@@ -98,7 +97,7 @@ public class GameManager {
             this.ghosts.clear();
             this.drawBoard();
             this.pacman.reset();
-            this.lifes = 3;
+            this.lives = 3;
             this.score = 0;
             this.cookiesEaten = 0;
             gameEnded = false;
