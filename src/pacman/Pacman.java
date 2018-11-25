@@ -60,7 +60,7 @@ public class Pacman extends Circle {
      *
      * @param axis
      */
-    void checkCookieCoalition(String axis, Set<Cookie> cookieSet) {
+    private void checkCookieCoalition(String axis, Set<Cookie> cookieSet) {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
         double pacmanTopEdge = getCenterY() - getRadius();
@@ -94,7 +94,7 @@ public class Pacman extends Circle {
         }
     }
 
-    void checkDoorway() {
+    private void checkDoorway() {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
         if (pacmanRightEdge < 0) {
@@ -171,7 +171,7 @@ public class Pacman extends Circle {
      *
      * @param event
      */
-    void movePacman(KeyEvent event) {
+    void move(KeyEvent event) {
         for (Ghost ghost : gameManager.getGhosts()) {
             ghost.run();
         }
@@ -196,7 +196,7 @@ public class Pacman extends Circle {
      *
      * @param event
      */
-    void stopPacman(KeyEvent event) {
+    void stop(KeyEvent event) {
         switch (event.getCode()) {
             case RIGHT:
                 rightPacmanAnimation.stop();
