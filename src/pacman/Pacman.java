@@ -4,6 +4,7 @@ package pacman;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -163,5 +164,52 @@ public class Pacman extends Circle {
                 }
             }
         };
+    }
+
+    /**
+     * Moves the pacman
+     *
+     * @param event
+     */
+    void movePacman(KeyEvent event) {
+        for (Ghost ghost : gameManager.getGhosts()) {
+            ghost.run();
+        }
+        switch (event.getCode()) {
+            case RIGHT:
+                rightPacmanAnimation.start();
+                break;
+            case LEFT:
+                leftPacmanAnimation.start();
+                break;
+            case UP:
+                upPacmanAnimation.start();
+                break;
+            case DOWN:
+                downPacmanAnimation.start();
+                break;
+        }
+    }
+
+    /**
+     * Stops the pacman
+     *
+     * @param event
+     */
+    void stopPacman(KeyEvent event) {
+        switch (event.getCode()) {
+            case RIGHT:
+                rightPacmanAnimation.stop();
+                break;
+            case LEFT:
+                leftPacmanAnimation.stop();
+                break;
+            case UP:
+                upPacmanAnimation.stop();
+                break;
+            case DOWN:
+                downPacmanAnimation.stop();
+                break;
+        }
     }
 }

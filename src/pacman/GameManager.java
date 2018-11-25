@@ -117,52 +117,6 @@ public class GameManager {
         this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 9.5 * BarObstacle.THICKNESS, 4, maze, this));
     }
 
-    /**
-     * Moves the pacman
-     *
-     * @param event
-     */
-    void movePacman(KeyEvent event) {
-        for (Ghost ghost : this.ghosts) {
-            ghost.run();
-        }
-        switch (event.getCode()) {
-            case RIGHT:
-                pacman.rightPacmanAnimation.start();
-                break;
-            case LEFT:
-                pacman.leftPacmanAnimation.start();
-                break;
-            case UP:
-                pacman.upPacmanAnimation.start();
-                break;
-            case DOWN:
-                pacman.downPacmanAnimation.start();
-                break;
-        }
-    }
-
-    /**
-     * Stops the pacman
-     *
-     * @param event
-     */
-     void stopPacman(KeyEvent event) {
-        switch (event.getCode()) {
-            case RIGHT:
-                pacman.rightPacmanAnimation.stop();
-                break;
-            case LEFT:
-                pacman.leftPacmanAnimation.stop();
-                break;
-            case UP:
-                pacman.upPacmanAnimation.stop();
-                break;
-            case DOWN:
-                pacman.downPacmanAnimation.stop();
-                break;
-        }
-    }
 
     void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
