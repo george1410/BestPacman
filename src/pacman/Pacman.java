@@ -2,6 +2,7 @@ package pacman;
 
 
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -11,14 +12,24 @@ import java.util.Set;
 public class Pacman extends Circle {
 
     private GameManager gameManager;
+    AnimationTimer leftPacmanAnimation;
+    AnimationTimer rightPacmanAnimation;
+    AnimationTimer upPacmanAnimation;
+    AnimationTimer downPacmanAnimation;
+    private Maze maze;
 
-    public Pacman(double x, double y, GameManager gameManager) {
+    public Pacman(double x, double y, GameManager gameManager, Maze maze) {
         this.gameManager = gameManager;
         this.setCenterX(x);
         this.setCenterY(y);
         this.setRadius(25);
+        this.maze = maze;
         Image img = new Image("pacman/pacman.png");
         this.setFill(new ImagePattern(img));
+        this.leftPacmanAnimation = this.createAnimation("left");
+        this.rightPacmanAnimation = this.createAnimation("right");
+        this.upPacmanAnimation = this.createAnimation("up");
+        this.downPacmanAnimation = this.createAnimation("down");
     }
 
     /**
@@ -96,5 +107,61 @@ public class Pacman extends Circle {
         setRotate(0);
         setCenterX(2.5 * BarObstacle.THICKNESS);
         setCenterY(2.5 * BarObstacle.THICKNESS);
+    }
+
+    /**
+     * Creates an animation of the movement.
+     *
+     * @param direction
+     * @return
+     */
+    private AnimationTimer createAnimation(String direction) {
+        double step = 5;
+        return new AnimationTimer() {
+            public void handle(long currentNanoTime) {
+                switch (direction) {
+                    case "left":
+                        if (!maze.isTouching(getCenterX() - getRadius(), getCenterY(), 15)) {
+                            setRotate(180);
+                            setCenterX(getCenterX() - step);
+                            checkCookieCoalition("x", maze.cookies);
+                            if (checkGhostCoalition(gameManager.getGhosts()))
+                                gameManager.lifeLost();
+                            checkDoorway();
+                        }
+                        break;
+                    case "right":
+                        if (!maze.isTouching(getCenterX() + getRadius(), getCenterY(), 15)) {
+                            setRotate(0);
+                            setCenterX(getCenterX() + step);
+                            checkCookieCoalition("x", maze.cookies);
+                            if (checkGhostCoalition(gameManager.getGhosts()))
+                                gameManager.lifeLost();
+                            checkDoorway();
+                        }
+                        break;
+                    case "up":
+                        if (!maze.isTouching(getCenterX(), getCenterY() - getRadius(), 15)) {
+                            setRotate(270);
+                            setCenterY(getCenterY() - step);
+                            checkCookieCoalition( "y", maze.cookies);
+                            if (checkGhostCoalition(gameManager.getGhosts()))
+                                gameManager.lifeLost();
+                            checkDoorway();
+                        }
+                        break;
+                    case "down":
+                        if (!maze.isTouching(getCenterX(), getCenterY() + getRadius(), 15)) {
+                            setRotate(90);
+                            setCenterY(getCenterY() + step);
+                            checkCookieCoalition( "y", maze.cookies);
+                            if (checkGhostCoalition(gameManager.getGhosts()))
+                                gameManager.lifeLost();
+                            checkDoorway();
+                        }
+                        break;
+                }
+            }
+        };
     }
 }

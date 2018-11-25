@@ -2,7 +2,6 @@ package pacman;
 
 
 
-import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -17,10 +16,6 @@ public class GameManager {
     private Pacman pacman;
     private Group root;
     private Set<Ghost> ghosts;
-    private AnimationTimer leftPacmanAnimation;
-    private AnimationTimer rightPacmanAnimation;
-    private AnimationTimer upPacmanAnimation;
-    private AnimationTimer downPacmanAnimation;
     private Maze maze;
     private int lives;
     private int score;
@@ -34,12 +29,8 @@ public class GameManager {
     GameManager(Group root) {
         this.root = root;
         this.maze = new Maze();
-        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this);
+        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
         this.ghosts = new HashSet<>();
-        this.leftPacmanAnimation = this.createAnimation("left");
-        this.rightPacmanAnimation = this.createAnimation("right");
-        this.upPacmanAnimation = this.createAnimation("up");
-        this.downPacmanAnimation = this.createAnimation("down");
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
@@ -49,10 +40,10 @@ public class GameManager {
      * Set one life less
      */
     void lifeLost() {
-        this.leftPacmanAnimation.stop();
-        this.rightPacmanAnimation.stop();
-        this.upPacmanAnimation.stop();
-        this.downPacmanAnimation.stop();
+        pacman.leftPacmanAnimation.stop();
+        pacman.rightPacmanAnimation.stop();
+        pacman.upPacmanAnimation.stop();
+        pacman.downPacmanAnimation.stop();
         for (Ghost ghost : ghosts) {
             ghost.getAnimation().stop();
         }
@@ -137,16 +128,16 @@ public class GameManager {
         }
         switch (event.getCode()) {
             case RIGHT:
-                this.rightPacmanAnimation.start();
+                pacman.rightPacmanAnimation.start();
                 break;
             case LEFT:
-                this.leftPacmanAnimation.start();
+                pacman.leftPacmanAnimation.start();
                 break;
             case UP:
-                this.upPacmanAnimation.start();
+                pacman.upPacmanAnimation.start();
                 break;
             case DOWN:
-                this.downPacmanAnimation.start();
+                pacman.downPacmanAnimation.start();
                 break;
         }
     }
@@ -159,74 +150,18 @@ public class GameManager {
      void stopPacman(KeyEvent event) {
         switch (event.getCode()) {
             case RIGHT:
-                this.rightPacmanAnimation.stop();
+                pacman.rightPacmanAnimation.stop();
                 break;
             case LEFT:
-                this.leftPacmanAnimation.stop();
+                pacman.leftPacmanAnimation.stop();
                 break;
             case UP:
-                this.upPacmanAnimation.stop();
+                pacman.upPacmanAnimation.stop();
                 break;
             case DOWN:
-                this.downPacmanAnimation.stop();
+                pacman.downPacmanAnimation.stop();
                 break;
         }
-    }
-
-    /**
-     * Creates an animation of the movement.
-     *
-     * @param direction
-     * @return
-     */
-    private AnimationTimer createAnimation(String direction) {
-        double step = 5;
-        return new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                switch (direction) {
-                    case "left":
-                        if (!maze.isTouching(pacman.getCenterX() - pacman.getRadius(), pacman.getCenterY(), 15)) {
-                            pacman.setRotate(180);
-                            pacman.setCenterX(pacman.getCenterX() - step);
-                            pacman.checkCookieCoalition("x", maze.cookies);
-                            if (pacman.checkGhostCoalition(ghosts))
-                                lifeLost();
-                            pacman.checkDoorway();
-                        }
-                        break;
-                    case "right":
-                        if (!maze.isTouching(pacman.getCenterX() + pacman.getRadius(), pacman.getCenterY(), 15)) {
-                            pacman.setRotate(0);
-                            pacman.setCenterX(pacman.getCenterX() + step);
-                            pacman.checkCookieCoalition("x", maze.cookies);
-                            if (pacman.checkGhostCoalition(ghosts))
-                                lifeLost();
-                            pacman.checkDoorway();
-                        }
-                        break;
-                    case "up":
-                        if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() - pacman.getRadius(), 15)) {
-                            pacman.setRotate(270);
-                            pacman.setCenterY(pacman.getCenterY() - step);
-                            pacman.checkCookieCoalition( "y", maze.cookies);
-                            if (pacman.checkGhostCoalition(ghosts))
-                                lifeLost();
-                            pacman.checkDoorway();
-                        }
-                        break;
-                    case "down":
-                        if (!maze.isTouching(pacman.getCenterX(), pacman.getCenterY() + pacman.getRadius(), 15)) {
-                            pacman.setRotate(90);
-                            pacman.setCenterY(pacman.getCenterY() + step);
-                            pacman.checkCookieCoalition( "y", maze.cookies);
-                            if (pacman.checkGhostCoalition(ghosts))
-                                lifeLost();
-                            pacman.checkDoorway();
-                        }
-                        break;
-                }
-            }
-        };
     }
 
     void collectCookie(Cookie cookie) {
