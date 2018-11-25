@@ -60,7 +60,7 @@ public class GameManager {
         this.pacman.reset();
         lifes--;
         score -= 10;
-        this.scoreBoard.lifes.setText("Lifes: " + this.lifes);
+        this.scoreBoard.lifes.setText("Lives: " + this.lifes);
         this.scoreBoard.score.setText("Score: " + this.score);
         if (lifes == 0) {
             this.endGame();
