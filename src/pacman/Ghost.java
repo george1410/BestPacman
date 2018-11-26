@@ -150,6 +150,16 @@ public class Ghost extends Rectangle implements Runnable {
 
     }
 
+    private void checkDoorway() {
+        double leftEdge = getX();
+        double rightEdge = getX() + getWidth();
+        if (rightEdge < 0) {
+            setX(49 * BarObstacle.THICKNESS);
+        } else if (leftEdge > 49 * BarObstacle.THICKNESS) {
+            setX(-1 * BarObstacle.THICKNESS);
+        }
+    }
+
     /**
      * Creates an animation of the ghost
      */
@@ -161,6 +171,7 @@ public class Ghost extends Rectangle implements Runnable {
             {
                 if(gameManager.getPacman().checkGhostCoalition(gameManager.getGhosts()))
                     gameManager.lifeLost();
+                checkDoorway();
                 double leftEdge = getX();
                 double topEdge = getY();
                 double rightEdge = getX() + getWidth();
