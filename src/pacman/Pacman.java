@@ -98,9 +98,9 @@ public class Pacman extends Circle {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
         if (pacmanRightEdge < 0) {
-            setCenterX(49 * BarObstacle.THICKNESS + getRadius());
-        } else if (pacmanLeftEdge > 49 * BarObstacle.THICKNESS + getRadius()) {
-            setCenterX(0 - getRadius());
+            setCenterX(49.5 * BarObstacle.THICKNESS);
+        } else if (pacmanLeftEdge > 49 * BarObstacle.THICKNESS) {
+            setCenterX(-0.5 * BarObstacle.THICKNESS);
         }
     }
 
