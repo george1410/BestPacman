@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.StartController">
-      <Button fx:id="startGameBtn" layoutX="560.0" layoutY="287.0" mnemonicParsing="false" onAction="#startGame" text="Start Game" />
-      <Button fx:id="showSetupBtn" layoutX="558.0" layoutY="331.0" mnemonicParsing="false" onAction="#showSetup" text="Setup Menu" />
+      <Button fx:id="startGameBtn" layoutX="548.0" layoutY="282.0" minWidth="130.0" mnemonicParsing="false" onAction="#startGame" prefWidth="130.0" styleClass="menu-button" text="START" />
+      <Button fx:id="showSetupBtn" layoutX="547.0" layoutY="340.0" minWidth="130.0" mnemonicParsing="false" onAction="#showSetup" prefWidth="130.0" styleClass="menu-button" text="SETUP" />
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="541.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../resources/pacman.png" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="220.0">
       <image>
          <Image url="@../resources/ghost1.png" />
       </image>
    </ImageView>
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="873.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="873.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="220.0">
       <image>
          <Image url="@../resources/ghost2.png" />
       </image>

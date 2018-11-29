@@ -1,3 +1,16 @@
 .ui-background {
     -fx-background-color: #191919;
 }
+
+.menu-button {
+    -fx-padding: 15px 25px;
+    -fx-background-color: none;
+    -fx-border-color: #ffee00;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #ffee00;
+}
+
+.menu-button:hover {
+    -fx-cursor: hand;
+}
