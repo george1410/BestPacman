@@ -1,4 +1,4 @@
-package pacman.maze;
+package pacman.models.maze;
 
 
 

@@ -5,22 +5,22 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@res/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.StartController">
+<AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.StartController">
       <Button fx:id="startGameBtn" layoutX="560.0" layoutY="287.0" mnemonicParsing="false" onAction="#startGame" text="Start Game" />
       <Button fx:id="showSetupBtn" layoutX="558.0" layoutY="331.0" mnemonicParsing="false" onAction="#showSetup" text="Setup Menu" />
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="541.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@res/pacman.png" />
+         <Image url="@../resources/pacman.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="221.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@res/ghost1.png" />
+         <Image url="@../resources/ghost1.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="873.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@res/ghost2.png" />
+         <Image url="@../resources/ghost2.png" />
       </image>
    </ImageView>
 </AnchorPane>

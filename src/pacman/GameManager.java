@@ -7,11 +7,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import pacman.characters.Ghost;
-import pacman.characters.Pacman;
-import pacman.maze.BarObstacle;
-import pacman.maze.Cookie;
-import pacman.maze.Maze;
+import pacman.models.Score;
+import pacman.models.characters.Ghost;
+import pacman.models.characters.Pacman;
+import pacman.models.maze.BarObstacle;
+import pacman.models.maze.Cookie;
+import pacman.models.maze.Maze;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,8 +56,8 @@ public class GameManager {
         this.pacman.reset();
         lives--;
         score -= 10;
-        this.scoreBoard.lives.setText("Lives: " + this.lives);
-        this.scoreBoard.score.setText("Score: " + this.score);
+        this.scoreBoard.getLives().setText("Lives: " + this.lives);
+        this.scoreBoard.getScore().setText("Score: " + this.score);
         if (lives == 0) {
             this.endGame();
         }
@@ -76,8 +77,8 @@ public class GameManager {
         endGame.setY(BarObstacle.THICKNESS * 28);
         endGame.setFont(Font.font("Arial", 40));
         endGame.setFill(Color.ROYALBLUE);
-        root.getChildren().remove(this.scoreBoard.score);
-        root.getChildren().remove(this.scoreBoard.lives);
+        root.getChildren().remove(this.scoreBoard.getScore());
+        root.getChildren().remove(this.scoreBoard.getLives());
         root.getChildren().add(endGame);
     }
 
@@ -129,7 +130,7 @@ public class GameManager {
             this.cookiesEaten++;
         }
         cookie.hide();
-        scoreBoard.score.setText("Score: " + score);
+        scoreBoard.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size()) {
             endGame();
         }

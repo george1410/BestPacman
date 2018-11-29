@@ -1,4 +1,4 @@
-package pacman.characters;
+package pacman.models.characters;
 
 
 
@@ -8,9 +8,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import pacman.*;
-import pacman.maze.BarObstacle;
-import pacman.maze.Cookie;
-import pacman.maze.Maze;
+import pacman.models.maze.BarObstacle;
+import pacman.models.maze.Cookie;
+import pacman.models.maze.Maze;
 
 import java.util.Set;
 
@@ -29,7 +29,7 @@ public class Pacman extends Circle implements Moveable {
         this.setCenterY(y);
         this.setRadius(25);
         this.maze = maze;
-        Image img = new Image("pacman/res/pacman.png");
+        Image img = new Image("pacman/resources/pacman.png");
         this.setFill(new ImagePattern(img));
         this.leftPacmanAnimation = this.createAnimation("left");
         this.rightPacmanAnimation = this.createAnimation("right");
