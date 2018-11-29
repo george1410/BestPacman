@@ -1,11 +1,10 @@
-package pacman;
+package pacman.maze;
 
 
 
 import javafx.scene.Group;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
@@ -16,7 +15,7 @@ public class Maze {
     private Set<BarObstacle> obstacles;
     Set<Cookie> cookies;
 
-    Maze() {
+    public Maze() {
         obstacles = new HashSet<>();
         cookies = new HashSet<>();
     }
@@ -84,5 +83,9 @@ public class Maze {
             e.printStackTrace();
         }
         root.getChildren().addAll(obstacles);
+    }
+
+    public Set<Cookie> getCookies() {
+        return cookies;
     }
 }

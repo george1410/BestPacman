@@ -1,4 +1,4 @@
-package pacman;
+package pacman.characters;
 
 import javafx.animation.AnimationTimer;
 

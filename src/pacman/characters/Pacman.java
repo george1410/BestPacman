@@ -1,4 +1,4 @@
-package pacman;
+package pacman.characters;
 
 
 
@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import pacman.*;
+import pacman.maze.BarObstacle;
+import pacman.maze.Cookie;
+import pacman.maze.Maze;
 
 import java.util.Set;
 
@@ -25,7 +29,7 @@ public class Pacman extends Circle implements Moveable {
         this.setCenterY(y);
         this.setRadius(25);
         this.maze = maze;
-        Image img = new Image("pacman/pacman.png");
+        Image img = new Image("pacman/res/pacman.png");
         this.setFill(new ImagePattern(img));
         this.leftPacmanAnimation = this.createAnimation("left");
         this.rightPacmanAnimation = this.createAnimation("right");
@@ -104,7 +108,7 @@ public class Pacman extends Circle implements Moveable {
         }
     }
 
-    void reset() {
+    public void reset() {
         setRotate(0);
         setCenterX(2.5 * BarObstacle.THICKNESS);
         setCenterY(2.5 * BarObstacle.THICKNESS);
@@ -125,7 +129,7 @@ public class Pacman extends Circle implements Moveable {
                         if (!maze.isTouching(getCenterX() - getRadius(), getCenterY(), 15)) {
                             setRotate(180);
                             setCenterX(getCenterX() - step);
-                            checkCookieCoalition("x", maze.cookies);
+                            checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(gameManager.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
@@ -135,7 +139,7 @@ public class Pacman extends Circle implements Moveable {
                         if (!maze.isTouching(getCenterX() + getRadius(), getCenterY(), 15)) {
                             setRotate(0);
                             setCenterX(getCenterX() + step);
-                            checkCookieCoalition("x", maze.cookies);
+                            checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(gameManager.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
@@ -145,7 +149,7 @@ public class Pacman extends Circle implements Moveable {
                         if (!maze.isTouching(getCenterX(), getCenterY() - getRadius(), 15)) {
                             setRotate(270);
                             setCenterY(getCenterY() - step);
-                            checkCookieCoalition( "y", maze.cookies);
+                            checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(gameManager.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
@@ -155,7 +159,7 @@ public class Pacman extends Circle implements Moveable {
                         if (!maze.isTouching(getCenterX(), getCenterY() + getRadius(), 15)) {
                             setRotate(90);
                             setCenterY(getCenterY() + step);
-                            checkCookieCoalition( "y", maze.cookies);
+                            checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(gameManager.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
@@ -171,7 +175,7 @@ public class Pacman extends Circle implements Moveable {
      *
      * @param event
      */
-    void move(KeyEvent event) {
+    public void move(KeyEvent event) {
         for (Ghost ghost : gameManager.getGhosts()) {
             ghost.run();
         }
@@ -196,7 +200,7 @@ public class Pacman extends Circle implements Moveable {
      *
      * @param event
      */
-    void stop(KeyEvent event) {
+    public void stop(KeyEvent event) {
         switch (event.getCode()) {
             case RIGHT:
                 rightPacmanAnimation.stop();
@@ -211,5 +215,21 @@ public class Pacman extends Circle implements Moveable {
                 downPacmanAnimation.stop();
                 break;
         }
+    }
+
+    public AnimationTimer getLeftPacmanAnimation() {
+        return leftPacmanAnimation;
+    }
+
+    public AnimationTimer getRightPacmanAnimation() {
+        return rightPacmanAnimation;
+    }
+
+    public AnimationTimer getUpPacmanAnimation() {
+        return upPacmanAnimation;
+    }
+
+    public AnimationTimer getDownPacmanAnimation() {
+        return downPacmanAnimation;
     }
 }

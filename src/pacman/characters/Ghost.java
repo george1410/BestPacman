@@ -1,13 +1,14 @@
-package pacman;
+package pacman.characters;
 
 
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-
+import pacman.maze.BarObstacle;
+import pacman.GameManager;
+import pacman.maze.Maze;
 import java.util.Map;
 import java.util.Random;
 
@@ -27,7 +28,7 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
         this.gameManager = gameManager;
         this.setHeight(50);
         this.setWidth(50);
-        Image img = new Image("/pacman/ghost" + color + ".png");
+        Image img = new Image("/pacman/res/ghost" + color + ".png");
         this.setFill(new ImagePattern(img));
         this.timesWalked = 0;
         this.direction = "down";

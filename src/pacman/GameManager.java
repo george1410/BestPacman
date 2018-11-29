@@ -7,6 +7,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import pacman.characters.Ghost;
+import pacman.characters.Pacman;
+import pacman.maze.BarObstacle;
+import pacman.maze.Cookie;
+import pacman.maze.Maze;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,11 +44,11 @@ public class GameManager {
     /**
      * Set one life less
      */
-    void lifeLost() {
-        pacman.leftPacmanAnimation.stop();
-        pacman.rightPacmanAnimation.stop();
-        pacman.upPacmanAnimation.stop();
-        pacman.downPacmanAnimation.stop();
+    public void lifeLost() {
+        pacman.getLeftPacmanAnimation().stop();
+        pacman.getRightPacmanAnimation().stop();
+        pacman.getUpPacmanAnimation().stop();
+        pacman.getDownPacmanAnimation().stop();
         for (Ghost ghost : ghosts) {
             ghost.getAnimation().stop();
         }
@@ -84,7 +89,7 @@ public class GameManager {
     void restartGame(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             root.getChildren().clear();
-            maze.cookies.clear();
+            maze.getCookies().clear();
             this.ghosts.clear();
             this.drawBoard();
             this.pacman.reset();
@@ -118,23 +123,23 @@ public class GameManager {
     }
 
 
-    void collectCookie(Cookie cookie) {
+    public void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
             this.score += cookie.getValue();
             this.cookiesEaten++;
         }
         cookie.hide();
         scoreBoard.score.setText("Score: " + score);
-        if (cookiesEaten == maze.cookies.size()) {
+        if (cookiesEaten == maze.getCookies().size()) {
             endGame();
         }
     }
 
-    Pacman getPacman() {
+    public Pacman getPacman() {
         return pacman;
     }
 
-    Set<Ghost> getGhosts() {
+    public Set<Ghost> getGhosts() {
         return ghosts;
     }
 }
