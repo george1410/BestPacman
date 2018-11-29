@@ -19,7 +19,7 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     private GameManager gameManager;
     private Maze maze;
     private AnimationTimer animation;
-    int timesWalked;
+    private int timesWalked;
 
     public Ghost(double x, double y, int color, Maze maze, GameManager gameManager) {
         this.setX(x);

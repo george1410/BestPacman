@@ -13,7 +13,7 @@ import java.util.Set;
 public class Maze {
 
     private Set<BarObstacle> obstacles;
-    Set<Cookie> cookies;
+    private Set<Cookie> cookies;
 
     public Maze() {
         obstacles = new HashSet<>();

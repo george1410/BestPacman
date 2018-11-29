@@ -17,10 +17,10 @@ import java.util.Set;
 public class Pacman extends Circle implements Moveable {
 
     private GameManager gameManager;
-    AnimationTimer leftPacmanAnimation;
-    AnimationTimer rightPacmanAnimation;
-    AnimationTimer upPacmanAnimation;
-    AnimationTimer downPacmanAnimation;
+    private AnimationTimer leftPacmanAnimation;
+    private AnimationTimer rightPacmanAnimation;
+    private AnimationTimer upPacmanAnimation;
+    private AnimationTimer downPacmanAnimation;
     private Maze maze;
 
     public Pacman(double x, double y, GameManager gameManager, Maze maze) {

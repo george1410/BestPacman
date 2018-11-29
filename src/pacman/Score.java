@@ -6,10 +6,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import pacman.maze.BarObstacle;
 
-public class Score {
+class Score {
 
-    public Text score;
-    public Text lives;
+    Text score;
+    Text lives;
 
     Score(Group root) {
         this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: 0");
