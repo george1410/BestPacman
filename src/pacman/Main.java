@@ -18,21 +18,9 @@ public class Main extends Application {
         Parent p = FXMLLoader.load(getClass().getResource("start.fxml"));
         theStage.setTitle( "Pacman" );
 
-        Group root = new Group();
         Scene theScene = new Scene( p );
         theStage.setScene( theScene );
 
-        /*
-        Canvas canvas = new Canvas( 1225, 600 );
-        root.getChildren().add( canvas );
-        GameManager gameManager = new GameManager(root);
-
-        gameManager.drawBoard();
-
-        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getPacman().move(event));
-        theScene.addEventHandler(KeyEvent.KEY_RELEASED, event -> gameManager.getPacman().stop(event));
-        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.restartGame(event));
-        */
         theStage.show();
     }
 

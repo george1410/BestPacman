@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1225.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.Controller">
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@res/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.Controller">
    <children>
-      <Text layoutX="570.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETUP MENU" />
+      <Text layoutX="570.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETUP MENU" />
+      <ChoiceBox layoutX="537.0" layoutY="199.0" prefWidth="150.0" fx:id="colorChoice">
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <String fx:id="option1" fx:value="Option 1"/>
+                  <String fx:id="option2" fx:value="Option 2"/>
+                  <String fx:id="option3" fx:value="Option 3"/>
+              </FXCollections>
+          </items>
+      </ChoiceBox>
    </children>
 </AnchorPane>
