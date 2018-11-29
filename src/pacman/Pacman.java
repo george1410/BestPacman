@@ -10,7 +10,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.Set;
 
-public class Pacman extends Circle {
+public class Pacman extends Circle implements Moveable {
 
     private GameManager gameManager;
     AnimationTimer leftPacmanAnimation;
@@ -94,7 +94,7 @@ public class Pacman extends Circle {
         }
     }
 
-    private void checkDoorway() {
+    public void checkDoorway() {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
         if (pacmanRightEdge < 0) {
@@ -116,7 +116,7 @@ public class Pacman extends Circle {
      * @param direction
      * @return
      */
-    private AnimationTimer createAnimation(String direction) {
+    public AnimationTimer createAnimation(String direction) {
         double step = 5;
         return new AnimationTimer() {
             public void handle(long currentNanoTime) {

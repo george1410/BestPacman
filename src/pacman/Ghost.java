@@ -12,12 +12,12 @@ import java.util.Map;
 import java.util.Random;
 
 
-public class Ghost extends Rectangle implements Runnable {
+public class Ghost extends Rectangle implements Runnable, Moveable {
 
-    String direction;
-    GameManager gameManager;
-    Maze maze;
-    AnimationTimer animation;
+    private String direction;
+    private GameManager gameManager;
+    private Maze maze;
+    private AnimationTimer animation;
     int timesWalked;
 
     public Ghost(double x, double y, int color, Maze maze, GameManager gameManager) {
@@ -31,7 +31,7 @@ public class Ghost extends Rectangle implements Runnable {
         this.setFill(new ImagePattern(img));
         this.timesWalked = 0;
         this.direction = "down";
-        this.createAnimation();
+        animation = this.createAnimation(direction);
     }
 
     private String getRandomDirection(String exclude1, String exclude2) {
@@ -150,7 +150,7 @@ public class Ghost extends Rectangle implements Runnable {
 
     }
 
-    private void checkDoorway() {
+    public void checkDoorway() {
         double leftEdge = getX();
         double rightEdge = getX() + getWidth();
         if (rightEdge < 0) {
@@ -163,12 +163,10 @@ public class Ghost extends Rectangle implements Runnable {
     /**
      * Creates an animation of the ghost
      */
-    public void createAnimation() {
+    public AnimationTimer createAnimation(String s) {
 
-        this.animation = new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
+        return new AnimationTimer() {
+            public void handle(long currentNanoTime) {
                 if(gameManager.getPacman().checkGhostCoalition(gameManager.getGhosts()))
                     gameManager.lifeLost();
                 checkDoorway();
