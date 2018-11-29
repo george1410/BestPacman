@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class StartController implements Initializable {
+public class StartController {
     @FXML
     public Button showSetupBtn;
 
@@ -27,7 +27,6 @@ public class StartController implements Initializable {
 
     @FXML
     void startGame() {
-        System.out.println("Starting Game...");
         Stage stage = (Stage) showSetupBtn.getScene().getWindow();
 
         Group root = new Group();
@@ -48,15 +47,9 @@ public class StartController implements Initializable {
 
     @FXML
     void showSetup() throws IOException {
-        System.out.println("Setup Menu...");
-        Parent root = FXMLLoader.load(getClass().getResource("setup.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../views/setup.fxml"));
         Scene theScene = new Scene(root);
         Stage stage = (Stage) showSetupBtn.getScene().getWindow();
         stage.setScene(theScene);
-        stage.show();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
     }
 }
