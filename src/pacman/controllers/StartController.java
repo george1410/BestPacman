@@ -3,6 +3,7 @@ package pacman.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,12 +15,14 @@ import javafx.stage.Stage;
 import pacman.GameManager;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class StartController {
+public class StartController implements Initializable {
     @FXML
     public Button showSetupBtn;
-    @FXML
-    public ChoiceBox colorChoice;
+
+    GameManager gameManager = GameManager.getInstance();
 
 
     @FXML
@@ -31,8 +34,8 @@ public class StartController {
         Scene theScene = new Scene(root);
         Canvas canvas = new Canvas( 1225, 600 );
         root.getChildren().add( canvas );
-        GameManager gameManager = new GameManager(root);
 
+        gameManager.setRoot(root);
         gameManager.drawBoard();
 
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getPacman().move(event));
@@ -46,12 +49,14 @@ public class StartController {
     @FXML
     void showSetup() throws IOException {
         System.out.println("Setup Menu...");
-        Parent p = FXMLLoader.load(getClass().getResource("setup.fxml"));
-        Scene theScene = new Scene( p );
+        Parent root = FXMLLoader.load(getClass().getResource("setup.fxml"));
+        Scene theScene = new Scene(root);
         Stage stage = (Stage) showSetupBtn.getScene().getWindow();
-        stage.setScene( theScene );
+        stage.setScene(theScene);
         stage.show();
+    }
 
-
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }

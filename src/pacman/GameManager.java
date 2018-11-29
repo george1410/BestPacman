@@ -17,7 +17,7 @@ import pacman.models.maze.Maze;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GameManager {
+public final class GameManager {
 
     private Pacman pacman;
     private Group root;
@@ -29,17 +29,26 @@ public class GameManager {
     private boolean gameEnded;
     private int cookiesEaten;
 
+    private static GameManager theGameManager = new GameManager();
+
+    public static GameManager getInstance() {
+        return theGameManager;
+    }
+
     /**
      * Constructor
      */
-    public GameManager(Group root) {
-        this.root = root;
+    private GameManager() {
         this.maze = new Maze();
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
         this.ghosts = new HashSet<>();
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
+    }
+
+    public void setRoot(Group root) {
+        this.root = root;
     }
 
     /**
