@@ -1,4 +1,4 @@
-package pacman;
+package pacman.controllers;
 
 
 import javafx.fxml.FXML;
@@ -11,9 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import pacman.GameManager;
+
 import java.io.IOException;
 
-public class Controller {
+public class StartController {
     @FXML
     public Button showSetupBtn;
     @FXML
@@ -49,6 +51,7 @@ public class Controller {
         Stage stage = (Stage) showSetupBtn.getScene().getWindow();
         stage.setScene( theScene );
         stage.show();
+
 
     }
 }

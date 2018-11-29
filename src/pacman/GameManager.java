@@ -31,7 +31,7 @@ public class GameManager {
     /**
      * Constructor
      */
-    GameManager(Group root) {
+    public GameManager(Group root) {
         this.root = root;
         this.maze = new Maze();
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
@@ -86,7 +86,7 @@ public class GameManager {
      *
      * @param event
      */
-    void restartGame(KeyEvent event) {
+    public void restartGame(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             root.getChildren().clear();
             maze.getCookies().clear();
@@ -103,7 +103,7 @@ public class GameManager {
     /**
      * Draws the board of the game with the cookies and the Pacman
      */
-    void drawBoard() {
+    public void drawBoard() {
         this.maze.CreateMaze(root);
 
         root.getChildren().add(this.pacman);
