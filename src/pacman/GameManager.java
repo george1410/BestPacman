@@ -55,7 +55,7 @@ public class GameManager {
         this.pacman.reset();
         lives--;
         score -= 10;
-        this.scoreBoard.lifes.setText("Lives: " + this.lives);
+        this.scoreBoard.lives.setText("Lives: " + this.lives);
         this.scoreBoard.score.setText("Score: " + this.score);
         if (lives == 0) {
             this.endGame();
@@ -77,7 +77,7 @@ public class GameManager {
         endGame.setFont(Font.font("Arial", 40));
         endGame.setFill(Color.ROYALBLUE);
         root.getChildren().remove(this.scoreBoard.score);
-        root.getChildren().remove(this.scoreBoard.lifes);
+        root.getChildren().remove(this.scoreBoard.lives);
         root.getChildren().add(endGame);
     }
 
