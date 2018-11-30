@@ -23,7 +23,9 @@ public class SetupController implements Initializable {
     @FXML
     Button backToStartBtn;
     @FXML
-    ChoiceBox colorChoiceBox;
+    ChoiceBox obstacleDropdown;
+    @FXML
+    ChoiceBox backgroundDropdown;
 
     @FXML
     void backToStart() throws IOException {
@@ -34,8 +36,8 @@ public class SetupController implements Initializable {
     }
 
     @FXML
-    void colorChanged() {
-        int id = colorChoiceBox.getSelectionModel().getSelectedIndex();
+    void obstacleDropdownChange() {
+        int id = obstacleDropdown.getSelectionModel().getSelectedIndex();
 
         switch (id) {
             case 0:
@@ -53,7 +55,14 @@ public class SetupController implements Initializable {
         }
     }
 
+    @FXML
+    void backgroundDropdownChange() {
+        //TODO
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        obstacleDropdown.getSelectionModel().selectFirst();
+        backgroundDropdown.getSelectionModel().selectFirst();
     }
 }

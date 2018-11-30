@@ -12,5 +12,19 @@
 }
 
 .menu-button:hover {
-    -fx-cursor: hand;
+    -fx-border-color: #FBFBFF;
+    -fx-text-fill: #FBFBFF;
+}
+
+.h1 {
+    -fx-fill: #ffee00;
+    -fx-font-size: 28px;
+}
+
+.setup-label {
+    -fx-fill: #ffee00;
+}
+
+.dropdown {
+
 }
