@@ -24,7 +24,7 @@ public class StartController {
     @FXML
     public Button showSetupBtn;
 
-    GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
 
 
     @FXML

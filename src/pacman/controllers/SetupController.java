@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SetupController implements Initializable {
-    GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
     @FXML
     Button backToStartBtn;
     @FXML
