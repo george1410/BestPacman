@@ -39,12 +39,16 @@ public final class GameManager {
      * Constructor
      */
     private GameManager() {
-        this.maze = new Maze();
+        this.maze = new Maze(Color.CADETBLUE);
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
         this.ghosts = new HashSet<>();
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
+    }
+
+    public void setBarColor(Color color) {
+        this.maze.setBarColor(color);
     }
 
     public void setRoot(Group root) {

@@ -3,6 +3,7 @@ package pacman.models.maze;
 
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,10 +15,12 @@ public class Maze {
 
     private Set<BarObstacle> obstacles;
     private Set<Cookie> cookies;
+    private Color barColor;
 
-    public Maze() {
+    public Maze(Color barColor) {
         obstacles = new HashSet<>();
         cookies = new HashSet<>();
+        this.barColor = barColor;
     }
 
     /**
@@ -70,7 +73,7 @@ public class Maze {
             while ((line = br.readLine()) != null) {
                 for (int x = 0; x < line.length(); x++) {
                     if (line.charAt(x) == '1') {
-                        this.obstacles.add(new BarObstacle(x, y));
+                        this.obstacles.add(new BarObstacle(x, y, barColor));
                     } else if (line.charAt(x) == '2') {
                         Cookie cookie = new Cookie((x+0.5) * BarObstacle.THICKNESS, (y+0.5) * BarObstacle.THICKNESS);
                         this.cookies.add(cookie);
@@ -87,5 +90,13 @@ public class Maze {
 
     public Set<Cookie> getCookies() {
         return cookies;
+    }
+
+    public void setBarColor(Color barColor) {
+        this.barColor = barColor;
+        for (BarObstacle obstacle:
+             obstacles) {
+            obstacle.setFill(barColor);
+        }
     }
 }

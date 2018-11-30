@@ -10,12 +10,12 @@
 <AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.SetupController">
    <children>
       <Text layoutX="570.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETUP MENU" />
-      <ChoiceBox fx:id="colorChoice" layoutX="537.0" layoutY="199.0" prefWidth="150.0">
+      <ChoiceBox fx:id="colorChoiceBox" layoutX="537.0" layoutY="199.0" prefWidth="150.0" onAction="#colorChanged">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String fx:id="option1" fx:value="Option 1" />
-                  <String fx:id="option2" fx:value="Option 2" />
-                  <String fx:id="option3" fx:value="Option 3" />
+                  <String fx:id="option1" fx:value="Blue" />
+                  <String fx:id="option2" fx:value="Red" />
+                  <String fx:id="option3" fx:value="Green" />
               </FXCollections>
           </items>
       </ChoiceBox>

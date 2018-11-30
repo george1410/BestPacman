@@ -13,12 +13,12 @@ public class BarObstacle extends Rectangle {
      * @param x
      * @param y
      */
-    public BarObstacle(double x, double y) {
+    public BarObstacle(double x, double y, Color color) {
         this.setX(x * THICKNESS);
         this.setY(y * THICKNESS);
         this.setHeight(THICKNESS);
         this.setWidth(THICKNESS);
-        this.setFill(Color.CADETBLUE);
+        this.setFill(color);
         this.setStrokeWidth(3);
     }
 }
