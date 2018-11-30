@@ -11,6 +11,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import pacman.GameManager;
 
@@ -33,6 +35,8 @@ public class StartController {
         Scene theScene = new Scene(root);
         Canvas canvas = new Canvas( 1225, 600 );
         root.getChildren().add( canvas );
+        canvas.getGraphicsContext2D().setFill(new Color(0.1, 0.1, 0.1, 1));
+        canvas.getGraphicsContext2D().fillRect(0, 0, 1225, 600);
 
         gameManager.setRoot(root);
         gameManager.drawBoard();
