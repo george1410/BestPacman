@@ -67,7 +67,7 @@ public class Maze {
      */
     public void CreateMaze(Group root) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("maze1.map"));
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze1.map"));
             String line;
             int y = 0;
             while ((line = br.readLine()) != null) {
