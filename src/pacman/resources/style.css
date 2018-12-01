@@ -1,13 +1,33 @@
-.ui-background {
-    -fx-background-color: #191919;
-}
-
 .ui-background1 {
-    -fx-background-color: #191919;
+    -fx-background-color: #191919; // BLACK
 }
 
 .ui-background2 {
-    -fx-background-color: #ff0000;
+    -fx-background-color: #13293D; // BLUE
+}
+
+.ui-background3 {
+    -fx-background-color: #600211; // RED
+}
+
+.ui-background4 {
+    -fx-background-color: #3E5930; // GREEN
+}
+
+.ui-background5 {
+    -fx-background-color: #343330; // GREY
+}
+
+.ui-background6 {
+    -fx-background-color: #563A59; // PURPLE
+}
+
+.ui-background7 {
+    -fx-background-color: #701C36; // CLARET
+}
+
+.ui-background8 {
+    -fx-background-color: #F6F4F3; // WHITE
 }
 
 .menu-button {
