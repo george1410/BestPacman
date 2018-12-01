@@ -1,11 +1,15 @@
 package pacman;
 
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import pacman.models.Score;
 import pacman.models.characters.Ghost;
 import pacman.models.characters.Pacman;
@@ -13,6 +17,7 @@ import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +32,7 @@ public final class GameManager {
     private Score scoreBoard;
     private boolean gameEnded;
     private int cookiesEaten;
+    private Stage stage;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -52,6 +58,10 @@ public final class GameManager {
 
     public void setRoot(Pane root) {
         this.root = root;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     /**
@@ -99,17 +109,30 @@ public final class GameManager {
      *
      * @param event
      */
-    public void restartGame(KeyEvent event) {
+    public void restartGame(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
-            root.getChildren().clear();
             maze.getCookies().clear();
             this.ghosts.clear();
-            this.drawBoard();
             this.pacman.reset();
             this.lives = 3;
             this.score = 0;
             this.cookiesEaten = 0;
             gameEnded = false;
+
+            Parent root1 = FXMLLoader.load(getClass().getResource("views/game.fxml"));
+            Scene theScene = new Scene(root1);
+
+            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> this.getPacman().move(event1));
+            theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> this.getPacman().stop(event1));
+            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
+                try {
+                    this.restartGame(event1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            this.stage.setScene(theScene);
         }
     }
 

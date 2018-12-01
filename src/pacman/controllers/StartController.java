@@ -25,10 +25,17 @@ public class StartController {
 
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getPacman().move(event));
         theScene.addEventHandler(KeyEvent.KEY_RELEASED, event -> gameManager.getPacman().stop(event));
-        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.restartGame(event));
+        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            try {
+                gameManager.restartGame(event);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         Stage stage = (Stage) showSetupBtn.getScene().getWindow();
         stage.setScene(theScene);
+        gameManager.setStage(stage);
     }
 
     @FXML
