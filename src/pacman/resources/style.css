@@ -2,6 +2,14 @@
     -fx-background-color: #191919;
 }
 
+.ui-background1 {
+    -fx-background-color: #191919;
+}
+
+.ui-background2 {
+    -fx-background-color: #ff0000;
+}
+
 .menu-button {
     -fx-padding: 15px 25px;
     -fx-background-color: none;
@@ -26,5 +34,33 @@
 }
 
 .dropdown {
+    -fx-background-color: none;
+    -fx-border-color: #ffee00;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-mark-color: #ffee00;
+}
 
+.choice-box > .label {
+    -fx-text-fill: #ffee00;
+}
+
+.dropdown .context-menu {
+    -fx-background-color: #191919;
+    -fx-border-color: #ffee00;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.dropdown .menu-item > .label {
+    -fx-text-fill: #ffee00;
+}
+
+.dropdown .menu-item:focused {
+    -fx-background-color: #ffee00;
+}
+
+.dropdown .menu-item:focused > .label {
+    -fx-text-fill: #000000;
+    -fx-mark-color: #000000;
 }

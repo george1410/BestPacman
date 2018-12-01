@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-<?import java.lang.*?>
+
 <AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.SetupController">
    <children>
       <Text layoutX="565.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="SETUP" />
-      <ChoiceBox fx:id="obstacleDropdown" layoutX="537.0" layoutY="189.0" onAction="#obstacleDropdownChange" prefWidth="150.0" styleClass="dropdown">
+      <ChoiceBox fx:id="obstacleDropdown" layoutX="351.0" layoutY="189.0" onAction="#obstacleDropdownChange" prefWidth="150.0" styleClass="dropdown" AnchorPane.leftAnchor="351.0">
           <items>
               <FXCollections fx:factory="observableArrayList">
                   <String fx:id="option1" fx:value="Blue" />
@@ -19,8 +20,8 @@
           </items>
       </ChoiceBox>
       <Button fx:id="backToStartBtn" layoutX="567.0" layoutY="333.0" mnemonicParsing="false" onAction="#backToStart" styleClass="menu-button" text="BACK" />
-      <Text layoutX="554.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="OBSTACLE COLOR" />
-      <ChoiceBox fx:id="backgroundDropdown" layoutX="538.0" layoutY="271.0" onAction="#backgroundDropdownChange" prefWidth="150.0" styleClass="dropdown">
+      <Text layoutX="368.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="OBSTACLE COLOR" AnchorPane.leftAnchor="368.0" />
+      <ChoiceBox fx:id="backgroundDropdown" layoutX="689.0" layoutY="189.0" onAction="#backgroundDropdownChange" prefWidth="150.0" styleClass="dropdown" AnchorPane.rightAnchor="351.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:id="option1" fx:value="Blue" />
@@ -29,6 +30,6 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Text layoutX="542.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="BACKGROUND COLOR" />
+      <Text layoutX="729.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="BACKGROUND COLOR" AnchorPane.rightAnchor="355.01220703125" />
    </children>
 </AnchorPane>

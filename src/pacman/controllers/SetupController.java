@@ -54,7 +54,9 @@ public class SetupController implements Initializable {
 
     @FXML
     void backgroundDropdownChange() {
-        //TODO
+        //int id = backgroundDropdown.getSelectionModel().getSelectedIndex();
+
+        gameManager.setBackgroundColor(2);
     }
 
     @Override

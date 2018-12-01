@@ -33,6 +33,7 @@ public final class GameManager {
     private boolean gameEnded;
     private int cookiesEaten;
     private Stage stage;
+    private int backgroundColor;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -50,6 +51,11 @@ public final class GameManager {
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
+        this.backgroundColor = 1;
+    }
+
+    public void setBackgroundColor(int color) {
+        this.backgroundColor = color;
     }
 
     public void setBarColor(Color color) {
@@ -140,6 +146,9 @@ public final class GameManager {
      * Draws the board of the game with the cookies and the Pacman
      */
     public void drawBoard() {
+        root.getStyleClass().removeAll();
+        root.getStyleClass().add("ui-background" + backgroundColor);
+
         this.maze.CreateMaze(root);
 
         root.getChildren().add(this.pacman);
