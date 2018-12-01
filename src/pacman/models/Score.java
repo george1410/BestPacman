@@ -1,6 +1,7 @@
 package pacman.models;
 
 import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -11,7 +12,7 @@ public class Score {
     private Text score;
     private Text lives;
 
-    public Score(Group root) {
+    public Score(Pane root) {
         this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: 0");
         this.lives = new Text(BarObstacle.THICKNESS * 20, BarObstacle.THICKNESS * 28,"Lives: 3");
         score.setFill(Color.MAGENTA);

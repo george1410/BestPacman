@@ -4,8 +4,8 @@
 <?import javafx.scene.canvas.Canvas?>
 
 
-<Group fx:id="root" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.GameController">
-   <children>
-      <Canvas height="600.0" width="1225.0" fx:id="canvas"/>
-   </children>
-</Group>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<Pane fx:id="root" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.GameController" styleClass="ui-background" stylesheets="@../resources/style.css">
+    <AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1"/>
+</Pane>

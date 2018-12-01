@@ -5,6 +5,7 @@ package pacman;
 import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import pacman.models.Score;
@@ -20,7 +21,7 @@ import java.util.Set;
 public final class GameManager {
 
     private Pacman pacman;
-    private Group root;
+    private Pane root;
     private Set<Ghost> ghosts;
     private Maze maze;
     private int lives;
@@ -51,7 +52,7 @@ public final class GameManager {
         this.maze.setBarColor(color);
     }
 
-    public void setRoot(Group root) {
+    public void setRoot(Pane root) {
         this.root = root;
     }
 

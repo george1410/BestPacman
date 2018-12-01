@@ -3,6 +3,7 @@ package pacman.models.maze;
 
 
 import javafx.scene.Group;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
@@ -65,7 +66,7 @@ public class Maze {
      * Draws the maze
      * @param root
      */
-    public void CreateMaze(Group root) {
+    public void CreateMaze(Pane root) {
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze1.map"));
             String line;
