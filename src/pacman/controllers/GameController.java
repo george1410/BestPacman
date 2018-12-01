@@ -2,8 +2,6 @@ package pacman.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 import pacman.GameManager;
 

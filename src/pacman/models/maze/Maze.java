@@ -1,8 +1,6 @@
 package pacman.models.maze;
 
 
-
-import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 

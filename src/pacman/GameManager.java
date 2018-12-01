@@ -1,8 +1,6 @@
 package pacman;
 
 
-
-import javafx.scene.Group;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;

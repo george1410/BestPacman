@@ -1,13 +1,12 @@
 package pacman.models.characters;
 
 
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import pacman.*;
+import pacman.GameManager;
 import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;

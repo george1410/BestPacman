@@ -1,14 +1,14 @@
 package pacman.models.characters;
 
 
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import pacman.models.maze.BarObstacle;
 import pacman.GameManager;
+import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Maze;
+
 import java.util.Map;
 import java.util.Random;
 
