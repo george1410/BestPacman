@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.canvas.Canvas?>
+
+
+<Group fx:id="root" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.GameController">
+   <children>
+      <Canvas height="600.0" width="1225.0" fx:id="canvas"/>
+   </children>
+</Group>

@@ -24,29 +24,19 @@ public class StartController {
     @FXML
     public Button showSetupBtn;
 
-    private GameManager gameManager = GameManager.getInstance();
-
+    GameManager gameManager = GameManager.getInstance();
 
     @FXML
-    void startGame() {
-        Stage stage = (Stage) showSetupBtn.getScene().getWindow();
-
-        Group root = new Group();
+    void startGame() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../views/game.fxml"));
         Scene theScene = new Scene(root);
-        Canvas canvas = new Canvas( 1225, 600 );
-        root.getChildren().add( canvas );
-        canvas.getGraphicsContext2D().setFill(new Color(0.1, 0.1, 0.1, 1));
-        canvas.getGraphicsContext2D().fillRect(0, 0, 1225, 600);
-
-        gameManager.setRoot(root);
-        gameManager.drawBoard();
 
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getPacman().move(event));
         theScene.addEventHandler(KeyEvent.KEY_RELEASED, event -> gameManager.getPacman().stop(event));
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.restartGame(event));
 
+        Stage stage = (Stage) showSetupBtn.getScene().getWindow();
         stage.setScene(theScene);
-        stage.show();
     }
 
     @FXML
