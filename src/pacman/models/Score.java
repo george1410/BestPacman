@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import pacman.GameManager;
 import pacman.models.maze.BarObstacle;
 
 public class Score {
@@ -12,8 +13,8 @@ public class Score {
     private Text lives;
 
     public Score(Pane root) {
-        this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: 0");
-        this.lives = new Text(BarObstacle.THICKNESS * 20, BarObstacle.THICKNESS * 28,"Lives: 3");
+        this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: " + GameManager.getInstance().getScore());
+        this.lives = new Text(BarObstacle.THICKNESS * 20, BarObstacle.THICKNESS * 28,"Lives: " + GameManager.getInstance().getLives());
         score.setFill(Color.MAGENTA);
         score.setFont(Font.font("Arial", 30));
 

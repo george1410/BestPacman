@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import pacman.models.Score;
 import pacman.models.characters.Ghost;
@@ -35,6 +34,7 @@ public final class GameManager {
     private Stage stage;
     private int backgroundColor;
     private int obstacleColor;
+    private boolean gameLost;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -102,6 +102,7 @@ public final class GameManager {
         this.scoreBoard.getScore().setText("Score: " + this.score);
         if (lives == 0) {
             try {
+                this.gameLost = true;
                 this.endGame();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -115,7 +116,14 @@ public final class GameManager {
     private void endGame() throws IOException {
         this.gameEnded = true;
 
-        Parent root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
+        Parent root1;
+
+        if (gameLost) {
+            root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml")); // TODO: Send this to highscore.fxml, on which ESC triggers restartGame
+        } else {
+            root1 = FXMLLoader.load(getClass().getResource("views/nextround.fxml"));
+        }
+
         Scene theScene = new Scene(root1);
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
             try {
@@ -137,8 +145,12 @@ public final class GameManager {
             maze.getCookies().clear();
             this.ghosts.clear();
             this.pacman.reset();
-            this.lives = 3;
-            this.score = 0;
+
+            if (gameLost) {
+                this.lives = 3;
+                this.score = 0;
+            }
+
             this.cookiesEaten = 0;
             gameEnded = false;
 
@@ -199,6 +211,14 @@ public final class GameManager {
 
     public Set<Ghost> getGhosts() {
         return ghosts;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
 
