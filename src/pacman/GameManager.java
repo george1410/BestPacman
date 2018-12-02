@@ -175,7 +175,6 @@ public final class GameManager {
         this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 9.5 * BarObstacle.THICKNESS, 4, maze, this));
     }
 
-
     public void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
             this.score += cookie.getValue();

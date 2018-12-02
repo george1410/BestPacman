@@ -111,6 +111,10 @@ public class Pacman extends Circle implements Moveable {
         setRotate(0);
         setCenterX(2.5 * BarObstacle.THICKNESS);
         setCenterY(2.5 * BarObstacle.THICKNESS);
+        leftPacmanAnimation.stop();
+        rightPacmanAnimation.stop();
+        upPacmanAnimation.stop();
+        downPacmanAnimation.stop();
     }
 
     /**
