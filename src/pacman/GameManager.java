@@ -114,18 +114,6 @@ public final class GameManager {
      */
     private void endGame() throws IOException {
         this.gameEnded = true;
-/*        root.getChildren().remove(pacman);
-        for (Ghost ghost : ghosts) {
-            root.getChildren().remove(ghost);
-        }*/
-/*        javafx.scene.text.Text endGame = new javafx.scene.text.Text("Game Over, press ESC to restart");
-        endGame.setX(BarObstacle.THICKNESS * 3);
-        endGame.setY(BarObstacle.THICKNESS * 28);
-        endGame.setFont(Font.font("Arial", 40));
-        endGame.setFill(Color.ROYALBLUE);
-        root.getChildren().remove(this.scoreBoard.getScore());
-        root.getChildren().remove(this.scoreBoard.getLives());
-        root.getChildren().add(endGame);*/
 
         Parent root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         Scene theScene = new Scene(root1);
