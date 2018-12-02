@@ -149,6 +149,7 @@ public final class GameManager {
             if (gameLost) {
                 this.lives = 3;
                 this.score = 0;
+                this.gameLost = false;
             }
 
             this.cookiesEaten = 0;
