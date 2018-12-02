@@ -36,6 +36,8 @@ public class SetupController implements Initializable {
     void obstacleDropdownChange() {
         int id = obstacleDropdown.getSelectionModel().getSelectedIndex();
 
+        gameManager.setObstacleColor(id);
+
         switch (id) {
             case 0:
                 // Orange
@@ -85,7 +87,7 @@ public class SetupController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        obstacleDropdown.getSelectionModel().selectFirst();
-        backgroundDropdown.getSelectionModel().selectFirst();
+        obstacleDropdown.getSelectionModel().select(gameManager.getObstacleColor());
+        backgroundDropdown.getSelectionModel().select(gameManager.getBackgroundColor() - 1);
     }
 }

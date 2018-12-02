@@ -34,6 +34,7 @@ public final class GameManager {
     private int cookiesEaten;
     private Stage stage;
     private int backgroundColor;
+    private int obstacleColor;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -52,10 +53,23 @@ public final class GameManager {
         this.score = 0;
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
+        this.obstacleColor = 0;
     }
 
     public void setBackgroundColor(int color) {
         this.backgroundColor = color;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public int getObstacleColor() {
+        return obstacleColor;
+    }
+
+    public void setObstacleColor(int obstacleColor) {
+        this.obstacleColor = obstacleColor;
     }
 
     public void setBarColor(Color color) {
