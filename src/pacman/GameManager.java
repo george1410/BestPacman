@@ -45,7 +45,7 @@ public final class GameManager {
      * Constructor
      */
     private GameManager() {
-        this.maze = new Maze(Color.CADETBLUE);
+        this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
         this.ghosts = new HashSet<>();
         this.lives = 3;

@@ -38,16 +38,40 @@ public class SetupController implements Initializable {
 
         switch (id) {
             case 0:
-                // Blue
-                gameManager.setBarColor(new Color(0, 0, 1, 1));
+                // Orange
+                gameManager.setBarColor(new Color(1, 0.74, 0.26, 1));
                 break;
             case 1:
-                // Red
-                gameManager.setBarColor(new Color(1, 0, 0, 1));
+                // Blue
+                gameManager.setBarColor(new Color(0.29, 0.74, 1, 1));
                 break;
             case 2:
+                // Purple
+                gameManager.setBarColor(new Color(0.29, 0.08, 0.41, 1));
+                break;
+            case 3:
+                // Yellow
+                gameManager.setBarColor(new Color(0.8, 1, 0, 1));
+                break;
+            case 4:
                 // Green
-                gameManager.setBarColor(new Color(0, 1, 0, 1));
+                gameManager.setBarColor(new Color(0.06, 1, 0.58, 1));
+                break;
+            case 5:
+                // Pink
+                gameManager.setBarColor(new Color(0.77, 0.22, 0.9, 1));
+                break;
+            case 6:
+                // Red
+                gameManager.setBarColor(new Color(0.87, 0, 0.28, 1));
+                break;
+            case 7:
+                // Turquoise
+                gameManager.setBarColor(new Color(0, 0.76, 0.63, 1));
+                break;
+            default:
+                // Default to orange
+                gameManager.setBarColor(new Color(1, 0.74, 1.26, 1));
                 break;
         }
     }

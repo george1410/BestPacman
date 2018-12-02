@@ -13,9 +13,14 @@
       <ChoiceBox fx:id="obstacleDropdown" layoutX="351.0" layoutY="189.0" onAction="#obstacleDropdownChange" prefWidth="150.0" styleClass="dropdown" AnchorPane.leftAnchor="351.0">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String fx:id="option1" fx:value="Blue" />
-                  <String fx:id="option2" fx:value="Red" />
-                  <String fx:id="option3" fx:value="Green" />
+                  <String  fx:value="ORANGE" />
+                  <String  fx:value="BLUE" />
+                  <String  fx:value="PURPLE" />
+                  <String  fx:value="YELLOW" />
+                  <String  fx:value="GREEN" />
+                  <String  fx:value="PINK" />
+                  <String  fx:value="RED" />
+                  <String  fx:value="TURQUOISE" />
               </FXCollections>
           </items>
       </ChoiceBox>
