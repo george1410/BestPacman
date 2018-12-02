@@ -87,27 +87,42 @@ public final class GameManager {
         this.scoreBoard.getLives().setText("Lives: " + this.lives);
         this.scoreBoard.getScore().setText("Score: " + this.score);
         if (lives == 0) {
-            this.endGame();
+            try {
+                this.endGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     /**
      * Ends the game
      */
-    private void endGame() {
+    private void endGame() throws IOException {
         this.gameEnded = true;
-        root.getChildren().remove(pacman);
+/*        root.getChildren().remove(pacman);
         for (Ghost ghost : ghosts) {
             root.getChildren().remove(ghost);
-        }
-        javafx.scene.text.Text endGame = new javafx.scene.text.Text("Game Over, press ESC to restart");
+        }*/
+/*        javafx.scene.text.Text endGame = new javafx.scene.text.Text("Game Over, press ESC to restart");
         endGame.setX(BarObstacle.THICKNESS * 3);
         endGame.setY(BarObstacle.THICKNESS * 28);
         endGame.setFont(Font.font("Arial", 40));
         endGame.setFill(Color.ROYALBLUE);
         root.getChildren().remove(this.scoreBoard.getScore());
         root.getChildren().remove(this.scoreBoard.getLives());
-        root.getChildren().add(endGame);
+        root.getChildren().add(endGame);*/
+
+        Parent root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
+        Scene theScene = new Scene(root1);
+        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
+            try {
+                this.restartGame(event1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        this.stage.setScene(theScene);
     }
 
     /**
@@ -130,13 +145,6 @@ public final class GameManager {
 
             theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> this.getPacman().move(event1));
             theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> this.getPacman().stop(event1));
-            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
-                try {
-                    this.restartGame(event1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
 
             this.stage.setScene(theScene);
         }
@@ -175,8 +183,12 @@ public final class GameManager {
         }
         cookie.hide();
         scoreBoard.getScore().setText("Score: " + score);
-        if (cookiesEaten == maze.getCookies().size()) {
-            endGame();
+        if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
+            try {
+                endGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

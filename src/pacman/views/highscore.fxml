@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="600.0" prefWidth="1225.0" styleClass="ui-background1" stylesheets="@../resources/style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacman.controllers.HighscoreController">
+    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="541.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../resources/pacman.png" />
+        </image>
+    </ImageView>
+</AnchorPane>
