@@ -140,6 +140,26 @@ public final class GameManager {
         Parent root1;
 
         if (gameLost) {
+            int newScoreIndex = -1;
+            if (score > highScores[9]) {
+                newScoreIndex = 9;
+                highScores[9] = score;
+                for (int i = 9; i > 0; i--) {
+                    if (highScores[i] > highScores[i-1]) {
+                        int temp = highScores[i];
+                        highScores[i] = highScores[i-1];
+                        highScores[i-1] = temp;
+                        newScoreIndex = i-1;
+                    }
+                }
+            }
+            for (int i = 0; i < highScores.length; i++) {
+                if (newScoreIndex == i) {
+                    System.out.println(i+1 + ". " + highScores[i] + "*** NEW ***");
+                } else {
+                    System.out.println(i+1 + ". " + highScores[i]);
+                }
+            }
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
             root1 = FXMLLoader.load(getClass().getResource("views/nextround.fxml"));
