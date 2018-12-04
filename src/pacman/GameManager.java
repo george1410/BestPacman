@@ -38,7 +38,8 @@ public final class GameManager {
     private int backgroundColor;
     private int obstacleColor;
     private boolean gameLost;
-    public int[] highScores;
+    private int[] highScores;
+    private int newScoreIndex;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -140,7 +141,7 @@ public final class GameManager {
         Parent root1;
 
         if (gameLost) {
-            int newScoreIndex = -1;
+            newScoreIndex = -1;
             if (score > highScores[9]) {
                 newScoreIndex = 9;
                 highScores[9] = score;
@@ -151,13 +152,6 @@ public final class GameManager {
                         highScores[i-1] = temp;
                         newScoreIndex = i-1;
                     }
-                }
-            }
-            for (int i = 0; i < highScores.length; i++) {
-                if (newScoreIndex == i) {
-                    System.out.println(i+1 + ". " + highScores[i] + "*** NEW ***");
-                } else {
-                    System.out.println(i+1 + ". " + highScores[i]);
                 }
             }
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
@@ -261,6 +255,14 @@ public final class GameManager {
 
     public int getScore() {
         return score;
+    }
+
+    public int getNewScoreIndex() {
+        return newScoreIndex;
+    }
+
+    public int[] getHighScores() {
+        return highScores;
     }
 }
 
