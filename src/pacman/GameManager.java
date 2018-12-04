@@ -16,6 +16,9 @@ import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +38,7 @@ public final class GameManager {
     private int backgroundColor;
     private int obstacleColor;
     private boolean gameLost;
+    public int[] highScores;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -54,6 +58,23 @@ public final class GameManager {
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
         this.obstacleColor = 0;
+        this.highScores = readHighScores();
+    }
+
+    private int[] readHighScores() {
+        int[] highScores = new int[10];
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
+            String line;
+            int count = 0;
+            while ((line = br.readLine()) != null) {
+                highScores[count] = Integer.parseInt(line);
+                count++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highScores;
     }
 
     public void setBackgroundColor(int color) {
@@ -119,7 +140,7 @@ public final class GameManager {
         Parent root1;
 
         if (gameLost) {
-            root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml")); // TODO: Send this to highscore.fxml, on which ESC triggers restartGame
+            root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
             root1 = FXMLLoader.load(getClass().getResource("views/nextround.fxml"));
         }
