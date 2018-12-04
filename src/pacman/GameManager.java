@@ -74,34 +74,6 @@ public final class GameManager {
         return highScores;
     }
 
-    public void setBackgroundColor(int color) {
-        this.backgroundColor = color;
-    }
-
-    public int getBackgroundColor() {
-        return backgroundColor;
-    }
-
-    public int getObstacleColor() {
-        return obstacleColor;
-    }
-
-    public void setObstacleColor(int obstacleColor) {
-        this.obstacleColor = obstacleColor;
-    }
-
-    public void setBarColor(Color color) {
-        this.maze.setBarColor(color);
-    }
-
-    public void setRoot(Pane root) {
-        this.root = root;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
     /**
      * Set one life less
      */
@@ -244,6 +216,8 @@ public final class GameManager {
         }
     }
 
+
+
     public Pacman getPacman() {
         return pacman;
     }
@@ -266,6 +240,34 @@ public final class GameManager {
 
     public int[] getHighScores() {
         return highScores;
+    }
+
+    public void setBackgroundColor(int color) {
+        this.backgroundColor = color;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public int getObstacleColor() {
+        return obstacleColor;
+    }
+
+    public void setObstacleColor(int obstacleColor) {
+        this.obstacleColor = obstacleColor;
+    }
+
+    public void setBarColor(Color color) {
+        this.maze.setBarColor(color);
+    }
+
+    public void setRoot(Pane root) {
+        this.root = root;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
 

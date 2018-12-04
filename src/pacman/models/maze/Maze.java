@@ -87,15 +87,15 @@ public class Maze {
         root.getChildren().addAll(obstacles);
     }
 
-    public Set<Cookie> getCookies() {
-        return cookies;
-    }
-
     public void setBarColor(Color barColor) {
         this.barColor = barColor;
         for (BarObstacle obstacle:
              obstacles) {
             obstacle.setFill(barColor);
         }
+    }
+
+    public Set<Cookie> getCookies() {
+        return cookies;
     }
 }
