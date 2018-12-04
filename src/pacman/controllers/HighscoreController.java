@@ -1,6 +1,9 @@
 package pacman.controllers;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import pacman.GameManager;
 
 import java.net.URL;
@@ -10,15 +13,13 @@ public class HighscoreController implements Initializable {
     private GameManager gameManager = GameManager.getInstance();
     private int newScoreIndex = gameManager.getNewScoreIndex();
     private int[] highScores = gameManager.getHighScores();
+    @FXML
+    GridPane scoreGrid;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        for (int i = 0; i < highScores.length; i++) {
-            if (newScoreIndex == i) {
-                System.out.println(i+1 + ". " + highScores[i] + "*** NEW ***");
-            } else {
-                System.out.println(i+1 + ". " + highScores[i]);
-            }
-        }
+        Text text = new Text("1. 1250");
+        text.getStyleClass().add("setup-label");
+        scoreGrid.add(text, 0, 0);
     }
 }
