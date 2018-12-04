@@ -63,11 +63,10 @@ public final class GameManager {
         int[] highScores = new int[10];
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
-            String line;
-            int count = 0;
-            while ((line = br.readLine()) != null) {
-                highScores[count] = Integer.parseInt(line);
-                count++;
+            String line = br.readLine();
+            String[] splitArr = line.split(",");
+            for (int i = 0; i < splitArr.length; i++) {
+                highScores[i] = Integer.parseInt(splitArr[i]);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,7 +152,7 @@ public final class GameManager {
                 // write the new high score array to disk.
                 PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
                 for (int i = 0; i < highScores.length; i++) {
-                    pw.print(highScores[i]);
+                    pw.print(highScores[i] + ",");
                 }
                 pw.close();
 
