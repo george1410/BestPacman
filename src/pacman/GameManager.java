@@ -153,6 +153,7 @@ public final class GameManager {
     public void restartGame(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             maze.getCookies().clear();
+            maze.getObstacles().clear();
             this.ghosts.clear();
             this.pacman.reset();
 

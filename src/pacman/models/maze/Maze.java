@@ -98,4 +98,8 @@ public class Maze {
     public Set<Cookie> getCookies() {
         return cookies;
     }
+
+    public Set<BarObstacle> getObstacles() {
+        return obstacles;
+    }
 }
