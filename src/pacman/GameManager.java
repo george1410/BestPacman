@@ -16,10 +16,7 @@ import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -153,6 +150,13 @@ public final class GameManager {
                         newScoreIndex = i-1;
                     }
                 }
+                // write the new high score array to disk.
+                PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
+                for (int i = 0; i < highScores.length; i++) {
+                    pw.print(highScores[i]);
+                }
+                pw.close();
+
             }
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
