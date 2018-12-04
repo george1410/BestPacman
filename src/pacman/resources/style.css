@@ -53,6 +53,15 @@
     -fx-fill: #ffee00;
 }
 
+.high-score {
+    -fx-fill: #ffee00;
+    -fx-font-size: 18px;
+}
+
+.new-score {
+    -fx-fill: #de0047;
+}
+
 .dropdown {
     -fx-background-color: none;
     -fx-border-color: #ffee00;
