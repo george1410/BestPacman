@@ -2,10 +2,8 @@ package pacman.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import pacman.GameManager;
 
 import java.net.URL;
@@ -27,7 +25,6 @@ public class HighscoreController implements Initializable {
             }
             text.getStyleClass().add("high-score");
 
-            GridPane.setHalignment(text, HPos.CENTER);
             scoreGrid.add(text, i / 5, i % 5);
         }
     }
