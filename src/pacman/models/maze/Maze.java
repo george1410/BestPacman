@@ -81,6 +81,9 @@ public class Maze {
                         }
                         if (y > 0 && prevLine.charAt(x) == '1') {
                             this.obstacles.add(new BarObstacle(x,y-0.5, barColor));
+                            if (x > 0 && prevLine.charAt(x-1) == '1' && line.charAt(x-1) == '1') {
+                                this.obstacles.add(new BarObstacle(x-0.5, y-0.5, barColor));
+                            }
                         }
                     } else if (line.charAt(x) == '2') {
                         Cookie cookie = new Cookie((x * (2*BarObstacle.THICKNESS)) + 12.5, y * (2*BarObstacle.THICKNESS) + 12.5);
@@ -95,7 +98,6 @@ public class Maze {
                 this.width = prevLine.length();
             }
             this.height = y;
-            System.out.println("width: " + width + "\nheight: " + height);
         } catch (IOException e) {
             e.printStackTrace();
         }
