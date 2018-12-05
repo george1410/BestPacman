@@ -154,8 +154,8 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
         double leftEdge = getX();
         double rightEdge = getX() + getWidth();
         if (rightEdge < 0) {
-            setX(49 * BarObstacle.THICKNESS);
-        } else if (leftEdge > 49 * BarObstacle.THICKNESS) {
+            setX((maze.getWidth()*2-1) * BarObstacle.THICKNESS);
+        } else if (leftEdge > (maze.getWidth()*2-1) * BarObstacle.THICKNESS) {
             setX(-1 * BarObstacle.THICKNESS);
         }
     }

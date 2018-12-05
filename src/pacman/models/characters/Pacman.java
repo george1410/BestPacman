@@ -101,8 +101,8 @@ public class Pacman extends Circle implements Moveable {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
         if (pacmanRightEdge < 0) {
-            setCenterX(49.5 * BarObstacle.THICKNESS);
-        } else if (pacmanLeftEdge > 49 * BarObstacle.THICKNESS) {
+            setCenterX((maze.getWidth() * 2 - 0.5) * BarObstacle.THICKNESS);
+        } else if (pacmanLeftEdge > (maze.getWidth() * 2 - 1) * BarObstacle.THICKNESS) {
             setCenterX(-0.5 * BarObstacle.THICKNESS);
         }
     }

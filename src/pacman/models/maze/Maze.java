@@ -15,6 +15,8 @@ public class Maze {
     private Set<BarObstacle> obstacles;
     private Set<Cookie> cookies;
     private Color barColor;
+    private int width;
+    private int height;
 
     public Maze(Color barColor) {
         obstacles = new HashSet<>();
@@ -66,19 +68,7 @@ public class Maze {
      */
     public void CreateMaze(Pane root) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));
-/*            int height = 0;
-            String line;
-            while ((line = br.readLine()) != null) {
-                height++;
-            }
-            int width = line.length();
-            br.close();
-
-            int[][] map = new int[width][height];
-
-            br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));*/
-
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze3.map"));
             String line;
             String prevLine = null;
             int y = 0;
@@ -101,6 +91,11 @@ public class Maze {
                 y++;
                 prevLine = line;
             }
+            if (prevLine != null) {
+                this.width = prevLine.length();
+            }
+            this.height = y;
+            System.out.println("width: " + width + "\nheight: " + height);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,5 +116,13 @@ public class Maze {
 
     public Set<BarObstacle> getObstacles() {
         return obstacles;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
