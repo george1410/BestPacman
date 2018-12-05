@@ -66,20 +66,40 @@ public class Maze {
      */
     public void CreateMaze(Pane root) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze1.map"));
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));
+/*            int height = 0;
             String line;
+            while ((line = br.readLine()) != null) {
+                height++;
+            }
+            int width = line.length();
+            br.close();
+
+            int[][] map = new int[width][height];
+
+            br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));*/
+
+            String line;
+            String prevLine = null;
             int y = 0;
             while ((line = br.readLine()) != null) {
                 for (int x = 0; x < line.length(); x++) {
                     if (line.charAt(x) == '1') {
                         this.obstacles.add(new BarObstacle(x, y, barColor));
+                        if (x > 0 && line.charAt(x-1) == '1') {
+                            this.obstacles.add(new BarObstacle(x-0.5, y, barColor));
+                        }
+                        if (y > 0 && prevLine.charAt(x) == '1') {
+                            this.obstacles.add(new BarObstacle(x,y-0.5, barColor));
+                        }
                     } else if (line.charAt(x) == '2') {
-                        Cookie cookie = new Cookie((x+0.5) * BarObstacle.THICKNESS, (y+0.5) * BarObstacle.THICKNESS);
+                        Cookie cookie = new Cookie((x * (2*BarObstacle.THICKNESS)) + 12.5, y * (2*BarObstacle.THICKNESS) + 12.5);
                         this.cookies.add(cookie);
                         root.getChildren().add(cookie);
                     }
                 }
                 y++;
+                prevLine = line;
             }
         } catch (IOException e) {
             e.printStackTrace();
