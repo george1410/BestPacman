@@ -129,7 +129,7 @@ public class Pacman extends Circle implements Moveable {
             public void handle(long currentNanoTime) {
                 switch (direction) {
                     case "left":
-                        if (!maze.isTouching(getCenterX() - getRadius(), getCenterY(), 15)) {
+                        if (!maze.hasObstacle(getCenterX() - getRadius() - 15, getCenterX() - getRadius(), getCenterY() - getRadius(), getCenterY() + getRadius())) {
                             setRotate(180);
                             setCenterX(getCenterX() - step);
                             checkCookieCoalition("x", maze.getCookies());
@@ -139,7 +139,7 @@ public class Pacman extends Circle implements Moveable {
                         }
                         break;
                     case "right":
-                        if (!maze.isTouching(getCenterX() + getRadius(), getCenterY(), 15)) {
+                        if (!maze.hasObstacle(getCenterX() + getRadius(), getCenterX() + getRadius() + 15, getCenterY() - getRadius() , getCenterY() + getRadius())) {
                             setRotate(0);
                             setCenterX(getCenterX() + step);
                             checkCookieCoalition("x", maze.getCookies());
@@ -149,7 +149,7 @@ public class Pacman extends Circle implements Moveable {
                         }
                         break;
                     case "up":
-                        if (!maze.isTouching(getCenterX(), getCenterY() - getRadius(), 15)) {
+                        if (!maze.hasObstacle(getCenterX() - getRadius(), getCenterX() + getRadius(), getCenterY() - getRadius() - 15, getCenterY() - getRadius())) {
                             setRotate(270);
                             setCenterY(getCenterY() - step);
                             checkCookieCoalition( "y", maze.getCookies());
@@ -159,7 +159,7 @@ public class Pacman extends Circle implements Moveable {
                         }
                         break;
                     case "down":
-                        if (!maze.isTouching(getCenterX(), getCenterY() + getRadius(), 15)) {
+                        if (!maze.hasObstacle(getCenterX() - getRadius(), getCenterX() + getRadius(), getCenterY() + getRadius(), getCenterY() + getRadius() + 15)) {
                             setRotate(90);
                             setCenterY(getCenterY() + step);
                             checkCookieCoalition( "y", maze.getCookies());
