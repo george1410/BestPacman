@@ -22,7 +22,6 @@ import java.util.Set;
 
 public final class GameManager {
 
-    private Pacman pacman;
     private Pane root;
     private Maze maze;
     private int lives;
@@ -48,7 +47,6 @@ public final class GameManager {
      */
     private GameManager() {
         this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
-        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
@@ -76,14 +74,14 @@ public final class GameManager {
      * Set one life less
      */
     public void lifeLost() {
-        pacman.getLeftPacmanAnimation().stop();
-        pacman.getRightPacmanAnimation().stop();
-        pacman.getUpPacmanAnimation().stop();
-        pacman.getDownPacmanAnimation().stop();
+        maze.getPacman().getLeftPacmanAnimation().stop();
+        maze.getPacman().getRightPacmanAnimation().stop();
+        maze.getPacman().getUpPacmanAnimation().stop();
+        maze.getPacman().getDownPacmanAnimation().stop();
         for (Ghost ghost : maze.getGhosts()) {
             ghost.getAnimation().stop();
         }
-        this.pacman.reset();
+        maze.getPacman().reset();
         lives--;
         score -= 10;
         this.scoreBoard.getLives().setText("Lives: " + this.lives);
@@ -153,7 +151,7 @@ public final class GameManager {
             maze.getCookies().clear();
             maze.getObstacles().clear();
             maze.getGhosts().clear();
-            this.pacman.reset();
+            maze.getPacman().reset();
 
             if (gameLost) {
                 this.lives = 3;
@@ -167,8 +165,8 @@ public final class GameManager {
             Parent root1 = FXMLLoader.load(getClass().getResource("views/game.fxml"));
             Scene theScene = new Scene(root1);
 
-            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> this.getPacman().move(event1));
-            theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> this.getPacman().stop(event1));
+            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> maze.getPacman().move(event1));
+            theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> maze.getPacman().stop(event1));
 
             this.stage.setScene(theScene);
         }
@@ -183,7 +181,6 @@ public final class GameManager {
 
         this.maze.CreateMaze(root);
 
-        root.getChildren().add(this.pacman);
         this.scoreBoard = new Score(root);
     }
 
@@ -202,12 +199,6 @@ public final class GameManager {
                 e.printStackTrace();
             }
         }
-    }
-
-
-
-    public Pacman getPacman() {
-        return pacman;
     }
 
     public int getLives() {

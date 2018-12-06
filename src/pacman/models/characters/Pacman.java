@@ -22,12 +22,12 @@ public class Pacman extends Circle implements Moveable {
     private AnimationTimer downPacmanAnimation;
     private Maze maze;
 
-    public Pacman(double x, double y, GameManager gameManager, Maze maze) {
+    public Pacman(double x, double y, Maze maze, GameManager gameManager) {
+        this.maze = maze;
         this.gameManager = gameManager;
         this.setCenterX(x);
         this.setCenterY(y);
         this.setRadius(25);
-        this.maze = maze;
         Image img = new Image("pacman/resources/pacman.png");
         this.setFill(new ImagePattern(img));
         this.leftPacmanAnimation = this.createAnimation("left");

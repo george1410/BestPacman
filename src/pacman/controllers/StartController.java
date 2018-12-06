@@ -23,8 +23,8 @@ public class StartController {
         Parent root = FXMLLoader.load(getClass().getResource("../views/game.fxml"));
         Scene theScene = new Scene(root);
 
-        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getPacman().move(event));
-        theScene.addEventHandler(KeyEvent.KEY_RELEASED, event -> gameManager.getPacman().stop(event));
+        theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> gameManager.getMaze().getPacman().move(event));
+        theScene.addEventHandler(KeyEvent.KEY_RELEASED, event -> gameManager.getMaze().getPacman().stop(event));
         theScene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             try {
                 gameManager.restartGame(event);

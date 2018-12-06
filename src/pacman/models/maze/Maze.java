@@ -3,7 +3,9 @@ package pacman.models.maze;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import pacman.GameManager;
 import pacman.models.characters.Ghost;
+import pacman.models.characters.Pacman;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,6 +18,7 @@ public class Maze {
     private Set<BarObstacle> obstacles;
     private Set<Cookie> cookies;
     private Set<Ghost> ghosts;
+    private Pacman pacman;
     private Color barColor;
     private int width;
     private int height;
@@ -94,9 +97,12 @@ public class Maze {
                         this.cookies.add(cookie);
                         root.getChildren().add(cookie);
                     } else if (line.charAt(x) == '3') {
-                        Ghost ghost = new Ghost((2*x) * BarObstacle.THICKNESS - (BarObstacle.THICKNESS*0.5), (2*y) * BarObstacle.THICKNESS - (BarObstacle.THICKNESS*0.5), (ghostCount % 5) + 1);
+                        Ghost ghost = new Ghost((2*x-0.5) * BarObstacle.THICKNESS, (2*y-0.5) * BarObstacle.THICKNESS, (ghostCount % 5) + 1);
                         this.ghosts.add(ghost);
                         ghostCount++;
+                    } else if (line.charAt(x) == '*') {
+                        this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, GameManager.getInstance());
+                        root.getChildren().add(pacman);
                     }
                 }
                 y++;
@@ -133,11 +139,11 @@ public class Maze {
         return width;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
     public Set<Ghost> getGhosts() {
         return ghosts;
+    }
+
+    public Pacman getPacman() {
+        return pacman;
     }
 }

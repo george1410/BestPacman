@@ -13,7 +13,7 @@ public class BarObstacle extends Rectangle {
      * @param x
      * @param y
      */
-    public BarObstacle(double x, double y, Color color) {
+    BarObstacle(double x, double y, Color color) {
         this.setX(x * (2 * THICKNESS));
         this.setY(y * (2 * THICKNESS));
         this.setHeight(THICKNESS);

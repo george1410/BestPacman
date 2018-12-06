@@ -165,7 +165,7 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
 
         return new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                if(gameManager.getPacman().checkGhostCoalition(maze.getGhosts()))
+                if(maze.getPacman().checkGhostCoalition(maze.getGhosts()))
                     gameManager.lifeLost();
                 checkDoorway();
                 double leftEdge = getX();

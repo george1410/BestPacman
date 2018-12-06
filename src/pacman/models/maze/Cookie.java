@@ -10,7 +10,7 @@ public class Cookie extends Circle {
 
     private int value;
 
-    public Cookie(double x, double y) {
+    Cookie(double x, double y) {
         this.value = 5;
         this.setCenterX(x);
         this.setCenterY(y);
