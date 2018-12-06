@@ -133,7 +133,7 @@ public class Pacman extends Circle implements Moveable {
                             setRotate(180);
                             setCenterX(getCenterX() - step);
                             checkCookieCoalition("x", maze.getCookies());
-                            if (checkGhostCoalition(gameManager.getGhosts()))
+                            if (checkGhostCoalition(maze.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
                         }
@@ -143,7 +143,7 @@ public class Pacman extends Circle implements Moveable {
                             setRotate(0);
                             setCenterX(getCenterX() + step);
                             checkCookieCoalition("x", maze.getCookies());
-                            if (checkGhostCoalition(gameManager.getGhosts()))
+                            if (checkGhostCoalition(maze.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
                         }
@@ -153,7 +153,7 @@ public class Pacman extends Circle implements Moveable {
                             setRotate(270);
                             setCenterY(getCenterY() - step);
                             checkCookieCoalition( "y", maze.getCookies());
-                            if (checkGhostCoalition(gameManager.getGhosts()))
+                            if (checkGhostCoalition(maze.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
                         }
@@ -163,7 +163,7 @@ public class Pacman extends Circle implements Moveable {
                             setRotate(90);
                             setCenterY(getCenterY() + step);
                             checkCookieCoalition( "y", maze.getCookies());
-                            if (checkGhostCoalition(gameManager.getGhosts()))
+                            if (checkGhostCoalition(maze.getGhosts()))
                                 gameManager.lifeLost();
                             checkDoorway();
                         }
@@ -179,7 +179,7 @@ public class Pacman extends Circle implements Moveable {
      * @param event
      */
     public void move(KeyEvent event) {
-        for (Ghost ghost : gameManager.getGhosts()) {
+        for (Ghost ghost : maze.getGhosts()) {
             ghost.run();
         }
         switch (event.getCode()) {

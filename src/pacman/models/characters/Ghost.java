@@ -15,16 +15,14 @@ import java.util.Random;
 
 public class Ghost extends Rectangle implements Runnable, Moveable {
     private String direction;
-    private GameManager gameManager;
-    private Maze maze;
+    private GameManager gameManager = GameManager.getInstance();
+    private Maze maze = gameManager.getMaze();
     private AnimationTimer animation;
     private int timesWalked;
 
-    public Ghost(double x, double y, int color, Maze maze, GameManager gameManager) {
+    public Ghost(double x, double y, int color) {
         this.setX(x);
         this.setY(y);
-        this.maze = maze;
-        this.gameManager = gameManager;
         this.setHeight(50);
         this.setWidth(50);
         Image img = new Image("/pacman/resources/ghost" + color + ".png");
@@ -167,7 +165,7 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
 
         return new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                if(gameManager.getPacman().checkGhostCoalition(gameManager.getGhosts()))
+                if(gameManager.getPacman().checkGhostCoalition(maze.getGhosts()))
                     gameManager.lifeLost();
                 checkDoorway();
                 double leftEdge = getX();

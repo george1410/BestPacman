@@ -24,7 +24,6 @@ public final class GameManager {
 
     private Pacman pacman;
     private Pane root;
-    private Set<Ghost> ghosts;
     private Maze maze;
     private int lives;
     private int score;
@@ -50,7 +49,6 @@ public final class GameManager {
     private GameManager() {
         this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
         this.pacman = new Pacman(2.5 * BarObstacle.THICKNESS, 2.5 * BarObstacle.THICKNESS, this, maze);
-        this.ghosts = new HashSet<>();
         this.lives = 3;
         this.score = 0;
         this.cookiesEaten = 0;
@@ -82,7 +80,7 @@ public final class GameManager {
         pacman.getRightPacmanAnimation().stop();
         pacman.getUpPacmanAnimation().stop();
         pacman.getDownPacmanAnimation().stop();
-        for (Ghost ghost : ghosts) {
+        for (Ghost ghost : maze.getGhosts()) {
             ghost.getAnimation().stop();
         }
         this.pacman.reset();
@@ -154,7 +152,7 @@ public final class GameManager {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
             maze.getCookies().clear();
             maze.getObstacles().clear();
-            this.ghosts.clear();
+            maze.getGhosts().clear();
             this.pacman.reset();
 
             if (gameLost) {
@@ -186,20 +184,9 @@ public final class GameManager {
         this.maze.CreateMaze(root);
 
         root.getChildren().add(this.pacman);
-        this.generateGhosts();
-        root.getChildren().addAll(this.ghosts);
         this.scoreBoard = new Score(root);
     }
 
-    /**
-     * Generates the ghosts for the pacman!
-     */
-    private void generateGhosts() {
-        this.ghosts.add(new Ghost(18.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 1, maze, this));
-        this.ghosts.add(new Ghost(22.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 2, maze, this));
-        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 12.5 * BarObstacle.THICKNESS, 3, maze, this));
-        this.ghosts.add(new Ghost(28.5 * BarObstacle.THICKNESS, 9.5 * BarObstacle.THICKNESS, 4, maze, this));
-    }
 
     public void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
@@ -221,10 +208,6 @@ public final class GameManager {
 
     public Pacman getPacman() {
         return pacman;
-    }
-
-    public Set<Ghost> getGhosts() {
-        return ghosts;
     }
 
     public int getLives() {
@@ -269,6 +252,10 @@ public final class GameManager {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    public Maze getMaze() {
+        return maze;
     }
 }
 

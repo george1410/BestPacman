@@ -3,6 +3,7 @@ package pacman.models.maze;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import pacman.models.characters.Ghost;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ public class Maze {
 
     private Set<BarObstacle> obstacles;
     private Set<Cookie> cookies;
+    private Set<Ghost> ghosts;
     private Color barColor;
     private int width;
     private int height;
@@ -21,6 +23,7 @@ public class Maze {
     public Maze(Color barColor) {
         obstacles = new HashSet<>();
         cookies = new HashSet<>();
+        ghosts = new HashSet<>();
         this.barColor = barColor;
     }
 
@@ -67,8 +70,9 @@ public class Maze {
      * @param root
      */
     public void CreateMaze(Pane root) {
+        int ghostCount = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze3.map"));
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));
             String line;
             String prevLine = null;
             int y = 0;
@@ -89,11 +93,16 @@ public class Maze {
                         Cookie cookie = new Cookie((x * (2*BarObstacle.THICKNESS)) + 12.5, y * (2*BarObstacle.THICKNESS) + 12.5);
                         this.cookies.add(cookie);
                         root.getChildren().add(cookie);
+                    } else if (line.charAt(x) == '3') {
+                        Ghost ghost = new Ghost((2*x) * BarObstacle.THICKNESS - (BarObstacle.THICKNESS*0.5), (2*y) * BarObstacle.THICKNESS - (BarObstacle.THICKNESS*0.5), (ghostCount % 5) + 1);
+                        this.ghosts.add(ghost);
+                        ghostCount++;
                     }
                 }
                 y++;
                 prevLine = line;
             }
+            root.getChildren().addAll(this.ghosts);
             if (prevLine != null) {
                 this.width = prevLine.length();
             }
@@ -126,5 +135,9 @@ public class Maze {
 
     public int getHeight() {
         return height;
+    }
+
+    public Set<Ghost> getGhosts() {
+        return ghosts;
     }
 }
