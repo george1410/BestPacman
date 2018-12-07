@@ -17,7 +17,12 @@
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fill="#ffee00" layoutX="337.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRESS ESC TO START NEXT ROUND...">
+   <Text fill="#ffee00" layoutX="337.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRESS ESC TO START NEXT ROUND...">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Text>
+   <Text fx:id="currentScore" fill="#ffee00" layoutX="469.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT SCORE: 0">
       <font>
          <Font size="30.0" />
       </font>
