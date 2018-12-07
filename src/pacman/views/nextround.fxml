@@ -22,7 +22,7 @@
          <Font size="30.0" />
       </font>
    </Text>
-   <Text fx:id="currentScore" fill="#ffee00" layoutX="469.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT SCORE: 0">
+   <Text fill="#ffee00" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT SCORE: 0" textAlignment="CENTER" wrappingWidth="1225.0" fx:id="currentScore">
       <font>
          <Font size="30.0" />
       </font>
