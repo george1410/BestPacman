@@ -123,7 +123,6 @@ public final class GameManager {
                     pw.print(highScores[i] + ",");
                 }
                 pw.close();
-
             }
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
@@ -193,6 +192,13 @@ public final class GameManager {
         cookie.hide();
         scoreBoard.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
+            maze.getPacman().getLeftPacmanAnimation().stop();
+            maze.getPacman().getRightPacmanAnimation().stop();
+            maze.getPacman().getUpPacmanAnimation().stop();
+            maze.getPacman().getDownPacmanAnimation().stop();
+            for (Ghost ghost : maze.getGhosts()) {
+                ghost.getAnimation().stop();
+            }
             try {
                 endGame();
             } catch (IOException e) {

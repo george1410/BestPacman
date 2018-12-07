@@ -15,9 +15,13 @@ public class HighscoreController implements Initializable {
     private int[] highScores = gameManager.getHighScores();
     @FXML
     GridPane scoreGrid;
+    @FXML
+    Text yourScore;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        yourScore.setText("YOUR SCORE: " + gameManager.getScore());
         for (int i = 0; i < highScores.length; i++) {
             Text text = new Text(i+1 + ". " + highScores[i]);
             if (i == newScoreIndex) {
