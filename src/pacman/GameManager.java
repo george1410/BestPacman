@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import pacman.models.Score;
@@ -16,6 +18,7 @@ import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
+import javax.sound.sampled.AudioInputStream;
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -87,6 +90,7 @@ public final class GameManager {
         this.scoreBoard.getLives().setText("Lives: " + this.lives);
         this.scoreBoard.getScore().setText("Score: " + this.score);
         if (lives == 0) {
+            playSound("src/pacman/resources/lose_sound.wav");
             try {
                 this.gameLost = true;
                 this.endGame();
@@ -192,6 +196,7 @@ public final class GameManager {
         cookie.hide();
         scoreBoard.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
+            playSound("src/pacman/resources/win_sound.wav");
             maze.getPacman().getLeftPacmanAnimation().stop();
             maze.getPacman().getRightPacmanAnimation().stop();
             maze.getPacman().getUpPacmanAnimation().stop();
@@ -205,6 +210,12 @@ public final class GameManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void playSound(String filepath) {
+        Media sound = new Media(new File(filepath).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     public int getLives() {
