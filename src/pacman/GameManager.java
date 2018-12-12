@@ -32,8 +32,6 @@ public final class GameManager {
     private int backgroundColor;
     private int obstacleColor;
     private boolean gameLost;
-    private int[] highScores;
-    private int newScoreIndex;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -55,27 +53,6 @@ public final class GameManager {
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
         this.obstacleColor = 0;
-        this.highScores = readHighScores();
-    }
-
-    /**
-     * Reads the high scores from csv file into memory.
-     *
-     * @return int array of high scores.
-     */
-    private int[] readHighScores() {
-        int[] highScores = new int[10];
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
-            String line = br.readLine();
-            String[] splitArr = line.split(",");
-            for (int i = 0; i < splitArr.length; i++) {
-                highScores[i] = Integer.parseInt(splitArr[i]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return highScores;
     }
 
     /**
@@ -113,25 +90,7 @@ public final class GameManager {
         Parent root1;
 
         if (gameLost) {
-            newScoreIndex = -1;
-            if (scoreManager.getScore() > highScores[9]) {
-                newScoreIndex = 9;
-                highScores[9] = scoreManager.getScore();
-                for (int i = 9; i > 0; i--) {
-                    if (highScores[i] > highScores[i-1]) {
-                        int temp = highScores[i];
-                        highScores[i] = highScores[i-1];
-                        highScores[i-1] = temp;
-                        newScoreIndex = i-1;
-                    }
-                }
-                // write the new high score array to disk.
-                PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
-                for (int i = 0; i < highScores.length; i++) {
-                    pw.print(highScores[i] + ",");
-                }
-                pw.close();
-            }
+            scoreManager.updateHighScores();
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
             root1 = FXMLLoader.load(getClass().getResource("views/nextround.fxml"));
@@ -225,14 +184,6 @@ public final class GameManager {
         Media sound = new Media(new File(filepath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-    }
-
-    public int getNewScoreIndex() {
-        return newScoreIndex;
-    }
-
-    public int[] getHighScores() {
-        return highScores;
     }
 
     public void setBackgroundColor(int color) {

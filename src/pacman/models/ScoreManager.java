@@ -2,6 +2,8 @@ package pacman.models;
 
 import javafx.scene.text.Text;
 
+import java.io.*;
+
 /**
  * Model for the scoreboard displayed below the maze.
  */
@@ -11,6 +13,8 @@ public class ScoreManager {
     private Text livesText;
     private int score;
     private int lives;
+    private int[] highScores;
+    private int newScoreIndex;
 
     /**
      * Constructor for the ScoreManager, setting default values.
@@ -18,6 +22,7 @@ public class ScoreManager {
     public ScoreManager() {
         this.lives = 3;
         this.score = 0;
+        this.highScores = readHighScores();
     }
 
     /**
@@ -52,6 +57,48 @@ public class ScoreManager {
         livesText.setText("Lives: " + lives);
     }
 
+    /**
+     * Reads the high scores from csv file into memory.
+     *
+     * @return int array of high scores.
+     */
+    private int[] readHighScores() {
+        int[] highScores = new int[10];
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
+            String line = br.readLine();
+            String[] splitArr = line.split(",");
+            for (int i = 0; i < splitArr.length; i++) {
+                highScores[i] = Integer.parseInt(splitArr[i]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highScores;
+    }
+
+    public void updateHighScores() throws IOException {
+        newScoreIndex = -1;
+        if (score > highScores[9]) {
+            newScoreIndex = 9;
+            highScores[9] = score;
+            for (int i = 9; i > 0; i--) {
+                if (highScores[i] > highScores[i-1]) {
+                    int temp = highScores[i];
+                    highScores[i] = highScores[i-1];
+                    highScores[i-1] = temp;
+                    newScoreIndex = i-1;
+                }
+            }
+            // write the new high score array to disk.
+            PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
+            for (int highScore : highScores) {
+                pw.print(highScore + ",");
+            }
+            pw.close();
+        }
+    }
+
     public void setScore(int score) {
         this.score = score;
         this.scoreText.setText("Score: " + this.score);
@@ -63,5 +110,13 @@ public class ScoreManager {
 
     public int getLives() {
         return lives;
+    }
+
+    public int[] getHighScores() {
+        return highScores;
+    }
+
+    public int getNewScoreIndex() {
+        return newScoreIndex;
     }
 }

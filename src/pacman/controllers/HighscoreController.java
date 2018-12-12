@@ -14,8 +14,8 @@ import java.util.ResourceBundle;
  */
 public class HighscoreController implements Initializable {
     private GameManager gameManager = GameManager.getInstance();
-    private int newScoreIndex = gameManager.getNewScoreIndex();
-    private int[] highScores = gameManager.getHighScores();
+    private int newScoreIndex = gameManager.getScoreManager().getNewScoreIndex();
+    private int[] highScores = gameManager.getScoreManager().getHighScores();
     @FXML
     GridPane scoreGrid;
     @FXML
