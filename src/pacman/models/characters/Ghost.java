@@ -8,7 +8,6 @@ import javafx.scene.shape.Rectangle;
 import pacman.GameManager;
 import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Maze;
-
 import java.util.Map;
 import java.util.Random;
 

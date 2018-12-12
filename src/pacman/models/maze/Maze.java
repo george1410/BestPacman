@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import pacman.GameManager;
 import pacman.models.characters.Ghost;
 import pacman.models.characters.Pacman;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -27,6 +26,8 @@ public class Maze {
     private int width;
     private int height;
     private File mazeFile;
+    private String mazeFileName;
+    private boolean customMapLoaded;
 
     /**
      * Constructor for the maze initializing default values.
@@ -39,6 +40,8 @@ public class Maze {
         ghosts = new HashSet<>();
         this.barColor = barColor;
         mazeFile = new File("src/pacman/resources/maze2.map");
+        mazeFileName = "Default";
+        customMapLoaded = false;
     }
 
     /**
@@ -171,5 +174,23 @@ public class Maze {
 
     public void setMazeFile(File file) {
         this.mazeFile = file;
+        mazeFileName = file.getName();
+        customMapLoaded = true;
+    }
+
+    public String getMazeFileName() {
+        if (customMapLoaded) {
+            return mazeFileName;
+        } else {
+            return "Default";
+        }
+    }
+
+    public boolean isCustomMapLoaded() {
+        return customMapLoaded;
+    }
+
+    public void setCustomMapLoaded(boolean b) {
+        customMapLoaded = b;
     }
 }

@@ -44,6 +44,10 @@
     -fx-text-fill: #FBFBFF;
 }
 
+.menu-button-small {
+    -fx-padding: 8px 13px;
+}
+
 .h1 {
     -fx-fill: #ffee00;
     -fx-font-size: 28px;

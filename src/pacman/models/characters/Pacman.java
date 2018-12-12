@@ -56,7 +56,7 @@ public class Pacman extends Circle implements Moveable {
      * Checks if Pacman is touching a Ghost.
      *
      * @param ghosts The set of Ghosts to be checked against.
-     * @return Whether or not Pacman is currently touching a Ghost/
+     * @return Whether or not Pacman is currently touching a Ghost.
      */
     boolean checkGhostCoalition(Set<Ghost> ghosts) {
         double pacmanLeftEdge = getCenterX() - getRadius();

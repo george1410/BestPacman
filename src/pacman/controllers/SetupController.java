@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pacman.GameManager;
@@ -30,6 +31,10 @@ public class SetupController implements Initializable {
     ChoiceBox backgroundDropdown;
     @FXML
     Button loadMapButton;
+    @FXML
+    Text mapName;
+    @FXML
+    Button resetMapButton;
 
     /**
      * Switches to the Start view.
@@ -110,7 +115,23 @@ public class SetupController implements Initializable {
         fileChooser.setTitle("Load Map File");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(".map files", "*.map"));
         File file = fileChooser.showOpenDialog(loadMapButton.getScene().getWindow());
-        gameManager.getMaze().setMazeFile(file);
+        if (file != null) {
+            gameManager.getMaze().setMazeFile(file);
+            mapName.setText("Current Map: " + gameManager.getMaze().getMazeFileName());
+            gameManager.getMaze().setCustomMapLoaded(true);
+            resetMapButton.setVisible(gameManager.getMaze().isCustomMapLoaded());
+        }
+    }
+
+    /**
+     * Called when the resetMapButton is clicked, and sets the default built-in map file as the current maze file.
+     */
+    @FXML
+    void resetMap() {
+        gameManager.getMaze().setMazeFile(new File("src/pacman/resources/maze2.map"));
+        gameManager.getMaze().setCustomMapLoaded(false);
+        mapName.setText("Current Map: " + gameManager.getMaze().getMazeFileName());
+        resetMapButton.setVisible(gameManager.getMaze().isCustomMapLoaded());
     }
 
     /**
@@ -120,5 +141,7 @@ public class SetupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         obstacleDropdown.getSelectionModel().select(gameManager.getObstacleColor());
         backgroundDropdown.getSelectionModel().select(gameManager.getBackgroundColor() - 1);
+        mapName.setText("Current Map: " + gameManager.getMaze().getMazeFileName());
+        resetMapButton.setVisible(gameManager.getMaze().isCustomMapLoaded());
     }
 }
