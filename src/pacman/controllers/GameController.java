@@ -30,8 +30,7 @@ public class GameController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gameManager.setRoot(root);
-        gameManager.drawBoard();
+        gameManager.drawBoard(root);
         scoreText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
         livesText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
         scoreText.setFill(gameManager.getMaze().getBarColor());

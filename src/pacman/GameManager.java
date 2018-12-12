@@ -24,7 +24,6 @@ import java.io.*;
  */
 public final class GameManager {
 
-    private Pane root;
     private Maze maze;
     private ScoreManager scoreManager;
     private boolean gameEnded;
@@ -182,7 +181,7 @@ public final class GameManager {
     /**
      * Responsible for ensuring that a maze and score area are added to the scene.
      */
-    public void drawBoard() {
+    public void drawBoard(Pane root) {
         root.getStyleClass().removeAll();
         root.getStyleClass().add("ui-background" + backgroundColor);
 
@@ -254,10 +253,6 @@ public final class GameManager {
 
     public void setBarColor(Color color) {
         this.maze.setBarColor(color);
-    }
-
-    public void setRoot(Pane root) {
-        this.root = root;
     }
 
     public void setStage(Stage stage) {

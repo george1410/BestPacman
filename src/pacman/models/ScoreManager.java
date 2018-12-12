@@ -16,7 +16,8 @@ public class ScoreManager {
      * Constructor for the ScoreManager, setting default values.
      */
     public ScoreManager() {
-        reset();
+        this.lives = 3;
+        this.score = 0;
     }
 
     /**
