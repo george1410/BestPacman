@@ -11,6 +11,7 @@ import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
+import java.io.IOException;
 import java.util.Set;
 
 /**
@@ -97,20 +98,20 @@ public class Pacman extends Circle implements Moveable {
             if (axis.equals("x")) {
                 // pacman goes right
                 if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanRightEdge >= cookieLeftEdge && pacmanRightEdge <= cookieRightEdge)) {
-                    gameManager.collectCookie(cookie);
+                    collectCookie(cookie);
                 }
                 // pacman goes left
                 if ((cookieCenterY >= pacmanTopEdge && cookieCenterY <= pacmanBottomEdge) && (pacmanLeftEdge >= cookieLeftEdge && pacmanLeftEdge <= cookieRightEdge)) {
-                    gameManager.collectCookie(cookie);
+                    collectCookie(cookie);
                 }
             } else {
                 // pacman goes up
                 if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanBottomEdge >= cookieTopEdge && pacmanBottomEdge <= cookieBottomEdge)) {
-                    gameManager.collectCookie(cookie);
+                    collectCookie(cookie);
                 }
                 // pacman goes down
                 if ((cookieCenterX >= pacmanLeftEdge && cookieCenterX <= pacmanRightEdge) && (pacmanTopEdge <= cookieBottomEdge && pacmanTopEdge >= cookieTopEdge)) {
-                    gameManager.collectCookie(cookie);
+                    collectCookie(cookie);
                 }
             }
         }
@@ -142,7 +143,7 @@ public class Pacman extends Circle implements Moveable {
         downPacmanAnimation.stop();
     }
 
-    /**
+    /**s
      * Creates an animation of the movement.
      *
      * @param direction The direction to create a movement animation for.
@@ -159,7 +160,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterX(getCenterX() - step);
                             checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.ghostTouched();
+                                touchedGhost();
                             checkDoorway();
                         }
                         break;
@@ -169,7 +170,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterX(getCenterX() + step);
                             checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.ghostTouched();
+                                touchedGhost();
                             checkDoorway();
                         }
                         break;
@@ -179,7 +180,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterY(getCenterY() - step);
                             checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.ghostTouched();
+                                touchedGhost();
                             checkDoorway();
                         }
                         break;
@@ -189,7 +190,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterY(getCenterY() + step);
                             checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.ghostTouched();
+                                touchedGhost();
                             checkDoorway();
                         }
                         break;
@@ -246,10 +247,64 @@ public class Pacman extends Circle implements Moveable {
     }
 
     /**
+     * Called if Pacman and Ghosts collide to reduce number of lives, reset Pacman to start position, and play sound.
+     */
+    void touchedGhost() {
+        for (AnimationTimer animation : this.getAllAnimations()) {
+            animation.stop();
+        }
+
+        for (Ghost ghost : maze.getGhosts()) {
+            ghost.getAnimation().stop();
+        }
+
+        maze.getPacman().reset();
+        gameManager.getScoreManager().loseLife();
+
+        if (gameManager.getScoreManager().getLives() == 0) {
+            gameManager.playSound("src/pacman/resources/lose_sound.wav");
+            try {
+                gameManager.setGameLost(true);
+                gameManager.endGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Called when Pacman collides with a cookie, handles updating score.
+     *
+     * @param cookie The cookie object that Pacman collided with.
+     */
+    private void collectCookie(Cookie cookie) {
+        if (cookie.isVisible()) {
+            gameManager.getScoreManager().setScore(gameManager.getScoreManager().getScore() + cookie.getValue());
+            gameManager.increaseCookiesEaten();
+        }
+        cookie.hide();
+        if (gameManager.getCookiesEaten() == maze.getCookies().size() && !gameManager.isGameEnded()) {
+            gameManager.playSound("src/pacman/resources/win_sound.wav");
+            for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
+                animation.stop();
+            }
+
+            for (Ghost ghost : maze.getGhosts()) {
+                ghost.getAnimation().stop();
+            }
+            try {
+                gameManager.endGame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * Allows access to all of the Pacman animations.
      * @return Array of the Animations for each direction.
      */
-    public AnimationTimer[] getAllAnimations() {
+    private AnimationTimer[] getAllAnimations() {
         return new AnimationTimer[]{leftPacmanAnimation, rightPacmanAnimation, upPacmanAnimation, downPacmanAnimation};
     }
 }

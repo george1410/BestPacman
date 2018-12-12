@@ -56,35 +56,9 @@ public final class GameManager {
     }
 
     /**
-     * Called if Pacman and Ghosts collide to reduce number of lives, reset Pacman to start position, and play sound.
-     */
-    public void ghostTouched() {
-        for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
-            animation.stop();
-        }
-        
-        for (Ghost ghost : maze.getGhosts()) {
-            ghost.getAnimation().stop();
-        }
-
-        maze.getPacman().reset();
-        scoreManager.loseLife();
-
-        if (scoreManager.getLives() == 0) {
-            playSound("src/pacman/resources/lose_sound.wav");
-            try {
-                this.gameLost = true;
-                this.endGame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * Called when all coins are collected or all lives are lost to end the round/game.
      */
-    private void endGame() throws IOException {
+    public void endGame() throws IOException {
         this.gameEnded = true;
 
         Parent root1;
@@ -148,39 +122,11 @@ public final class GameManager {
     }
 
     /**
-     * Called when Pacman collides with a cookie, handles updating score.
-     *
-     * @param cookie The cookie object that Pacman collided with.
-     */
-    public void collectCookie(Cookie cookie) {
-        if (cookie.isVisible()) {
-            this.scoreManager.setScore(this.scoreManager.getScore() + cookie.getValue());
-            this.cookiesEaten++;
-        }
-        cookie.hide();
-        if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
-            playSound("src/pacman/resources/win_sound.wav");
-            for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
-                animation.stop();
-            }
-
-            for (Ghost ghost : maze.getGhosts()) {
-                ghost.getAnimation().stop();
-            }
-            try {
-                endGame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * Plays a sound file.
      *
      * @param filepath Path to the sound file to be played.
      */
-    private void playSound(String filepath) {
+    public void playSound(String filepath) {
         Media sound = new Media(new File(filepath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
@@ -216,5 +162,21 @@ public final class GameManager {
 
     public ScoreManager getScoreManager() {
         return scoreManager;
+    }
+
+    public void setGameLost(boolean gameLost) {
+        this.gameLost = gameLost;
+    }
+
+    public void increaseCookiesEaten() {
+        this.cookiesEaten++;
+    }
+
+    public int getCookiesEaten() {
+        return cookiesEaten;
+    }
+
+    public boolean isGameEnded() {
+        return gameEnded;
     }
 }
