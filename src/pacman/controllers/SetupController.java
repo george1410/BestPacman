@@ -8,9 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import pacman.GameManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,6 +28,8 @@ public class SetupController implements Initializable {
     ChoiceBox obstacleDropdown;
     @FXML
     ChoiceBox backgroundDropdown;
+    @FXML
+    Button loadMapButton;
 
     /**
      * Switches to the Start view.
@@ -95,6 +99,18 @@ public class SetupController implements Initializable {
         int id = backgroundDropdown.getSelectionModel().getSelectedIndex() + 1;
 
         gameManager.setBackgroundColor(id);
+    }
+
+    /**
+     * Called when the loadMapButton is clicked and sets the selected file as the current maze file.
+     */
+    @FXML
+    void loadCustomMap() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load Map File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter(".map files", "*.map"));
+        File file = fileChooser.showOpenDialog(loadMapButton.getScene().getWindow());
+        gameManager.getMaze().setMazeFile(file);
     }
 
     /**

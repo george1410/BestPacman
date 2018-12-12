@@ -13,23 +13,23 @@
       <ChoiceBox fx:id="obstacleDropdown" layoutX="351.0" layoutY="189.0" onAction="#obstacleDropdownChange" prefWidth="150.0" styleClass="dropdown" AnchorPane.leftAnchor="351.0">
           <items>
               <FXCollections fx:factory="observableArrayList">
-                  <String  fx:value="ORANGE" />
-                  <String  fx:value="BLUE" />
-                  <String  fx:value="PURPLE" />
-                  <String  fx:value="YELLOW" />
-                  <String  fx:value="GREEN" />
-                  <String  fx:value="PINK" />
-                  <String  fx:value="RED" />
-                  <String  fx:value="TURQUOISE" />
+                  <String fx:value="ORANGE" />
+                  <String fx:value="BLUE" />
+                  <String fx:value="PURPLE" />
+                  <String fx:value="YELLOW" />
+                  <String fx:value="GREEN" />
+                  <String fx:value="PINK" />
+                  <String fx:value="RED" />
+                  <String fx:value="TURQUOISE" />
               </FXCollections>
           </items>
       </ChoiceBox>
-      <Button fx:id="backToStartBtn" layoutX="567.0" layoutY="333.0" mnemonicParsing="false" onAction="#backToStart" styleClass="menu-button" text="BACK" />
+      <Button fx:id="backToStartBtn" layoutX="568.0" layoutY="354.0" mnemonicParsing="false" onAction="#backToStart" styleClass="menu-button" text="BACK" />
       <Text layoutX="368.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="OBSTACLE COLOR" AnchorPane.leftAnchor="368.0" />
       <ChoiceBox fx:id="backgroundDropdown" layoutX="689.0" layoutY="189.0" onAction="#backgroundDropdownChange" prefWidth="150.0" styleClass="dropdown" AnchorPane.rightAnchor="351.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String  fx:value="BLACK" />
+               <String fx:value="BLACK" />
                <String fx:value="BLUE" />
                <String fx:value="RED" />
                 <String fx:value="GREEN" />
@@ -41,5 +41,6 @@
          </items>
       </ChoiceBox>
       <Text layoutX="729.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="setup-label" text="BACKGROUND COLOR" AnchorPane.rightAnchor="355.01220703125" />
+      <Button fx:id="loadMapButton" layoutX="521.0" layoutY="264.0" mnemonicParsing="false" onAction="#loadCustomMap" styleClass="menu-button" text="LOAD CUSTOM MAP" />
    </children>
 </AnchorPane>

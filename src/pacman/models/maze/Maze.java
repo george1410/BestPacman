@@ -8,6 +8,7 @@ import pacman.models.characters.Ghost;
 import pacman.models.characters.Pacman;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ public class Maze {
     private Color barColor;
     private int width;
     private int height;
+    private File mazeFile;
 
     /**
      * Constructor for the maze initializing default values.
@@ -36,6 +38,7 @@ public class Maze {
         cookies = new HashSet<>();
         ghosts = new HashSet<>();
         this.barColor = barColor;
+        mazeFile = new File("src/pacman/resources/maze2.map");
     }
 
     /**
@@ -86,7 +89,7 @@ public class Maze {
     public void CreateMaze(Pane root) {
         int ghostCount = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/maze2.map"));
+            BufferedReader br = new BufferedReader(new FileReader(mazeFile));
             String line;
             String prevLine = null;
             int y = 0;
@@ -164,5 +167,9 @@ public class Maze {
 
     public Pacman getPacman() {
         return pacman;
+    }
+
+    public void setMazeFile(File file) {
+        this.mazeFile = file;
     }
 }
