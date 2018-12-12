@@ -5,7 +5,7 @@ import javafx.scene.text.Text;
 /**
  * Model for the scoreboard displayed below the maze.
  */
-public class Score {
+public class ScoreManager {
 
     private Text score;
     private Text lives;
@@ -16,7 +16,7 @@ public class Score {
      * @param score Text component in the view containing the current score.
      * @param lives Text component in the view showing the current lives.
      */
-    public Score(Text score, Text lives) {
+    public ScoreManager(Text score, Text lives) {
         this.score = score;
         this.lives = lives;
     }

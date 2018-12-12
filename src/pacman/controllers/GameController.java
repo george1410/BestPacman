@@ -3,10 +3,9 @@ package pacman.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import pacman.GameManager;
-import pacman.models.Score;
+import pacman.models.ScoreManager;
 import pacman.models.maze.BarObstacle;
 
 import java.net.URL;
@@ -40,6 +39,6 @@ public class GameController implements Initializable {
         scoreText.setText("Score: " + gameManager.getScore());
         livesText.setText("Lives: " + gameManager.getLives());
 
-        gameManager.setScoreBoard(new Score(scoreText, livesText));
+        gameManager.setScoreManager(new ScoreManager(scoreText, livesText));
     }
 }

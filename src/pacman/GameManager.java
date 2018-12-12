@@ -12,7 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import pacman.models.Score;
+import pacman.models.ScoreManager;
 import pacman.models.characters.Ghost;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
@@ -28,7 +28,7 @@ public final class GameManager {
     private Maze maze;
     private int lives;
     private int score;
-    private Score scoreBoard;
+    private ScoreManager scoreManager;
     private boolean gameEnded;
     private int cookiesEaten;
     private Stage stage;
@@ -96,8 +96,8 @@ public final class GameManager {
         maze.getPacman().reset();
         lives--;
         score -= 10;
-        this.scoreBoard.getLives().setText("Lives: " + this.lives);
-        this.scoreBoard.getScore().setText("Score: " + this.score);
+        this.scoreManager.getLives().setText("Lives: " + this.lives);
+        this.scoreManager.getScore().setText("Score: " + this.score);
         if (lives == 0) {
             playSound("src/pacman/resources/lose_sound.wav");
             try {
@@ -205,7 +205,7 @@ public final class GameManager {
             this.cookiesEaten++;
         }
         cookie.hide();
-        scoreBoard.getScore().setText("Score: " + score);
+        scoreManager.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
             playSound("src/pacman/resources/win_sound.wav");
             for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
@@ -282,8 +282,8 @@ public final class GameManager {
         return maze;
     }
 
-    public void setScoreBoard(Score scoreBoard) {
-        this.scoreBoard = scoreBoard;
+    public void setScoreManager(ScoreManager scoreManager) {
+        this.scoreManager = scoreManager;
     }
 }
 

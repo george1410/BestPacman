@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Controller for the High Score screen.
+ * Controller for the High ScoreManager screen.
  */
 public class HighscoreController implements Initializable {
     private GameManager gameManager = GameManager.getInstance();
