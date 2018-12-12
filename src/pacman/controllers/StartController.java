@@ -12,12 +12,18 @@ import pacman.GameManager;
 
 import java.io.IOException;
 
+/**
+ * Controller for the Start screen.
+ */
 public class StartController {
     @FXML
     public Button showSetupBtn;
 
     private GameManager gameManager = GameManager.getInstance();
 
+    /**
+     * Switches to the Game view, adn binds keypress event handlers to the new view.
+     */
     @FXML
     void startGame() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../views/game.fxml"));
@@ -38,6 +44,9 @@ public class StartController {
         gameManager.setStage(stage);
     }
 
+    /**
+     * Switches to the Setup view.
+     */
     @FXML
     void showSetup() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../views/setup.fxml"));

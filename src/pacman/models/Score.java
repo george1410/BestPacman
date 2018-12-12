@@ -7,11 +7,19 @@ import javafx.scene.text.Text;
 import pacman.GameManager;
 import pacman.models.maze.BarObstacle;
 
+/**
+ * Model for the scoreboard displayed below the maze.
+ */
 public class Score {
 
     private Text score;
     private Text lives;
 
+    /**
+     * Constructor for the scoreboard, setting default values.
+     *
+     * @param root Pane in the scene which the scoreboard should be drawn onto.
+     */
     public Score(Pane root) {
         this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: " + GameManager.getInstance().getScore());
         this.lives = new Text(BarObstacle.THICKNESS * 20, BarObstacle.THICKNESS * 28,"Lives: " + GameManager.getInstance().getLives());

@@ -12,7 +12,9 @@ import pacman.models.maze.Maze;
 import java.util.Map;
 import java.util.Random;
 
-
+/**
+ * Model for the Ghosts on the map.
+ */
 public class Ghost extends Rectangle implements Runnable, Moveable {
     private String direction;
     private GameManager gameManager = GameManager.getInstance();
@@ -20,6 +22,13 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     private AnimationTimer animation;
     private int timesWalked;
 
+    /**
+     * Constructor initialises default values for the Ghost.
+     *
+     * @param x The x-position for the Ghost.
+     * @param y The y-position for the Ghost.
+     * @param color Integer representation of the color of the ghost (1-5).
+     */
     public Ghost(double x, double y, int color) {
         this.setX(x);
         this.setY(y);
@@ -29,9 +38,16 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
         this.setFill(new ImagePattern(img));
         this.timesWalked = 0;
         this.direction = "down";
-        animation = this.createAnimation(direction);
+        animation = this.createAnimation(null);
     }
 
+    /**
+     * Generate a random direction (up,down,left,right)
+     *
+     * @param exclude1 Guaranteed to not be the generated direction.
+     * @param exclude2 Guaranteed to not be the generated direction.
+     * @return A random direction, that is not one of the excluded.
+     */
     private String getRandomDirection(String exclude1, String exclude2) {
         String[] directions = {"left", "right", "up", "down"};
         int rnd = new Random().nextInt(directions.length);
@@ -42,16 +58,9 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     }
 
     /**
-     * Gets the animation for the ghost
-     * @return
-     */
-    public AnimationTimer getAnimation() {
-        return animation;
-    }
-
-    /**
+     * Checks if movement in the specified direction will hit an obstacle, and sets the direction if not.
      *
-     * @param direction
+     * @param direction Direction of travel to check if there is a path in.
      */
     private void checkIftheresPathToGo(String direction) {
         double rightEdge, leftEdge, topEdge, bottomEdge;
@@ -92,14 +101,15 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     }
 
     /**
+     * Generates random direction changes for the Ghosts.
      *
-     * @param whereToGo
-     * @param whereToChangeTo
-     * @param leftEdge
-     * @param topEdge
-     * @param rightEdge
-     * @param bottomEdge
-     * @param padding
+     * @param whereToGo Current direction of movement.
+     * @param whereToChangeTo Direction to move if unable to continue in current direction.
+     * @param leftEdge X-Position of the left edge of the Ghost.
+     * @param topEdge Y-Position of the top edge of the Ghost.
+     * @param rightEdge X-Position of the right edge of the Ghost.
+     * @param bottomEdge Y-Position of the bottom edge of the Ghost.
+     * @param padding Padding maintained between Ghost and Obstacles.
      */
     private void moveUntilYouCant(String whereToGo, String whereToChangeTo, double leftEdge, double topEdge, double rightEdge, double bottomEdge, double padding) {
         double step = 5;
@@ -148,6 +158,9 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
 
     }
 
+    /**
+     * Checks whether the Ghost is travelling through a doorway, and moves it to the other doorway if necessary.
+     */
     public void checkDoorway() {
         double leftEdge = getX();
         double rightEdge = getX() + getWidth();
@@ -159,7 +172,9 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     }
 
     /**
-     * Creates an animation of the ghost
+     * Creates the animation for the Ghost.
+     *
+     * @return The animation for the Ghost.
      */
     public AnimationTimer createAnimation(String s) {
 
@@ -196,8 +211,15 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
         };
     }
 
+    /**
+     * Starts a new thread and begins the Ghost animation on it.
+     */
     @Override
     public void run() {
         this.animation.start();
+    }
+
+    public AnimationTimer getAnimation() {
+        return animation;
     }
 }

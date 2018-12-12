@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Model for the maze and organising its components.
+ */
 public class Maze {
 
     private Set<BarObstacle> obstacles;
@@ -21,8 +24,12 @@ public class Maze {
     private Pacman pacman;
     private Color barColor;
     private int width;
-    private int height;
 
+    /**
+     * Constructor for the maze initializing default values.
+     *
+     * @param barColor The color of the obstacles in the maze.
+     */
     public Maze(Color barColor) {
         obstacles = new HashSet<>();
         cookies = new HashSet<>();
@@ -32,9 +39,10 @@ public class Maze {
 
     /**
      * Checks if point is touching obstacles
-     * @param x
-     * @param y
-     * @return
+     *
+     * @param x The x-position to check.
+     * @param y The y-position to check.
+     * @return Whether or not the given coordinate is touching an obstacle.
      */
     public Boolean isTouching(double x, double y, double padding) {
         for (BarObstacle barObstacle:obstacles) {
@@ -51,12 +59,13 @@ public class Maze {
     }
 
     /**
-     * lets you know if there's an obstacle in the current coordinate
-     * @param fromX
-     * @param toX
-     * @param fromY
-     * @param toY
-     * @return
+     * Checks if there is an obstacle in the current coordinate range.
+     *
+     * @param fromX Lower x-position to check from.
+     * @param toX Upper x-position to check to.
+     * @param fromY Lower y-position to check from.
+     * @param toY Upper y-position to check to.
+     * @return Whether or not the given coordinate range contains an obstacle.
      */
     public Boolean hasObstacle(double fromX,  double toX, double fromY, double toY) {
         boolean isTouching = false;
@@ -69,8 +78,9 @@ public class Maze {
     }
 
     /**
-     * Draws the maze
-     * @param root
+     * Draws the maze, based on the map file.
+     *
+     * @param root Pane in the scene which the maze components should be drawn onto.
      */
     public void CreateMaze(Pane root) {
         int ghostCount = 0;
@@ -112,7 +122,6 @@ public class Maze {
             if (prevLine != null) {
                 this.width = prevLine.length();
             }
-            this.height = y;
         } catch (IOException e) {
             e.printStackTrace();
         }

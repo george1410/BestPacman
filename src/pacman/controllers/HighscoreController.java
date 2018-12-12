@@ -9,6 +9,9 @@ import pacman.GameManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the High Score screen.
+ */
 public class HighscoreController implements Initializable {
     private GameManager gameManager = GameManager.getInstance();
     private int newScoreIndex = gameManager.getNewScoreIndex();
@@ -18,7 +21,9 @@ public class HighscoreController implements Initializable {
     @FXML
     Text yourScore;
 
-
+    /**
+     * Set default properties of the components in the view.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         yourScore.setText("YOUR SCORE: " + gameManager.getScore());

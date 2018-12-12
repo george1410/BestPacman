@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the Setup screen.
+ */
 public class SetupController implements Initializable {
     private GameManager gameManager = GameManager.getInstance();
     @FXML
@@ -24,6 +27,9 @@ public class SetupController implements Initializable {
     @FXML
     ChoiceBox backgroundDropdown;
 
+    /**
+     * Switches to the Start view.
+     */
     @FXML
     void backToStart() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("../views/start.fxml"));
@@ -32,6 +38,9 @@ public class SetupController implements Initializable {
         stage.setScene(theScene);
     }
 
+    /**
+     * Sets the obstacle color to the currently selected color in the dropdown.
+     */
     @FXML
     void obstacleDropdownChange() {
         int id = obstacleDropdown.getSelectionModel().getSelectedIndex();
@@ -78,6 +87,9 @@ public class SetupController implements Initializable {
         }
     }
 
+    /**
+     * Sets the background color to the currently selected color in the dropdown.
+     */
     @FXML
     void backgroundDropdownChange() {
         int id = backgroundDropdown.getSelectionModel().getSelectedIndex() + 1;
@@ -85,6 +97,9 @@ public class SetupController implements Initializable {
         gameManager.setBackgroundColor(id);
     }
 
+    /**
+     * Set default properties of the components in the view.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         obstacleDropdown.getSelectionModel().select(gameManager.getObstacleColor());

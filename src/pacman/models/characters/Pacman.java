@@ -13,6 +13,9 @@ import pacman.models.maze.Maze;
 
 import java.util.Set;
 
+/**
+ * Model for the Pacman character.
+ */
 public class Pacman extends Circle implements Moveable {
 
     private GameManager gameManager;
@@ -22,6 +25,14 @@ public class Pacman extends Circle implements Moveable {
     private AnimationTimer downPacmanAnimation;
     private Maze maze;
 
+    /**
+     * Constructor initialises default values for Pacman.
+     *
+     * @param x The x-position of Pacman.
+     * @param y the y-position of Pacman.
+     * @param maze The maze instance that Pacman is being used in.
+     * @param gameManager Reference to the GameManager singleton.
+     */
     public Pacman(double x, double y, Maze maze, GameManager gameManager) {
         this.maze = maze;
         this.gameManager = gameManager;
@@ -37,7 +48,10 @@ public class Pacman extends Circle implements Moveable {
     }
 
     /**
-     * Checks if pacman is touching a ghost
+     * Checks if Pacman is touching a Ghost.
+     *
+     * @param ghosts The set of Ghosts to be checked against.
+     * @return Whether or not Pacman is currently touching a Ghost/
      */
     boolean checkGhostCoalition(Set<Ghost> ghosts) {
         double pacmanLeftEdge = getCenterX() - getRadius();
@@ -59,9 +73,10 @@ public class Pacman extends Circle implements Moveable {
     }
 
     /**
-     * Checks if the Pacman touches cookies.
+     * Checks if Pacman is touching a cookie, and collects the cookie if it is.
      *
-     * @param axis
+     * @param axis Describes the current direction of travel for Pacman.
+     * @param cookieSet The set of cookies to be checked against.
      */
     private void checkCookieCoalition(String axis, Set<Cookie> cookieSet) {
         double pacmanLeftEdge = getCenterX() - getRadius();
@@ -97,6 +112,9 @@ public class Pacman extends Circle implements Moveable {
         }
     }
 
+    /**
+     * Checks whether the Ghost is travelling through a doorway, and moves it to the other doorway if necessary.
+     */
     public void checkDoorway() {
         double pacmanLeftEdge = getCenterX() - getRadius();
         double pacmanRightEdge = getCenterX() + getRadius();
@@ -107,6 +125,9 @@ public class Pacman extends Circle implements Moveable {
         }
     }
 
+    /**
+     * Stops Pacman moving, and returns to the original starting position.
+     */
     public void reset() {
         setRotate(0);
         setCenterX(2.5 * BarObstacle.THICKNESS);
@@ -120,8 +141,8 @@ public class Pacman extends Circle implements Moveable {
     /**
      * Creates an animation of the movement.
      *
-     * @param direction
-     * @return
+     * @param direction The direction to create a movement animation for.
+     * @return The movement animation.
      */
     public AnimationTimer createAnimation(String direction) {
         double step = 5;
@@ -174,9 +195,9 @@ public class Pacman extends Circle implements Moveable {
     }
 
     /**
-     * Moves the pacman
+     * Moves the pacman by starting the relevant animation.
      *
-     * @param event
+     * @param event The keyevent which the desired direction of movement can be extracted from.
      */
     public void move(KeyEvent event) {
         for (Ghost ghost : maze.getGhosts()) {
@@ -199,9 +220,9 @@ public class Pacman extends Circle implements Moveable {
     }
 
     /**
-     * Stops the pacman
+     * Stops pacman moving in the specified direction.
      *
-     * @param event
+     * @param event The keyevent which the direction of movement to stop can be extracted from.
      */
     public void stop(KeyEvent event) {
         switch (event.getCode()) {

@@ -13,16 +13,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import pacman.models.Score;
 import pacman.models.characters.Ghost;
-import pacman.models.characters.Pacman;
-import pacman.models.maze.BarObstacle;
 import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
-import javax.sound.sampled.AudioInputStream;
 import java.io.*;
-import java.util.HashSet;
-import java.util.Set;
 
+/**
+ * Singleton class that stores and manages the current global state of the game.
+ */
 public final class GameManager {
 
     private Pane root;
@@ -41,12 +39,17 @@ public final class GameManager {
 
     private static GameManager theGameManager = new GameManager();
 
+    /**
+     * Allows access to the GameManager singleton instance.
+     *
+     * @return The GameManager singleton instance.
+     */
     public static GameManager getInstance() {
         return theGameManager;
     }
 
     /**
-     * Constructor
+     * Constructor initialises default values for the fields.
      */
     private GameManager() {
         this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
@@ -58,6 +61,12 @@ public final class GameManager {
         this.highScores = readHighScores();
     }
 
+
+    /**
+     * Reads the high scores from csv file into memory.
+     *
+     * @return int array of high scores.
+     */
     private int[] readHighScores() {
         int[] highScores = new int[10];
         try {
@@ -74,7 +83,7 @@ public final class GameManager {
     }
 
     /**
-     * Set one life less
+     * Called if Pacman and Ghosts collide to reduce number of lives, reset Pacman to start position, and play sound.
      */
     public void lifeLost() {
         maze.getPacman().getLeftPacmanAnimation().stop();
@@ -101,7 +110,7 @@ public final class GameManager {
     }
 
     /**
-     * Ends the game
+     * Called when all coins are collected or all lives are lost to end the round/game.
      */
     private void endGame() throws IOException {
         this.gameEnded = true;
@@ -145,9 +154,9 @@ public final class GameManager {
     }
 
     /**
-     * Restart the game
+     * Restart the game and reset game state, if the KeyCode of the parameter is ESCAPE.
      *
-     * @param event
+     * @param event A keypress event from which the exact key pressed is extracted.
      */
     public void restartGame(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
@@ -176,7 +185,7 @@ public final class GameManager {
     }
 
     /**
-     * Draws the board of the game with the cookies and the Pacman
+     * Responsible for ensuring that a maze and score area are added to the scene.
      */
     public void drawBoard() {
         root.getStyleClass().removeAll();
@@ -187,7 +196,11 @@ public final class GameManager {
         this.scoreBoard = new Score(root);
     }
 
-
+    /**
+     * Called when Pacman collides with a cookie, handles updating score.
+     *
+     * @param cookie The cookie object that Pacman collided with.
+     */
     public void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
             this.score += cookie.getValue();
@@ -212,6 +225,11 @@ public final class GameManager {
         }
     }
 
+    /**
+     * Plays a sound file.
+     *
+     * @param filepath Path to the sound file to be played.
+     */
     private void playSound(String filepath) {
         Media sound = new Media(new File(filepath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
