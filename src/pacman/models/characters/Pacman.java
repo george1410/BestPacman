@@ -24,6 +24,8 @@ public class Pacman extends Circle implements Moveable {
     private AnimationTimer upPacmanAnimation;
     private AnimationTimer downPacmanAnimation;
     private Maze maze;
+    private double initialX;
+    private double initialY;
 
     /**
      * Constructor initialises default values for Pacman.
@@ -38,6 +40,8 @@ public class Pacman extends Circle implements Moveable {
         this.gameManager = gameManager;
         this.setCenterX(x);
         this.setCenterY(y);
+        this.initialX = x;
+        this.initialY = y;
         this.setRadius(25);
         Image img = new Image("pacman/resources/pacman.png");
         this.setFill(new ImagePattern(img));
@@ -130,8 +134,8 @@ public class Pacman extends Circle implements Moveable {
      */
     public void reset() {
         setRotate(0);
-        setCenterX(2.5 * BarObstacle.THICKNESS);
-        setCenterY(2.5 * BarObstacle.THICKNESS);
+        setCenterX(initialX);
+        setCenterY(initialY);
         leftPacmanAnimation.stop();
         rightPacmanAnimation.stop();
         upPacmanAnimation.stop();
