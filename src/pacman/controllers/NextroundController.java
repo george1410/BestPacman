@@ -20,6 +20,6 @@ public class NextroundController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        currentScore.setText("CURRENT SCORE: " + GameManager.getInstance().getScore());
+        currentScore.setText("CURRENT SCORE: " + GameManager.getInstance().getScoreManager().getScore());
     }
 }

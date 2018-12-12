@@ -26,8 +26,6 @@ public final class GameManager {
 
     private Pane root;
     private Maze maze;
-    private int lives;
-    private int score;
     private ScoreManager scoreManager;
     private boolean gameEnded;
     private int cookiesEaten;
@@ -54,8 +52,7 @@ public final class GameManager {
      */
     private GameManager() {
         this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
-        this.lives = 3;
-        this.score = 0;
+        this.scoreManager = new ScoreManager();
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
         this.obstacleColor = 0;
@@ -85,7 +82,7 @@ public final class GameManager {
     /**
      * Called if Pacman and Ghosts collide to reduce number of lives, reset Pacman to start position, and play sound.
      */
-    public void lifeLost() {
+    public void ghostTouched() {
         for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
             animation.stop();
         }
@@ -93,12 +90,11 @@ public final class GameManager {
         for (Ghost ghost : maze.getGhosts()) {
             ghost.getAnimation().stop();
         }
+
         maze.getPacman().reset();
-        lives--;
-        score -= 10;
-        this.scoreManager.getLives().setText("Lives: " + this.lives);
-        this.scoreManager.getScore().setText("Score: " + this.score);
-        if (lives == 0) {
+        scoreManager.loseLife();
+
+        if (scoreManager.getLives() == 0) {
             playSound("src/pacman/resources/lose_sound.wav");
             try {
                 this.gameLost = true;
@@ -119,9 +115,9 @@ public final class GameManager {
 
         if (gameLost) {
             newScoreIndex = -1;
-            if (score > highScores[9]) {
+            if (scoreManager.getScore() > highScores[9]) {
                 newScoreIndex = 9;
-                highScores[9] = score;
+                highScores[9] = scoreManager.getScore();
                 for (int i = 9; i > 0; i--) {
                     if (highScores[i] > highScores[i-1]) {
                         int temp = highScores[i];
@@ -166,8 +162,7 @@ public final class GameManager {
             maze.getPacman().reset();
 
             if (gameLost) {
-                this.lives = 3;
-                this.score = 0;
+                this.scoreManager.reset();
                 this.gameLost = false;
             }
 
@@ -201,11 +196,10 @@ public final class GameManager {
      */
     public void collectCookie(Cookie cookie) {
         if (cookie.isVisible()) {
-            this.score += cookie.getValue();
+            this.scoreManager.setScore(this.scoreManager.getScore() + cookie.getValue());
             this.cookiesEaten++;
         }
         cookie.hide();
-        scoreManager.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
             playSound("src/pacman/resources/win_sound.wav");
             for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
@@ -232,14 +226,6 @@ public final class GameManager {
         Media sound = new Media(new File(filepath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-    }
-
-    public int getLives() {
-        return lives;
-    }
-
-    public int getScore() {
-        return score;
     }
 
     public int getNewScoreIndex() {
@@ -282,8 +268,7 @@ public final class GameManager {
         return maze;
     }
 
-    public void setScoreManager(ScoreManager scoreManager) {
-        this.scoreManager = scoreManager;
+    public ScoreManager getScoreManager() {
+        return scoreManager;
     }
 }
-

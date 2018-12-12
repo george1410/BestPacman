@@ -36,9 +36,6 @@ public class GameController implements Initializable {
         livesText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
         scoreText.setFill(gameManager.getMaze().getBarColor());
         livesText.setFill(gameManager.getMaze().getBarColor());
-        scoreText.setText("Score: " + gameManager.getScore());
-        livesText.setText("Lives: " + gameManager.getLives());
-
-        gameManager.setScoreManager(new ScoreManager(scoreText, livesText));
+        gameManager.getScoreManager().init(scoreText, livesText);
     }
 }

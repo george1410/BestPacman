@@ -26,7 +26,7 @@ public class HighscoreController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        yourScore.setText("YOUR SCORE: " + gameManager.getScore());
+        yourScore.setText("YOUR SCORE: " + gameManager.getScoreManager().getScore());
         for (int i = 0; i < highScores.length; i++) {
             Text text = new Text(i+1 + ". " + highScores[i]);
             if (i == newScoreIndex) {

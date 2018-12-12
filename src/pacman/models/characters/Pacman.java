@@ -1,7 +1,6 @@
 package pacman.models.characters;
 
 
-import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -160,7 +159,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterX(getCenterX() - step);
                             checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.lifeLost();
+                                gameManager.ghostTouched();
                             checkDoorway();
                         }
                         break;
@@ -170,7 +169,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterX(getCenterX() + step);
                             checkCookieCoalition("x", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.lifeLost();
+                                gameManager.ghostTouched();
                             checkDoorway();
                         }
                         break;
@@ -180,7 +179,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterY(getCenterY() - step);
                             checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.lifeLost();
+                                gameManager.ghostTouched();
                             checkDoorway();
                         }
                         break;
@@ -190,7 +189,7 @@ public class Pacman extends Circle implements Moveable {
                             setCenterY(getCenterY() + step);
                             checkCookieCoalition( "y", maze.getCookies());
                             if (checkGhostCoalition(maze.getGhosts()))
-                                gameManager.lifeLost();
+                                gameManager.ghostTouched();
                             checkDoorway();
                         }
                         break;
