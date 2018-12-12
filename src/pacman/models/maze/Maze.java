@@ -24,6 +24,7 @@ public class Maze {
     private Pacman pacman;
     private Color barColor;
     private int width;
+    private int height;
 
     /**
      * Constructor for the maze initializing default values.
@@ -118,6 +119,7 @@ public class Maze {
                 y++;
                 prevLine = line;
             }
+            this.height = y * 2;
             root.getChildren().addAll(this.ghosts);
             if (prevLine != null) {
                 this.width = prevLine.length();
@@ -136,6 +138,10 @@ public class Maze {
         }
     }
 
+    public Color getBarColor() {
+        return barColor;
+    }
+
     public Set<Cookie> getCookies() {
         return cookies;
     }
@@ -146,6 +152,10 @@ public class Maze {
 
     public int getWidth() {
         return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public Set<Ghost> getGhosts() {

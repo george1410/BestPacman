@@ -1,11 +1,6 @@
 package pacman.models;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import pacman.GameManager;
-import pacman.models.maze.BarObstacle;
 
 /**
  * Model for the scoreboard displayed below the maze.
@@ -18,19 +13,12 @@ public class Score {
     /**
      * Constructor for the scoreboard, setting default values.
      *
-     * @param root Pane in the scene which the scoreboard should be drawn onto.
+     * @param score Text component in the view containing the current score.
+     * @param lives Text component in the view showing the current lives.
      */
-    public Score(Pane root) {
-        this.score = new Text(BarObstacle.THICKNESS * 4, BarObstacle.THICKNESS * 28, "Score: " + GameManager.getInstance().getScore());
-        this.lives = new Text(BarObstacle.THICKNESS * 20, BarObstacle.THICKNESS * 28,"Lives: " + GameManager.getInstance().getLives());
-        score.setFill(Color.MAGENTA);
-        score.setFont(Font.font("Arial", 30));
-
-        lives.setFill(Color.MAROON);
-        lives.setFont(Font.font("Arial", 30));
-
-        root.getChildren().add(score);
-        root.getChildren().add(lives);
+    public Score(Text score, Text lives) {
+        this.score = score;
+        this.lives = lives;
     }
 
     public Text getScore() {

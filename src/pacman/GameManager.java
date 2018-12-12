@@ -62,7 +62,6 @@ public final class GameManager {
         this.highScores = readHighScores();
     }
 
-
     /**
      * Reads the high scores from csv file into memory.
      *
@@ -193,8 +192,6 @@ public final class GameManager {
         root.getStyleClass().add("ui-background" + backgroundColor);
 
         this.maze.CreateMaze(root);
-
-        this.scoreBoard = new Score(root);
     }
 
     /**
@@ -283,6 +280,10 @@ public final class GameManager {
 
     public Maze getMaze() {
         return maze;
+    }
+
+    public void setScoreBoard(Score scoreBoard) {
+        this.scoreBoard = scoreBoard;
     }
 }
 

@@ -3,7 +3,11 @@ package pacman.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import pacman.GameManager;
+import pacman.models.Score;
+import pacman.models.maze.BarObstacle;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +18,11 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
     @FXML
     Pane root;
+    @FXML
+    Text scoreText;
+    @FXML
+    Text livesText;
+
 
     private GameManager gameManager = GameManager.getInstance();
 
@@ -24,5 +33,13 @@ public class GameController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         gameManager.setRoot(root);
         gameManager.drawBoard();
+        scoreText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
+        livesText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
+        scoreText.setFill(gameManager.getMaze().getBarColor());
+        livesText.setFill(gameManager.getMaze().getBarColor());
+        scoreText.setText("Score: " + gameManager.getScore());
+        livesText.setText("Lives: " + gameManager.getLives());
+
+        gameManager.setScoreBoard(new Score(scoreText, livesText));
     }
 }
