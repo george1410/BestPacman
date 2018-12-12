@@ -1,6 +1,7 @@
 package pacman;
 
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -86,10 +87,10 @@ public final class GameManager {
      * Called if Pacman and Ghosts collide to reduce number of lives, reset Pacman to start position, and play sound.
      */
     public void lifeLost() {
-        maze.getPacman().getLeftPacmanAnimation().stop();
-        maze.getPacman().getRightPacmanAnimation().stop();
-        maze.getPacman().getUpPacmanAnimation().stop();
-        maze.getPacman().getDownPacmanAnimation().stop();
+        for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
+            animation.stop();
+        }
+        
         for (Ghost ghost : maze.getGhosts()) {
             ghost.getAnimation().stop();
         }
@@ -210,10 +211,10 @@ public final class GameManager {
         scoreBoard.getScore().setText("Score: " + score);
         if (cookiesEaten == maze.getCookies().size() && !gameEnded) {
             playSound("src/pacman/resources/win_sound.wav");
-            maze.getPacman().getLeftPacmanAnimation().stop();
-            maze.getPacman().getRightPacmanAnimation().stop();
-            maze.getPacman().getUpPacmanAnimation().stop();
-            maze.getPacman().getDownPacmanAnimation().stop();
+            for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
+                animation.stop();
+            }
+
             for (Ghost ghost : maze.getGhosts()) {
                 ghost.getAnimation().stop();
             }

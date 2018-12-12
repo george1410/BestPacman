@@ -1,6 +1,7 @@
 package pacman.models.characters;
 
 
+import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -245,19 +246,11 @@ public class Pacman extends Circle implements Moveable {
         }
     }
 
-    public AnimationTimer getLeftPacmanAnimation() {
-        return leftPacmanAnimation;
-    }
-
-    public AnimationTimer getRightPacmanAnimation() {
-        return rightPacmanAnimation;
-    }
-
-    public AnimationTimer getUpPacmanAnimation() {
-        return upPacmanAnimation;
-    }
-
-    public AnimationTimer getDownPacmanAnimation() {
-        return downPacmanAnimation;
+    /**
+     * Allows access to all of the Pacman animations.
+     * @return Array of the Animations for each direction.
+     */
+    public AnimationTimer[] getAllAnimations() {
+        return new AnimationTimer[]{leftPacmanAnimation, rightPacmanAnimation, upPacmanAnimation, downPacmanAnimation};
     }
 }
