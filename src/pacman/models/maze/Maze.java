@@ -6,6 +6,7 @@ import javafx.scene.paint.Color;
 import pacman.GameManager;
 import pacman.models.characters.Ghost;
 import pacman.models.characters.Pacman;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

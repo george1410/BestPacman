@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import pacman.GameManager;
-import pacman.models.ScoreManager;
 import pacman.models.maze.BarObstacle;
 
 import java.net.URL;

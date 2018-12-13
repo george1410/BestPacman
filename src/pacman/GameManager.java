@@ -13,13 +13,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import pacman.controllers.GameController;
 import pacman.models.ScoreManager;
 import pacman.models.characters.Ghost;
-import pacman.models.maze.Cookie;
 import pacman.models.maze.Maze;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Singleton class that stores and manages the current global state of the game.
@@ -35,9 +34,9 @@ public final class GameManager {
     private int obstacleColor;
     private boolean gameLost;
     private boolean paused;
+    private Text pausedIndicator;
 
     private static GameManager theGameManager = new GameManager();
-    private Text pausedIndicator;
 
     /**
      * Allows access to the GameManager singleton instance.
