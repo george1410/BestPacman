@@ -226,11 +226,11 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
         return animation;
     }
 
-    public double getInitialX() {
+    double getInitialX() {
         return initialX;
     }
 
-    public double getInitialY() {
+    double getInitialY() {
         return initialY;
     }
 }
