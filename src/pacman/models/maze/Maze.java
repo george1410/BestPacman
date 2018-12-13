@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -135,6 +136,31 @@ public class Maze {
             e.printStackTrace();
         }
         root.getChildren().addAll(obstacles);
+        setBonusCookies(4);
+    }
+
+    /**
+     * Randomly makes the specified number of cookies bonus ones.
+     *
+     * @param numBonusCookies The number of bonus cookies to add.
+     */
+    private void setBonusCookies(int numBonusCookies) {
+        for (int i = 0; i < numBonusCookies; i++) {
+            boolean looping = true;
+            while (looping) {
+                int j = 0;
+                int rand = new Random().nextInt(cookies.size());
+                for (Cookie cookie : cookies) {
+                    if (j == rand) {
+                        if (cookie.getValue() == 5) {
+                            cookie.makeBonus();
+                            looping = false;
+                        }
+                    }
+                    j++;
+                }
+            }
+        }
     }
 
     public void setBarColor(Color barColor) {

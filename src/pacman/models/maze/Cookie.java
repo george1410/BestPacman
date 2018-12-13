@@ -36,4 +36,12 @@ public class Cookie extends Circle {
     public int getValue() {
         return value;
     }
+
+    /**
+     * Makes the cookie a bonus one, with higher value, and different color to differentiate.
+     */
+    public void makeBonus() {
+        this.value = 20;
+        this.setFill(new Color(1, 0.42, 0.71,1));
+    }
 }
