@@ -205,22 +205,24 @@ public class Pacman extends Circle implements Moveable {
      * @param event The keyevent which the desired direction of movement can be extracted from.
      */
     public void move(KeyEvent event) {
-        for (Ghost ghost : maze.getGhosts()) {
-            ghost.run();
-        }
-        switch (event.getCode()) {
-            case RIGHT:
-                rightPacmanAnimation.start();
-                break;
-            case LEFT:
-                leftPacmanAnimation.start();
-                break;
-            case UP:
-                upPacmanAnimation.start();
-                break;
-            case DOWN:
-                downPacmanAnimation.start();
-                break;
+        if (!gameManager.isPaused()) {
+            for (Ghost ghost : maze.getGhosts()) {
+                ghost.run();
+            }
+            switch (event.getCode()) {
+                case RIGHT:
+                    rightPacmanAnimation.start();
+                    break;
+                case LEFT:
+                    leftPacmanAnimation.start();
+                    break;
+                case UP:
+                    upPacmanAnimation.start();
+                    break;
+                case DOWN:
+                    downPacmanAnimation.start();
+                    break;
+            }
         }
     }
 
@@ -230,19 +232,21 @@ public class Pacman extends Circle implements Moveable {
      * @param event The keyevent which the direction of movement to stop can be extracted from.
      */
     public void stop(KeyEvent event) {
-        switch (event.getCode()) {
-            case RIGHT:
-                rightPacmanAnimation.stop();
-                break;
-            case LEFT:
-                leftPacmanAnimation.stop();
-                break;
-            case UP:
-                upPacmanAnimation.stop();
-                break;
-            case DOWN:
-                downPacmanAnimation.stop();
-                break;
+        if (!gameManager.isPaused()) {
+            switch (event.getCode()) {
+                case RIGHT:
+                    rightPacmanAnimation.stop();
+                    break;
+                case LEFT:
+                    leftPacmanAnimation.stop();
+                    break;
+                case UP:
+                    upPacmanAnimation.stop();
+                    break;
+                case DOWN:
+                    downPacmanAnimation.stop();
+                    break;
+            }
         }
     }
 
@@ -309,7 +313,7 @@ public class Pacman extends Circle implements Moveable {
      * Allows access to all of the Pacman animations.
      * @return Array of the Animations for each direction.
      */
-    private AnimationTimer[] getAllAnimations() {
+    public AnimationTimer[] getAllAnimations() {
         return new AnimationTimer[]{leftPacmanAnimation, rightPacmanAnimation, upPacmanAnimation, downPacmanAnimation};
     }
 }

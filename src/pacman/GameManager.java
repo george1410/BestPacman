@@ -32,6 +32,7 @@ public final class GameManager {
     private int backgroundColor;
     private int obstacleColor;
     private boolean gameLost;
+    private boolean paused;
 
     private static GameManager theGameManager = new GameManager();
 
@@ -53,6 +54,7 @@ public final class GameManager {
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
         this.obstacleColor = 0;
+        this.paused = false;
     }
 
     /**
@@ -92,6 +94,7 @@ public final class GameManager {
             maze.getObstacles().clear();
             maze.getGhosts().clear();
             maze.getPacman().reset();
+            this.paused = false;
 
             if (gameLost) {
                 this.scoreManager.reset();
@@ -122,6 +125,21 @@ public final class GameManager {
             }
 
             this.stage.setScene(theScene);
+        } else if (event.getCode() == KeyCode.P) {
+            if (!paused) {
+                for (Ghost ghost : maze.getGhosts()) {
+                    ghost.getAnimation().stop();
+                }
+
+                for (AnimationTimer animation : maze.getPacman().getAllAnimations()) {
+                    animation.stop();
+                }
+            } else {
+                for (Ghost ghost : maze.getGhosts()) {
+                    ghost.getAnimation().start();
+                }
+            }
+            paused = !paused;
         }
     }
 
@@ -192,5 +210,9 @@ public final class GameManager {
 
     public boolean isGameEnded() {
         return gameEnded;
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 }
