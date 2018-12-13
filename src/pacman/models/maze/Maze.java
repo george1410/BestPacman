@@ -39,7 +39,7 @@ public class Maze {
         cookies = new HashSet<>();
         ghosts = new HashSet<>();
         this.barColor = barColor;
-        mazeFile = new File("src/pacman/resources/maze2.map");
+        mazeFile = new File("src/pacman/resources/defaultmaze.map");
         mazeFileName = "Default";
         customMapLoaded = false;
     }

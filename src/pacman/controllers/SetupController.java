@@ -128,7 +128,7 @@ public class SetupController implements Initializable {
      */
     @FXML
     void resetMap() {
-        gameManager.getMaze().setMazeFile(new File("src/pacman/resources/maze2.map"));
+        gameManager.getMaze().setMazeFile(new File("src/pacman/resources/defaultmaze.map"));
         gameManager.getMaze().setCustomMapLoaded(false);
         mapName.setText("Current Map: " + gameManager.getMaze().getMazeFileName());
         resetMapButton.setVisible(gameManager.getMaze().isCustomMapLoaded());
