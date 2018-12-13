@@ -84,7 +84,7 @@ public final class GameManager {
     }
 
     /**
-     * Restart the game and reset game state, if the KeyCode of the parameter is ESCAPE.
+     * Restart the game and reset game state, if the KeyCode of the parameter is ESCAPE. Pause if the keycode is P.
      *
      * @param event A keypress event from which the exact key pressed is extracted.
      */
