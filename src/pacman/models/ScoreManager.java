@@ -20,6 +20,8 @@ public class ScoreManager {
 
     /**
      * Constructor for the ScoreManager, setting default values.
+     *
+     * @param fileHash Hash of the currently loaded map file.
      */
     public ScoreManager(String fileHash) {
         this.lives = 3;
@@ -49,6 +51,7 @@ public class ScoreManager {
 
     /**
      * Binds the view elements, and then updates them with the correct score and lives values.
+     *
      * @param scoreText Element in the view to display the current score.
      * @param livesText Element in the view to display the current lives.
      */
@@ -62,6 +65,7 @@ public class ScoreManager {
     /**
      * Reads the high scores from csv file into memory.
      *
+     * @param fileHash Hash of the currently loaded map file to load the high scores for.
      * @return int array of high scores.
      */
     private int[] readHighScores(String fileHash) {
@@ -91,6 +95,11 @@ public class ScoreManager {
         return highScores;
     }
 
+    /**
+     * Writes the new high scores to the disk.
+     *
+     * @param fileHash Hash of the current map file to write high scores for.
+     */
     public void updateHighScores(String fileHash) throws IOException {
         newScoreIndex = -1;
         if (score > highScores[9]) {
