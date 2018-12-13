@@ -21,6 +21,8 @@ public class GameController implements Initializable {
     Text scoreText;
     @FXML
     Text livesText;
+    @FXML
+    Text pausedText;
 
 
     private GameManager gameManager = GameManager.getInstance();
@@ -33,8 +35,12 @@ public class GameController implements Initializable {
         gameManager.drawBoard(root);
         scoreText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
         livesText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
+        pausedText.setLayoutY(gameManager.getMaze().getHeight() * BarObstacle.THICKNESS + BarObstacle.THICKNESS);
         scoreText.setFill(gameManager.getMaze().getBarColor());
         livesText.setFill(gameManager.getMaze().getBarColor());
+        pausedText.setFill(gameManager.getMaze().getBarColor());
         gameManager.getScoreManager().init(scoreText, livesText);
+        pausedText.setVisible(false);
+        gameManager.setPausedIndicator(pausedText);
     }
 }

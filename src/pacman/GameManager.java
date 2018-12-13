@@ -11,7 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import pacman.controllers.GameController;
 import pacman.models.ScoreManager;
 import pacman.models.characters.Ghost;
 import pacman.models.maze.Cookie;
@@ -35,6 +37,7 @@ public final class GameManager {
     private boolean paused;
 
     private static GameManager theGameManager = new GameManager();
+    private Text pausedIndicator;
 
     /**
      * Allows access to the GameManager singleton instance.
@@ -140,6 +143,7 @@ public final class GameManager {
                 }
             }
             paused = !paused;
+            pausedIndicator.setVisible(paused);
         }
     }
 
@@ -214,5 +218,9 @@ public final class GameManager {
 
     public boolean isPaused() {
         return paused;
+    }
+
+    public void setPausedIndicator(Text pausedText) {
+        this.pausedIndicator = pausedText;
     }
 }

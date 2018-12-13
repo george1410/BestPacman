@@ -15,5 +15,10 @@
             <Font size="30.0" />
          </font>
       </Text>
+      <Text layoutX="800.0"  strokeType="OUTSIDE" strokeWidth="0.0" text="PAUSED" fx:id="pausedText">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
