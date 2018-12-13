@@ -87,7 +87,7 @@ public final class GameManager {
      * @param event A keypress event from which the exact key pressed is extracted.
      */
     public void restartGame(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.ESCAPE && gameEnded) {
+        if (event.getCode() == KeyCode.ESCAPE) {
             maze.getCookies().clear();
             maze.getObstacles().clear();
             maze.getGhosts().clear();
@@ -99,13 +99,27 @@ public final class GameManager {
             }
 
             this.cookiesEaten = 0;
-            gameEnded = false;
+            Scene theScene;
+            if (gameEnded) {
+                gameEnded = false;
 
-            Parent root1 = FXMLLoader.load(getClass().getResource("views/game.fxml"));
-            Scene theScene = new Scene(root1);
+                Parent root1 = FXMLLoader.load(getClass().getResource("views/game.fxml"));
+                theScene = new Scene(root1);
 
-            theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> maze.getPacman().move(event1));
-            theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> maze.getPacman().stop(event1));
+                theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> maze.getPacman().move(event1));
+                theScene.addEventHandler(KeyEvent.KEY_RELEASED, event1 -> maze.getPacman().stop(event1));
+                theScene.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
+                    try {
+                        this.restartGame(event1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            } else {
+                this.scoreManager.reset();
+                Parent root1 = FXMLLoader.load(getClass().getResource("views/start.fxml"));
+                theScene = new Scene(root1);
+            }
 
             this.stage.setScene(theScene);
         }
