@@ -20,6 +20,8 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     private Maze maze = gameManager.getMaze();
     private AnimationTimer animation;
     private int timesWalked;
+    private double initialX;
+    private double initialY;
 
     /**
      * Constructor initialises default values for the Ghost.
@@ -31,6 +33,8 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
     public Ghost(double x, double y, int color) {
         this.setX(x);
         this.setY(y);
+        this.initialX = x;
+        this.initialY = y;
         this.setHeight(50);
         this.setWidth(50);
         Image img = new Image("/pacman/resources/ghost" + color + ".png");
@@ -220,5 +224,13 @@ public class Ghost extends Rectangle implements Runnable, Moveable {
 
     public AnimationTimer getAnimation() {
         return animation;
+    }
+
+    public double getInitialX() {
+        return initialX;
+    }
+
+    public double getInitialY() {
+        return initialY;
     }
 }

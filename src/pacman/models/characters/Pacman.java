@@ -270,6 +270,11 @@ public class Pacman extends Circle implements Moveable {
                 e.printStackTrace();
             }
         }
+
+        for (Ghost ghost : maze.getGhosts()) {
+            ghost.setX(ghost.getInitialX());
+            ghost.setY(ghost.getInitialY());
+        }
     }
 
     /**
