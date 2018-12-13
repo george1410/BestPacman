@@ -4,6 +4,7 @@ package pacman.models.maze;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import pacman.GameManager;
+import pacman.models.ScoreManager;
 import pacman.models.characters.Ghost;
 import pacman.models.characters.Pacman;
 
@@ -11,6 +12,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -30,6 +35,9 @@ public class Maze {
     private File mazeFile;
     private String mazeFileName;
     private boolean customMapLoaded;
+    private String fileHash;
+
+    private GameManager gameManager = GameManager.getInstance();
 
     /**
      * Constructor for the maze initializing default values.
@@ -44,6 +52,7 @@ public class Maze {
         mazeFile = new File("src/pacman/resources/defaultmaze.map");
         mazeFileName = "Default";
         customMapLoaded = false;
+        this.fileHash = generateMD5(mazeFile);
     }
 
     /**
@@ -140,6 +149,24 @@ public class Maze {
     }
 
     /**
+     * Generates the MD5 hash of a file.
+     *
+     * @param file The file to generate the hash for.
+     * @return A Base64 Encoded string representation of the hash.
+     */
+    private String generateMD5(File file) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(Files.readAllBytes(file.toPath()));
+            byte[] digest = md.digest();
+            return Base64.getEncoder().encodeToString(digest);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
      * Randomly makes the specified number of cookies bonus ones.
      *
      * @param numBonusCookies The number of bonus cookies to add.
@@ -203,6 +230,7 @@ public class Maze {
         this.mazeFile = file;
         mazeFileName = file.getName();
         customMapLoaded = true;
+        fileHash = generateMD5(file);
     }
 
     public String getMazeFileName() {
@@ -219,5 +247,9 @@ public class Maze {
 
     public void setCustomMapLoaded(boolean b) {
         customMapLoaded = b;
+    }
+
+    public String getFileHash() {
+        return fileHash;
     }
 }

@@ -1,8 +1,10 @@
 package pacman.models;
 
 import javafx.scene.text.Text;
+import pacman.GameManager;
 
 import java.io.*;
+import java.util.LinkedList;
 
 /**
  * Model for the scoreboard displayed below the maze.
@@ -19,10 +21,10 @@ public class ScoreManager {
     /**
      * Constructor for the ScoreManager, setting default values.
      */
-    public ScoreManager() {
+    public ScoreManager(String fileHash) {
         this.lives = 3;
         this.score = 0;
-        this.highScores = readHighScores();
+        this.highScores = readHighScores(fileHash);
     }
 
     /**
@@ -62,14 +64,26 @@ public class ScoreManager {
      *
      * @return int array of high scores.
      */
-    private int[] readHighScores() {
+    private int[] readHighScores(String fileHash) {
         int[] highScores = new int[10];
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
-            String line = br.readLine();
-            String[] splitArr = line.split(",");
-            for (int i = 0; i < splitArr.length; i++) {
-                highScores[i] = Integer.parseInt(splitArr[i]);
+
+            String line;
+            boolean found = false;
+            while ((line = br.readLine()) != null) {
+                String[] splitArr = line.split(",");
+                if (splitArr[0].equals(fileHash)) {
+                    for (int i = 0; i < 10; i++) {
+                        highScores[i] = Integer.parseInt(splitArr[i+1]);
+                    }
+                    found = true;
+                }
+            }
+            if (!found) {
+                for (int i = 0; i < 10; i++) {
+                    highScores[i] = 0;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +91,7 @@ public class ScoreManager {
         return highScores;
     }
 
-    public void updateHighScores() throws IOException {
+    public void updateHighScores(String fileHash) throws IOException {
         newScoreIndex = -1;
         if (score > highScores[9]) {
             newScoreIndex = 9;
@@ -90,11 +104,40 @@ public class ScoreManager {
                     newScoreIndex = i-1;
                 }
             }
-            // write the new high score array to disk.
-            PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
-            for (int highScore : highScores) {
-                pw.print(highScore + ",");
+
+            BufferedReader br = new BufferedReader(new FileReader("src/pacman/resources/scores.csv"));
+            LinkedList<String> lines = new LinkedList<>();
+            String line;
+            while ((line = br.readLine()) != null && !line.equals("")) {
+                lines.add(line);
             }
+
+            boolean written = false;
+            PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
+            for (String theLine : lines) {
+                String[] spitLine = theLine.split(",");
+                String firstEl = spitLine[0];
+                if (firstEl.equals(fileHash)) {
+                    // update and write.
+                    pw.print(fileHash + ",");
+                    for (int highScore : highScores) {
+                        pw.print(highScore + ",");
+                    }
+                    pw.println();
+                    written = true;
+                } else {
+                    // write.
+                    pw.println(theLine);
+                }
+            }
+            if (!written) {
+                pw.print(fileHash + ",");
+                for (int highScore : highScores) {
+                    pw.print(highScore + ",");
+                }
+                pw.println();
+            }
+
             pw.close();
         }
     }
@@ -118,5 +161,9 @@ public class ScoreManager {
 
     public int getNewScoreIndex() {
         return newScoreIndex;
+    }
+
+    public void setHighScores(String fileHash) {
+        this.highScores = readHighScores(fileHash);
     }
 }

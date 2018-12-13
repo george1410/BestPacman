@@ -19,6 +19,7 @@ import pacman.models.maze.Maze;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Singleton class that stores and manages the current global state of the game.
@@ -52,7 +53,7 @@ public final class GameManager {
      */
     private GameManager() {
         this.maze = new Maze(new Color(1, 0.74, 0.26, 1));
-        this.scoreManager = new ScoreManager();
+        this.scoreManager = new ScoreManager(this.maze.getFileHash());
         this.cookiesEaten = 0;
         this.backgroundColor = 1;
         this.obstacleColor = 0;
@@ -68,7 +69,8 @@ public final class GameManager {
         Parent root1;
 
         if (gameLost) {
-            scoreManager.updateHighScores();
+            scoreManager.setHighScores(maze.getFileHash());
+            scoreManager.updateHighScores(maze.getFileHash());
             root1 = FXMLLoader.load(getClass().getResource("views/highscore.fxml"));
         } else {
             root1 = FXMLLoader.load(getClass().getResource("views/nextround.fxml"));
