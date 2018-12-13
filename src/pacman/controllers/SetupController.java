@@ -5,17 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pacman.GameManager;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -132,6 +133,27 @@ public class SetupController implements Initializable {
         gameManager.getMaze().setCustomMapLoaded(false);
         mapName.setText("Current Map: " + gameManager.getMaze().getMazeFileName());
         resetMapButton.setVisible(gameManager.getMaze().isCustomMapLoaded());
+    }
+
+    /**
+     * Called when the resetHighScores Button is clicked, and opens a confirmation dialog before clearing  high scores.
+     */
+    @FXML
+    void resetHighScores() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?!");
+        alert.setHeaderText("Are you sure?!");
+        alert.setContentText("This action will remove all saved high scores for all maps. It is irreversible. Are you sure you want to proceed?");
+        DialogPane dp = alert.getDialogPane();
+        dp.getStylesheets().add(getClass().getResource("../resources/style.css").toExternalForm());
+        dp.getStyleClass().add("myDialog");
+        ButtonBar buttonBar = (ButtonBar)alert.getDialogPane().lookup(".button-bar");
+        buttonBar.getButtons().forEach(b->b.getStyleClass().add("menu-button"));
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            gameManager.getScoreManager().clearHighScores();
+        }
     }
 
     /**

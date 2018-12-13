@@ -97,3 +97,11 @@
     -fx-text-fill: #000000;
     -fx-mark-color: #000000;
 }
+
+.myDialog, .myDialog:header *.header-panel {
+    -fx-background-color: #191919;
+}
+
+.myDialog > *.label.content, .myDialog:header *.header-panel *.label {
+    -fx-text-fill: #ffee00;
+}

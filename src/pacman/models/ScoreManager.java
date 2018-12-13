@@ -175,4 +175,13 @@ public class ScoreManager {
     public void setHighScores(String fileHash) {
         this.highScores = readHighScores(fileHash);
     }
+
+    public void clearHighScores() {
+        try {
+           PrintWriter pw = new PrintWriter(new FileWriter("src/pacman/resources/scores.csv"));
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

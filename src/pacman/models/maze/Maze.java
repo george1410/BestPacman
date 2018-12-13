@@ -37,8 +37,6 @@ public class Maze {
     private boolean customMapLoaded;
     private String fileHash;
 
-    private GameManager gameManager = GameManager.getInstance();
-
     /**
      * Constructor for the maze initializing default values.
      *
