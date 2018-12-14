@@ -143,7 +143,7 @@ public class Pacman extends Circle implements Moveable {
         downPacmanAnimation.stop();
     }
 
-    /**s
+    /**
      * Creates an animation of the movement.
      *
      * @param direction The direction to create a movement animation for.

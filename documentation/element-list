@@ -1,0 +1,5 @@
+pacman
+pacman.controllers
+pacman.models
+pacman.models.characters
+pacman.models.maze
